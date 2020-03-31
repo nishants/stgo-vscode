@@ -1,0 +1,34 @@
+@import 'vars';
+@import 'colors';
+@import 'typography';
+@import 'form';
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  line-height: $rowHeight;
+}
+
+.column-label{
+  line-height: $rowHeight;
+  width: $columnWidth;
+}
+
+.resize-container:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+ul.undo-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
+}
