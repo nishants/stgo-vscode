@@ -1,0 +1,25 @@
+@import 'style/_base.scss';
+
+button {
+  background: var(--vscode-button-background);
+  color: var(--vscode-button-foreground);
+
+  &:hover{
+    background: var(--vscode-button-hoverBackground);
+  }
+}
+
+select {
+  display: block;
+  background: var(--vscode-settings-dropdownBackground);
+  border-color:  var(--vscode-settings-dropdownBorder);
+  color: var(--vscode-settings-dropdownForeground);
+
+  font-size: $theme-font-weight;
+  font-weight: $theme-font-weight;
+  font-family: $theme-font-family;
+
+  border-radius: $border-radius;
+  -webkit-appearance: none;
+  -webkit-border-radius: $border-radius;
+}
