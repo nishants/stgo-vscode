@@ -1,0 +1,7 @@
+@import 'vars';
+@import 'typography';
+
+.column-label{
+  line-height: $rowHeight;
+  width: $columnWidth;
+}
