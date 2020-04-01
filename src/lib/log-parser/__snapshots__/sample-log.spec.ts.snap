@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`lib if utils mocked automatically 1`] = `
+Object {
+  "addCommit": [Function],
+  "getCommits": [Function],
+}
+`;

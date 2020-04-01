@@ -1,4 +1,5 @@
-![](./docs/images/wtfpl-badge.png)
+### identifying commits  
+- As commit hash's are modified on rebase, so we use the commit message to map commits.
 
 Development build ui (wihtout minification ): `NODE_ENV=dev yarn build:ui`
 publishe manually: 
@@ -66,3 +67,8 @@ Added features X, Y, and Z.
 * [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
 
 **Enjoy!**
+
+
+
+
+

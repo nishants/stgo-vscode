@@ -1,0 +1,19 @@
+pool:
+  vmImage: 'vs2017-win2016'
+
+steps:
+- script: yarn
+  displayName: 'Install npm modules'
+
+- script: yarn lint
+  displayName: 'Lint UI, libs and extension tests in parallel'
+
+- script: yarn test
+  displayName: 'Run UI, libs and extension tests in parallel'
+
+- script: yarn build
+  displayName: 'Compile UI, libs and extension tests in parallel'
+
+# TODO need to enable auto releaes of extension
+#- script: yarn publish
+#  displayName: 'Build exention'
