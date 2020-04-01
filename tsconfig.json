@@ -1,6 +1,8 @@
 {
 	"compilerOptions": {
-		"module": "commonjs",
+      "skipLibCheck": true,
+      "resolveJsonModule": true,
+      "module": "commonjs",
 		"target": "es6",
 		"outDir": "out",
 		"lib": [
@@ -16,6 +18,7 @@
 	},
 	"exclude": [
 		"node_modules",
-		".vscode-test"
+		".vscode-test",
+		"docs"
 	]
 }

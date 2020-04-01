@@ -5,7 +5,6 @@ export function activate(context: vscode.ExtensionContext) {
 	const disposable = vscode.commands.registerCommand('extension.stgoci', () => {
 		app.render(context);
 	});
-
 	context.subscriptions.push(disposable);
 }
 
