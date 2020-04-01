@@ -2,7 +2,6 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import data from './data';
-import * as lib from './lib';
 
 const REACT_APP_NAME = 'reat-app';
 const REACT_APP_TITLE = 'React App';
@@ -43,15 +42,6 @@ export const render = (context: vscode.ExtensionContext) => {
                 case 'load-ui':
                     // @ts-ignore
                     panel.webview.postMessage({ messageId: 'set-data', data });
-                    // TODO : just test azure api inside plugin
-                    lib.getBuildInfo().then(buildInfo => {
-                        const message =`Build info : ${buildInfo._links.web.href}`;
-                        vscode.window.showInformationMessage(message);
-                    });
-                    lib.getPullRequest().then(pullRequest => {
-                        const message =`PR Title : ${pullRequest[0].title}`;
-                        vscode.window.showInformationMessage(message);
-                    });
                     return;
                 case 'quit':
                     vscode.window.showWarningMessage("Closed by clicking on quit.");
