@@ -60,11 +60,14 @@ class App extends React.Component {
 
   selectTab (tabName){
     this.setState({showTab: tabName});
-
   }
 
   getScreenshotDiffs(branchName){
     sendMessage({messageId: 'get-screenshot-diffs', data: {branchName}});
+  }
+
+  openUrl(url){
+    sendMessage({messageId: 'open-url', data: {url}});
   }
 
   setScreenshotDiffs(screenshotDiffs){
@@ -78,6 +81,7 @@ class App extends React.Component {
       selectBranch: (event) => this.setBranch(event.target.value),
       selectTab: (tabname) => this.selectTab(tabname),
       getScreenshotDiffs: (branchName) => this.getScreenshotDiffs(branchName),
+      openUrl: (url) => this.openUrl(url),
     };
 
     const getTab = () => {
@@ -93,6 +97,7 @@ class App extends React.Component {
             branchName={currentBranchName}
             screenshotDiffs={screenshotDiffs}
             getScreenshotDiffs={callbacks.getScreenshotDiffs}
+            openUrl={callbacks.openUrl}
           />;
 
         case TABS.ciLogs:

@@ -1,19 +1,19 @@
 import React from "react";
 
-const screenshotDiffItem = (diff) => (
+const screenshotDiffItem = (diff, openUrl) => (
   <li className={'screenshot-diff-item'}>
     <h4>{diff.path} <br/> {diff.fileName}</h4>
     <ul className='image-comparison'>
       <li>
-        <img src={diff.imageMaster}/>
+        <img src={diff.imageMaster} onClick={() =>  openUrl(diff.imageMaster)}/>
         <label>Master</label>
       </li>
       <li>
-        <img src={diff.imageDifference}/>
+        <img src={diff.imageDifference} onClick={() =>  openUrl(diff.imageDifference)}/>
         <label>Difference</label>
       </li>
       <li>
-        <img src={diff.imageBranch}/>
+        <img src={diff.imageBranch} onClick={() =>  openUrl(diff.imageBranch)}/>
         <label>Branch</label>
       </li>
     </ul>
@@ -26,7 +26,7 @@ class ScreenshotDiffs extends React.Component {
   }
 
   render() {
-    const {screenshotDiffs} = this.props;
+    const {screenshotDiffs, openUrl} = this.props;
     return <div id="screenshot-diffs-tab">
       <ul>
         {
@@ -34,7 +34,7 @@ class ScreenshotDiffs extends React.Component {
             <li className='file-screenshot-diff-group'>
               <ul>
                 {
-                  diff.screenshots.map(diff => screenshotDiffItem(diff))
+                  diff.screenshots.map(diff => screenshotDiffItem(diff, openUrl))
                 }
               </ul>
 
