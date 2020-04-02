@@ -1,4 +1,7 @@
 #screenshot-diffs-tab{
+  > ul{
+    @extend .undo-list;
+  }
   display: block;
   .file-screenshot-diff-group{
     ul {
@@ -8,11 +11,12 @@
 
   .screenshot-diff-item{
     padding: 10px;
-    border: 1px solid $lightBorder;
+    //border: 1px solid $lightBorder;
     h4{
       margin: 0;
+      padding-left: 10px;
     }
-    margin-bottom: 20px;
+    margin-bottom: 50px;
   }
 
   ul.image-comparison{

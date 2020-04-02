@@ -2,19 +2,19 @@ import React from "react";
 
 const screenshotDiffItem = (diff) => (
   <li className={'screenshot-diff-item'}>
-    <h4>{diff.fileName}</h4>
+    <h4>{diff.path} <br/> {diff.fileName}</h4>
     <ul className='image-comparison'>
       <li>
-        <label>Master</label>
         <img src={diff.imageMaster}/>
+        <label>Master</label>
       </li>
       <li>
-        <label>Difference</label>
         <img src={diff.imageDifference}/>
+        <label>Difference</label>
       </li>
       <li>
-        <label>Branch</label>
         <img src={diff.imageBranch}/>
+        <label>Branch</label>
       </li>
     </ul>
   </li>
@@ -32,10 +32,6 @@ class ScreenshotDiffs extends React.Component {
         {
           screenshotDiffs.files.map(diff => (
             <li className='file-screenshot-diff-group'>
-              <h3>
-                {diff.path}
-              </h3>
-
               <ul>
                 {
                   diff.screenshots.map(diff => screenshotDiffItem(diff))
