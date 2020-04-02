@@ -7,6 +7,7 @@ const TABS = {
   overview: 'overview',
   cypressCi: 'cypress-ci',
   screenshotDiffs: 'screenshot-comparison',
+  ciLogs: 'ci-logs',
 }
 
 const vscode = acquireVsCodeApi();
@@ -76,6 +77,9 @@ class App extends React.Component {
 
         case TABS.screenshotDiffs:
           return <div>Screenshot Diffs</div>;
+
+        case TABS.ciLogs:
+          return <div>Integration helper logs</div>;
       }
     };
 

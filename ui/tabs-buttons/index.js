@@ -6,7 +6,7 @@ export default ({selectTab}) => (
       <li onClick={() => selectTab('overview')}>Overview</li>
       <li onClick={() => selectTab('cypress-ci')}>Cypress-CI</li>
       <li onClick={() => selectTab('screenshot-comparison')}>ScreenshotComparison</li>
-      <li>CI Logs</li>
+      <li onClick={() => selectTab('ci-logs')}>CI Logs</li>
     </ul>
   </div>
 );
