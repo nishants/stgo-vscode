@@ -18,10 +18,10 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = {showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0}};
+  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0}};
 
   setMessage(message) {
-    this.setState({message});
+    this.setState({ message })
   }
 
   closePanel() {
@@ -39,6 +39,9 @@ class App extends React.Component {
         case 'retried':
           this.setMessage('Cant run more than one window. !');
           break;
+        case 'set-branch-info':
+          this.setBranch(message.data.branchInfo.branchName);
+          break;
         case 'set-screenshot-diffs':
           this.setScreenshotDiffs(message.data);
           break;
@@ -48,6 +51,7 @@ class App extends React.Component {
     sendMessage({messageId: 'get-current-branch-info'});
     sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
     sendMessage({messageId: 'get-cypress-builds', data: {branchName: "xyz-branch"}});
+    //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
 
   componentWillUnmount() {
@@ -55,11 +59,13 @@ class App extends React.Component {
   }
 
   setBranch(branchName) {
-    this.setState({currentBranchName: branchName})
+    this.setState({ currentBranchName: branchName });
+    sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
+    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
   }
 
-  selectTab (tabName){
-    this.setState({showTab: tabName});
+  selectTab(tabName) {
+    this.setState({ showTab: tabName });
   }
 
   getScreenshotDiffs(branchName){
@@ -85,7 +91,7 @@ class App extends React.Component {
     };
 
     const getTab = () => {
-      switch(showTab){
+      switch (showTab) {
         case TABS.overview:
           return <div>Overview</div>;
 
@@ -107,8 +113,8 @@ class App extends React.Component {
 
     return (
       <div>
-        <SelectBranch selectBranch={callbacks.selectBranch}/>
-        <TabButtons selectTab={callbacks.selectTab}/>
+        <SelectBranch selectBranch={callbacks.selectBranch} />
+        <TabButtons selectTab={callbacks.selectTab} />
         {getTab()}
       </div>
     );
