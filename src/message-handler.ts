@@ -20,6 +20,7 @@ export default async (panel: vscode.WebviewPanel) => {
                 return panel.webview.postMessage({messageId: 'set-data', data});
 
             case 'open-url':
+                // @ts-ignore
                 return vscode.env.openExternal(message.data.url);
 
             case 'get-current-branch-info':
@@ -32,6 +33,7 @@ export default async (panel: vscode.WebviewPanel) => {
                 return azure.getCypressBuilds(message.data);
 
             case 'get-screenshot-diffs':
+                // @ts-ignore
                 return integrationHelper.getScreenshotDiffs(message.data);
 
             case 'quit':
