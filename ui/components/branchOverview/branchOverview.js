@@ -1,4 +1,5 @@
 import React from 'react';
+import './branchOverview.scss';
 
 class BranchOverview extends React.Component {
     state = {
@@ -33,6 +34,10 @@ class BranchOverview extends React.Component {
             <div>Title: {branchData.title}</div>
             <div>Description:
                 <div>{branchData.description}</div>
+            </div>
+            <div>
+                <div><a href={ `https://stestr1-nl2.tst2.dom/${selectedBranch}`}>Open branch on DTE</a></div>
+                <div><a href={ `https://ba.orange.saxobank.com/${selectedBranch}`}>Open branch on Tst56</a></div>
             </div>
         </div>);
     }
