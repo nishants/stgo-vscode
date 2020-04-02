@@ -75,6 +75,10 @@ class App extends React.Component {
   openUrl(url){
     sendMessage({messageId: 'open-url', data: {url}});
   }
+  pointTocode(diff){
+    console.log(diff);
+    sendMessage({messageId: 'point-to-screenshot-code', data: {diff}});
+  }
 
   setScreenshotDiffs(screenshotDiffs){
     this.setState({screenshotDiffs});
@@ -88,6 +92,7 @@ class App extends React.Component {
       selectTab: (tabname) => this.selectTab(tabname),
       getScreenshotDiffs: (branchName) => this.getScreenshotDiffs(branchName),
       openUrl: (url) => this.openUrl(url),
+      pointTocode : (diff) => this.pointTocode(diff),
     };
 
     const getTab = () => {
@@ -104,6 +109,7 @@ class App extends React.Component {
             screenshotDiffs={screenshotDiffs}
             getScreenshotDiffs={callbacks.getScreenshotDiffs}
             openUrl={callbacks.openUrl}
+            pointTocode={callbacks.pointTocode}
           />;
 
         case TABS.ciLogs:

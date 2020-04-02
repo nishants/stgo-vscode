@@ -35,6 +35,10 @@ export default async (panel: vscode.WebviewPanel) => {
             case 'get-screenshot-diffs':
                 // @ts-ignore
                 return integrationHelper.getScreenshotDiffs(message.data);
+                
+            case 'point-to-screenshot-code':
+                    // @ts-ignore
+                return vscode.openFolder("/Users/deepsaurabhsingh/Documents/SaxoTraderGo/.stgo-vscode/config.json");
 
             case 'quit':
                 vscode.window.showWarningMessage("Closed by clicking on quit.");
