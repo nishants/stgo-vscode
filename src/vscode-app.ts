@@ -2,6 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 import data from './data';
+import * as config from "./config";
 
 const REACT_APP_NAME = 'reat-app';
 const REACT_APP_TITLE = 'React App';
@@ -9,12 +10,14 @@ const REACT_APP_TITLE = 'React App';
 //  allow only one instance of webview at a time
 let panel: vscode.WebviewPanel | undefined = undefined;
 
-export const render = (context: vscode.ExtensionContext) => {
+export const render = async (context: vscode.ExtensionContext) => {
     if (panel) {
         panel.reveal(vscode.ViewColumn.Beside);
         panel.webview.postMessage({ messageId: 'retried' });
         return;
     }
+
+    const workspaceConfig = await config.getConfig();
 
     panel = vscode.window.createWebviewPanel(
         REACT_APP_NAME,
@@ -43,6 +46,18 @@ export const render = (context: vscode.ExtensionContext) => {
                     // @ts-ignore
                     panel.webview.postMessage({ messageId: 'set-data', data });
                     return;
+                case 'get-pull-request':
+                    if(workspaceConfig.enableMocks){
+                        // @ts-ignore
+                        return config.getMockPullRequestFor(message.data.branchName).then(mockPullRequest => {
+                            // @ts-ignore
+                            panel.webview.postMessage({ messageId: 'set-pull-request', data: mockPullRequest })
+                        });
+                    }
+                    // @ts-ignore
+                    // TODO : get pull request form TFS
+                    return;
+
                 case 'quit':
                     vscode.window.showWarningMessage("Closed by clicking on quit.");
                     panel?.dispose();

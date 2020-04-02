@@ -31,6 +31,7 @@ class App extends React.Component {
   componentDidMount() {
     this.messageListener = window.addEventListener('message', event => {
       const message = event.data;
+      console.log("Received data from shell : ", message);
       switch (message.messageId) {
         case 'set-data':
           this.setState(message.data);
@@ -42,6 +43,7 @@ class App extends React.Component {
     });
 
     sendMessage({messageId: 'load-ui'});
+    sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
   }
 
   componentWillUnmount() {
