@@ -12,7 +12,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
                 panel.webview.postMessage({messageId: 'set-cypress-builds', data: mockData});
             });
         }
-        // TODO : get pull request form TFS
+        // TODO : get data from azure
         return;
     };
 
