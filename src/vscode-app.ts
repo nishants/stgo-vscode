@@ -46,6 +46,18 @@ export const render = async (context: vscode.ExtensionContext) => {
                     // @ts-ignore
                     panel.webview.postMessage({ messageId: 'set-data', data });
                     return;
+                case 'get-pull-request':
+                    if(workspaceConfig.enableMocks){
+                        // @ts-ignore
+                        return config.getMockPullRequestFor(message.data.branchName).then(mockPullRequest => {
+                            // @ts-ignore
+                            panel.webview.postMessage({ messageId: 'set-pull-request', data: mockPullRequest })
+                        });
+                    }
+                    // @ts-ignore
+                    // TODO : get pull request form TFS
+                    return;
+
                 case 'quit':
                     vscode.window.showWarningMessage("Closed by clicking on quit.");
                     panel?.dispose();
