@@ -4,8 +4,6 @@ import * as vscode from "vscode";
 import TFS from "./tfs";
 const PR_MOCK_FILE = "pull-request-mock.json";
 
-let TFS_TOKEN = "2jeuwk35cpb7hj63qkj2xt3ikgs6zhrrmngzxpbmvz5uhf2sjnjq";
-
 export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
   const getPullRequest = async ({ branchName }: object) => {
     if (workspaceConfig.enableMocks) {
