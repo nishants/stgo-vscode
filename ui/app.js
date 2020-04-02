@@ -18,7 +18,7 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = {showTab: TABS.overview, screenshotDiffs: []};
+  state = {showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0}};
 
   setMessage(message) {
     this.setState({message});

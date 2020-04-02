@@ -1,20 +1,13 @@
 import React from "react";
 
-const screenshotDiffItem = () => {
-
-};
-
 class ScreenshotDiffs extends React.Component {
-  componentDidMount() {
-    this.props.getScreenshotDiffs(this.props.branchName);
-  }
-
+  st
   render() {
     const {screenshotDiffs} = this.props;
     return <div id="screenshot-diffs-tab">
       <ul>
         {
-          screenshotDiffs.files.map(diff => (
+          screenshotDiffs.map(diff => (
             <li>
               {JSON.stringify(diff)}
             </li>
@@ -25,5 +18,7 @@ class ScreenshotDiffs extends React.Component {
   }
 }
 
-export default ScreenshotDiffs;
+export default () => {
+
+};
 
