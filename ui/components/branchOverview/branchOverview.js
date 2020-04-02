@@ -12,12 +12,12 @@ class BranchOverview extends React.Component {
             this.setState({ branchData: message.data});
         }
         });
-        this.props.sendMessage({messageId: 'get-pull-request', data: { branchName: this.props.selectedBranch}});
+        this.props.getBranchDetails(this.props.selectedBranch);
 
     }
     componentDidUpdate(prevProps) {
         if(prevProps.selectedBranch !== this.props.selectedBranch) {
-            this.props.sendMessage({messageId: 'get-pull-request', data: { branchName: this.props.selectedBranch}});
+            this.props.getBranchDetails(this.props.selectedBranch);
         }
     }
     render() {
