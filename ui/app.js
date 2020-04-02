@@ -85,7 +85,7 @@ class App extends React.Component {
 
     return (
       <div>
-        <SelectBranch selectBranch={callbacks.selectBranch}/>
+        <SelectBranch selectBranch={callbacks.selectBranch} list={[{id: 1, name: 'branch1'}, {id: 2, name: 'branch2'}]}/>
         <TabButtons selectTab={callbacks.selectTab}/>
         {getTab()}
       </div>
