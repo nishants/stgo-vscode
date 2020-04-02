@@ -1,5 +1,13 @@
 import React from "react";
-import BranchLogs from "./branch-logs";
+
+import SelectBranch from "./select-branch";
+import TabButtons from "./tabs-buttons";
+
+const TABS = {
+  overview: 'overview',
+  cypressCi: 'cypress-ci',
+  screenshotDiffs: 'screenshot-comparison',
+}
 
 const vscode = acquireVsCodeApi();
 
@@ -8,14 +16,7 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = {
-    message: null,
-    selectedCommit: null,
-    currentBranchName: null,
-    branches: [],
-    commits: [],
-    commitLogs: []
-  };
+  state = {showTab: TABS.overview};
 
   setMessage(message) {
     this.setState({message})
@@ -33,18 +34,14 @@ class App extends React.Component {
       const message = event.data;
       console.log("Received data from shell : ", message);
       switch (message.messageId) {
-        case 'set-data':
-          this.setState(message.data);
-          break;
         case 'retried':
           this.setMessage('Cant run more than one window. !');
           break;
       }
     });
-
-    sendMessage({messageId: 'load-ui'});
-    sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
+    // TODO : Just to test, remove this
     sendMessage({messageId: 'get-current-branch-info'});
+    sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
     sendMessage({messageId: 'get-cypress-builds', data: {branchName: "xyz-branch"}});
   }
 
@@ -56,51 +53,39 @@ class App extends React.Component {
     this.setState({currentBranchName: branchName})
   }
 
-  setCommit(commit) {
-    this.setState({selectedCommit: commit})
-  }
+  selectTab (tabName){
+    this.setState({showTab: tabName});
 
-  openCommitLog(commitLog) {
-    sendMessage({
-      messageId: 'view-commit-log',
-      commitLog
-    });
-  }
-
-  openCommit(commit) {
-    sendMessage({
-      messageId: 'view-commit',
-      commit
-    });
-  }
-
-  handleCommitLogAction(commit, action) {
-    sendMessage({
-      messageId: 'handle-commit-log-action',
-      commit,
-      action
-    });
   }
 
   render() {
-    const {currentBranchName, selectedCommit, branches, commits, commitLogs} = this.state;
+    const {showTab} = this.state;
 
     const callbacks = {
       selectBranch: (event) => this.setBranch(event.target.value),
-      selectCommit: (commit) => this.setCommit(commit),
-      openCommitLog: (commitLog) => this.openCommitLog(commitLog),
-      openCommit: (commit) => this.openCommit(commit),
-      handleCommitLogAction: (action) => this.handleCommitLogAction(selectedCommit, action)
+      selectTab: (tabname) => this.selectTab(tabname),
     };
 
-    return <BranchLogs
-      currentBranchName={currentBranchName}
-      branches={branches}
-      commits={commits}
-      commitLogs={commitLogs}
-      selectedCommit={selectedCommit}
-      {...callbacks}
-    />;
+    const getTab = () => {
+      switch(showTab){
+        case TABS.overview:
+          return <div>Overview</div>;
+
+        case TABS.cypressCi:
+          return <div>Cypress CI</div>;
+
+        case TABS.screenshotDiffs:
+          return <div>Screenshot Diffs</div>;
+      }
+    };
+
+    return (
+      <div>
+        <SelectBranch selectBranch={callbacks.selectBranch}/>
+        <TabButtons selectTab={callbacks.selectTab}/>
+        {getTab()}
+      </div>
+    );
   }
 }
 
