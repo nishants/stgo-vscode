@@ -17,10 +17,10 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = {showTab: TABS.overview};
+  state = { showTab: TABS.overview };
 
   setMessage(message) {
-    this.setState({message})
+    this.setState({ message })
   }
 
   closePanel() {
@@ -38,12 +38,13 @@ class App extends React.Component {
         case 'retried':
           this.setMessage('Cant run more than one window. !');
           break;
+        case 'set-branch-info':
+          this.setBranch(message.data.branchInfo.branchName);
+          break;
       }
     });
     // TODO : Just to test, remove this
-    sendMessage({messageId: 'get-current-branch-info'});
-    sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
-    sendMessage({messageId: 'get-cypress-builds', data: {branchName: "xyz-branch"}});
+    sendMessage({ messageId: 'get-current-branch-info' });
   }
 
   componentWillUnmount() {
@@ -51,16 +52,18 @@ class App extends React.Component {
   }
 
   setBranch(branchName) {
-    this.setState({currentBranchName: branchName})
+    this.setState({ currentBranchName: branchName });
+    sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
+    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
   }
 
-  selectTab (tabName){
-    this.setState({showTab: tabName});
+  selectTab(tabName) {
+    this.setState({ showTab: tabName });
 
   }
 
   render() {
-    const {showTab} = this.state;
+    const { showTab } = this.state;
 
     const callbacks = {
       selectBranch: (event) => this.setBranch(event.target.value),
@@ -68,7 +71,7 @@ class App extends React.Component {
     };
 
     const getTab = () => {
-      switch(showTab){
+      switch (showTab) {
         case TABS.overview:
           return <div>Overview</div>;
 
