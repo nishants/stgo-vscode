@@ -1,13 +1,24 @@
 import React from "react";
+import { TABS } from "../constants";
 
-export default ({selectTab}) => (
-  <div id='tab-button'>
-    <ul className='tabs'>
-      <li onClick={() => selectTab('overview')}>Overview</li>
-      <li onClick={() => selectTab('cypress-ci')}>Cypress-CI</li>
-      <li onClick={() => selectTab('screenshot-comparison')}>ScreenshotComparison</li>
-      <li onClick={() => selectTab('ci-logs')}>CI Logs</li>
-    </ul>
-  </div>
-);
+export default ({ selectTab, selectedTab }) => {
+
+  const getTabButton = (key) => {
+      let className1 = "tab";
+      
+      if(TABS[key]==selectedTab) {
+        className1+= " tab--active";
+      }
+      
+      return <button className={className1} onClick={() => selectTab(TABS[key])}>{TABS[key]}</button>
+  }
+
+  return (
+    <div className='tab-buttons'>
+      {
+        Object.keys(TABS).map((tabKey) => getTabButton(tabKey))
+      }
+     </div>
+  );
+};
 

@@ -3,6 +3,12 @@ $commitLogBgColor:  var(--vscode-menu-background);
 $errorColor: var(--vscode-editorError-foreground);
 $successColor: var(--vscode-gitDecoration-addedResourceForeground);
 $selectionBg: var(--vscode-focusBorder);
+$activeBackground: var(--vscode-tab-activeBackground);
+$activeForeground: var(--vscode-tab-activeForeground);
+$activeModifiedBorder: var(--vscode-tab-activeModifiedBorder);
+$inactiveBackground: var(--vscode-tab-inactiveBackground);
+$inactiveForeground: var(--vscode-tab-inactiveForeground);
+$inactiveModifiedBorder: var(--vscode-tab-inactiveModifiedBorder);
 $lightBorder: var(--vscode-editorGroup-border);
 
   //--vscode-activityBar-activeBorder: #ffffff;
