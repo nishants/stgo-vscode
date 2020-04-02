@@ -1586,8 +1586,8 @@ aws4@^1.8.0:
 
 azure-devops-node-api@^10.1.0:
   version "10.1.0"
-  resolved "http://npm.sys.dom:81/npm/NPM3rdParty/azure-devops-node-api/-/azure-devops-node-api-10.1.0.tgz#dc572abae0c2993e227dd0e59d11318c49768113"
-  integrity sha1-3FcquuDCmT4ifdDlnRExjEl2gRM=
+  resolved "https://registry.yarnpkg.com/azure-devops-node-api/-/azure-devops-node-api-10.1.0.tgz#dc572abae0c2993e227dd0e59d11318c49768113"
+  integrity sha512-CPGfmGkiZ+wsmeElmloFHFBHYRc1S8miJrQjJ9JBhr0BjUQ4i/xV/OhYGOyqJOHN+LGGcLTrWCeq2t9zNQkQ9w==
   dependencies:
     tunnel "0.0.6"
     typed-rest-client "1.7.2"
