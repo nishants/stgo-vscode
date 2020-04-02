@@ -17,8 +17,11 @@ export default async (panel: vscode.WebviewPanel) => {
         switch (message.messageId) {
             case 'load-ui':
                 // @ts-ignore
-                panel.webview.postMessage({messageId: 'set-data', data});
-                return;
+                return panel.webview.postMessage({messageId: 'set-data', data});
+
+            case 'open-url':
+                // @ts-ignore
+                return vscode.env.openExternal(message.data.url);
 
             case 'get-current-branch-info':
                 return git.getCheckedOutBranchInfo();

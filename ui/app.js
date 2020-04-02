@@ -2,13 +2,14 @@ import React from "react";
 
 import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
+import ScreenshotDiffsTab from "./screenshot-diffs-tab";
 
 const TABS = {
   overview: 'overview',
   cypressCi: 'cypress-ci',
   screenshotDiffs: 'screenshot-comparison',
   ciLogs: 'ci-logs',
-}
+};
 
 const vscode = acquireVsCodeApi();
 
@@ -17,7 +18,7 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = { showTab: TABS.overview };
+  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0}};
 
   setMessage(message) {
     this.setState({ message })
@@ -41,10 +42,16 @@ class App extends React.Component {
         case 'set-branch-info':
           this.setBranch(message.data.branchInfo.branchName);
           break;
+        case 'set-screenshot-diffs':
+          this.setScreenshotDiffs(message.data);
+          break;
       }
     });
     // TODO : Just to test, remove this
-    sendMessage({ messageId: 'get-current-branch-info' });
+    sendMessage({messageId: 'get-current-branch-info'});
+    sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
+    sendMessage({messageId: 'get-cypress-builds', data: {branchName: "xyz-branch"}});
+    //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
 
   componentWillUnmount() {
@@ -59,15 +66,28 @@ class App extends React.Component {
 
   selectTab(tabName) {
     this.setState({ showTab: tabName });
+  }
 
+  getScreenshotDiffs(branchName){
+    sendMessage({messageId: 'get-screenshot-diffs', data: {branchName}});
+  }
+
+  openUrl(url){
+    sendMessage({messageId: 'open-url', data: {url}});
+  }
+
+  setScreenshotDiffs(screenshotDiffs){
+    this.setState({screenshotDiffs});
   }
 
   render() {
-    const { showTab } = this.state;
+    const {showTab, currentBranchName, screenshotDiffs} = this.state;
 
     const callbacks = {
       selectBranch: (event) => this.setBranch(event.target.value),
       selectTab: (tabname) => this.selectTab(tabname),
+      getScreenshotDiffs: (branchName) => this.getScreenshotDiffs(branchName),
+      openUrl: (url) => this.openUrl(url),
     };
 
     const getTab = () => {
@@ -79,7 +99,12 @@ class App extends React.Component {
           return <div>Cypress CI</div>;
 
         case TABS.screenshotDiffs:
-          return <div>Screenshot Diffs</div>;
+          return <ScreenshotDiffsTab
+            branchName={currentBranchName}
+            screenshotDiffs={screenshotDiffs}
+            getScreenshotDiffs={callbacks.getScreenshotDiffs}
+            openUrl={callbacks.openUrl}
+          />;
 
         case TABS.ciLogs:
           return <div>Integration helper logs</div>;

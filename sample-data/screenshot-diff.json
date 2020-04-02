@@ -11,9 +11,9 @@
     "reported": false,
     "path": "\\drop\\cypress\\screenshots\\app\\integration\\integration.spec.js",
     "fileName": "srcfrontendappintegrationintegration -- phone deeplink for chat -- should render correctly (1).png",
-    "imageMaster": "http://st-integration.sys.dom/publicApi/differences/ci-1170325-notifications/screenshot/05476e4a671f06339f3ad5efe564e1d9311c984a/m",
-    "imageBranch": "http://st-integration.sys.dom/publicApi/differences/ci-1170325-notifications/screenshot/05476e4a671f06339f3ad5efe564e1d9311c984a/b",
-    "imageDifference": "http://st-integration.sys.dom/publicApi/differences/ci-1170325-notifications/screenshot/05476e4a671f06339f3ad5efe564e1d9311c984a/d",
+    "imageMaster": "https://i.ytimg.com/vi/YYFM-wggh6s/maxresdefault.jpg",
+    "imageBranch": "https://i.ytimg.com/vi/E_lByLdKeKY/maxresdefault.jpg",
+    "imageDifference": "https://i.ytimg.com/vi/eLgxBaiwuA8/maxresdefault.jpg",
     "approveUrl": "http://st-integration.sys.dom/publicApi/differences/ci-1170325-notifications/05476e4a671f06339f3ad5efe564e1d9311c984a"
   },
   {
