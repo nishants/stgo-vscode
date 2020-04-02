@@ -2,6 +2,8 @@ import React from "react";
 
 import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
+import CypressCi from "./cypress-ci";
+
 
 const TABS = {
   overview: 'overview',
@@ -73,7 +75,7 @@ class App extends React.Component {
           return <div>Overview</div>;
 
         case TABS.cypressCi:
-          return <div>Cypress CI</div>;
+          return <div><CypressCi/></div>;
 
         case TABS.screenshotDiffs:
           return <div>Screenshot Diffs</div>;
