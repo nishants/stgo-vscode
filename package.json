@@ -74,5 +74,8 @@
     "webpack": "^4.41.6",
     "webpack-cli": "^3.3.11"
   },
-  "dependencies": {}
+  "dependencies": {
+    "execa": "^4.0.0",
+    "os": "^0.1.1"
+  }
 }
