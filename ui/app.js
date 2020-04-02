@@ -83,7 +83,6 @@ class App extends React.Component {
     sendMessage({messageId: 'open-url', data: {url}});
   }
   getBranchDetails(branchName) {
-    console.log('getbranch details', branchName)
     sendMessage({messageId: 'get-pull-request', data: {branchName}});
   }
 
