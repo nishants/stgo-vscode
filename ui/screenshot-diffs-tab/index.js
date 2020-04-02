@@ -16,7 +16,18 @@ class ScreenshotDiffs extends React.Component {
         {
           screenshotDiffs.files.map(diff => (
             <li>
-              {JSON.stringify(diff)}
+              {diff.path}
+
+              <ul>
+                {
+                  diff.screenshots.map(diff => (
+                    <li>
+                      {diff.fileName} : {`${diff.approved}`}
+                    </li>
+                  ))
+                }
+              </ul>
+
             </li>
           ))
         }

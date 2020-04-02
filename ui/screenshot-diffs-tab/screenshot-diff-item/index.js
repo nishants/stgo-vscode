@@ -1,7 +1,6 @@
 import React from "react";
 
 class ScreenshotDiffs extends React.Component {
-  st
   render() {
     const {screenshotDiffs} = this.props;
     return <div id="screenshot-diffs-tab">
@@ -9,7 +8,17 @@ class ScreenshotDiffs extends React.Component {
         {
           screenshotDiffs.map(diff => (
             <li>
-              {JSON.stringify(diff)}
+              {diff.path}json
+
+              <ul>
+                {
+                  diff.screenshots.map(diff => (
+                    <li>
+                      {diff.fileName} : {`${diff.approved}`}
+                    </li>
+                  ))
+                }
+              </ul>
             </li>
           ))
         }
