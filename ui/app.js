@@ -2,6 +2,7 @@ import React from "react";
 
 import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
+import BranchOverView from './components/branchOverview/branchOverview';
 import ScreenshotDiffsTab from "./screenshot-diffs-tab";
 
 const TABS = {
@@ -18,7 +19,11 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0}};
+  state = {
+    showTab: TABS.overview,
+    currentBranchName: 'xyz-branch',
+    screenshotDiffs: { files: [], unapproved: 0 }
+  };
 
   setMessage(message) {
     this.setState({ message })
@@ -48,20 +53,21 @@ class App extends React.Component {
       }
     });
     // TODO : Just to test, remove this
-    sendMessage({messageId: 'get-current-branch-info'});
-    sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
-    sendMessage({messageId: 'get-cypress-builds', data: {branchName: "xyz-branch"}});
+    sendMessage({ messageId: 'get-current-branch-info' });
+    // todo remove sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
+    sendMessage({ messageId: 'get-cypress-builds', data: { branchName: this.state.currentBranchName } });
     //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
-
+  
   componentWillUnmount() {
     window.removeEventListener(this.messageListener);
   }
 
   setBranch(branchName) {
     this.setState({ currentBranchName: branchName });
-    sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
-    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
+    //todo handled by the component
+    // sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
+    sendMessage({ messageId: 'get-cypress-builds', data: { branchName: this.state.currentBranchName } });
   }
 
   selectTab(tabName) {
@@ -76,24 +82,32 @@ class App extends React.Component {
     sendMessage({messageId: 'open-url', data: {url}});
   }
 
-  setScreenshotDiffs(screenshotDiffs){
-    this.setState({screenshotDiffs});
+  getBranchDetails(branchName) {
+    sendMessage({ messageId: 'get-pull-request', data: { branchName } });
+  }
+
+  setScreenshotDiffs(screenshotDiffs) {
+    this.setState({ screenshotDiffs });
   }
 
   render() {
-    const {showTab, currentBranchName, screenshotDiffs} = this.state;
 
+    const { showTab, currentBranchName, screenshotDiffs } = this.state;
     const callbacks = {
       selectBranch: (event) => this.setBranch(event.target.value),
       selectTab: (tabname) => this.selectTab(tabname),
       getScreenshotDiffs: (branchName) => this.getScreenshotDiffs(branchName),
+      getBranchDetails: (branchName) => this.getBranchDetails(branchName),
       openUrl: (url) => this.openUrl(url),
     };
 
     const getTab = () => {
       switch (showTab) {
         case TABS.overview:
-          return <div>Overview</div>;
+          return <BranchOverView
+            selectedBranch={this.state.currentBranchName}
+            getBranchDetails={callbacks.getBranchDetails}
+          />;
 
         case TABS.cypressCi:
           return <div>Cypress CI</div>;
@@ -106,19 +120,19 @@ class App extends React.Component {
             openUrl={callbacks.openUrl}
           />;
 
-        case TABS.ciLogs:
-          return <div>Integration helper logs</div>;
-      }
-    };
+case TABS.ciLogs:
+  return <div>Integration helper logs</div>;
+}
+};
 
-    return (
-      <div>
-        <SelectBranch selectBranch={callbacks.selectBranch} />
-        <TabButtons selectTab={callbacks.selectTab} />
-        {getTab()}
-      </div>
-    );
-  }
+return (
+<div>
+<SelectBranch selectBranch={callbacks.selectBranch} />
+<TabButtons selectTab={callbacks.selectTab} />
+{getTab()}
+</div>
+);
+}
 }
 
 export default App;
