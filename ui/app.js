@@ -44,6 +44,7 @@ class App extends React.Component {
     sendMessage({messageId: 'get-current-branch-info'});
     sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
     sendMessage({messageId: 'get-cypress-builds', data: {branchName: "xyz-branch"}});
+    //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
 
   componentWillUnmount() {
