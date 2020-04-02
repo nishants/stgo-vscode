@@ -4,7 +4,7 @@ import * as GitApi from "azure-devops-node-api/GitApi";
 import { TFS_URL, SaxoTrader_Project_TFS_ID } from "../constant";
 
 export default class TFS {
-  tfsConnectObj: GitApi.IGitApi;
+  tfsConnectObj: GitApi.IGitApi | undefined;
   private token: string = "";
 
   constructor(token: string) {
@@ -22,17 +22,17 @@ export default class TFS {
   }
 
   async getPr(branchName: string) {
-    if (!this.tfsConnectObj) {
-      await this.createConnection();
-    }
-    const prDetails = await this.tfsConnectObj.getPullRequests(
-      SaxoTrader_Project_TFS_ID,
-      {
-        sourceRefName: `refs/heads/${branchName}`
-      }
-    );
+    if (this.tfsConnectObj) {
+      const prDetails = await this.tfsConnectObj.getPullRequests(
+        SaxoTrader_Project_TFS_ID,
+        {
+          sourceRefName: `refs/heads/${branchName}`
+        }
+      );
 
-    return prDetails;
+      return prDetails;
+    }
+    return [];
   }
 
   async getPullRequestData(branchName: string) {
@@ -40,14 +40,18 @@ export default class TFS {
       console.log("Brnach name is Must");
       return;
     }
+
+    if (!this.tfsConnectObj) {
+      await this.createConnection();
+    }
     const prDetails = await this.getPr(branchName);
 
     if (prDetails.length) {
       //  returning object for Esiting PR with details and edit link
       return {
         type: "EXISTING",
-        data: prDetails,
-        link: `${TFS_URL}/_git/SaxoTrader/pullrequest/${prDetails.pullRequestId}?_a=overview`
+        data: prDetails[0],
+        link: `${TFS_URL}/_git/SaxoTrader/pullrequest/${prDetails[0]?.pullRequestId}?_a=overview`
       };
     }
 
