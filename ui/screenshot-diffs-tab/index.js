@@ -33,7 +33,7 @@ class ScreenshotDiffs extends React.Component {
           screenshotDiffs.files.map(diff => (
             <li className='file-screenshot-diff-group'>
               <h3>
-                diff.path
+                {diff.path}
               </h3>
 
               <ul>

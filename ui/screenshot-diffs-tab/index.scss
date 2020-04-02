@@ -1,6 +1,30 @@
 #screenshot-diffs-tab{
   display: block;
   .file-screenshot-diff-group{
+    ul {
+      @extend .undo-list;
+    }
+  }
+
+  .screenshot-diff-item{
+    padding: 10px;
+    border: 1px solid $lightBorder;
+    h4{
+      margin: 0;
+    }
+    margin-bottom: 20px;
+  }
+
+  ul.image-comparison{
+    @extend .undo-list;
+    @extend .resize-container;
+    > li {
+      width: 33%;
+      float: left;
+      padding: 10px;
+    }
+  }
+  .file-screenshot-diff-group{
 
   }
 }
