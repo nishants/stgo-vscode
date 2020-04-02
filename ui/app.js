@@ -2,13 +2,14 @@ import React from "react";
 
 import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
+import BranchOverView from './components/branchOverview/branchOverview';
 
 const TABS = {
   overview: 'overview',
   cypressCi: 'cypress-ci',
   screenshotDiffs: 'screenshot-comparison',
   ciLogs: 'ci-logs',
-}
+};
 
 const vscode = acquireVsCodeApi();
 
@@ -17,10 +18,13 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = {showTab: TABS.overview};
+  state = {
+    showTab: TABS.overview,
+    currentBranchName: 'xyz-branch'
+  };
 
   setMessage(message) {
-    this.setState({message})
+    this.setState({message});
   }
 
   closePanel() {
@@ -42,8 +46,8 @@ class App extends React.Component {
     });
     // TODO : Just to test, remove this
     sendMessage({messageId: 'get-current-branch-info'});
-    sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
-    sendMessage({messageId: 'get-cypress-builds', data: {branchName: "xyz-branch"}});
+    // todo remove sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
+    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
   }
 
   componentWillUnmount() {
@@ -51,7 +55,7 @@ class App extends React.Component {
   }
 
   setBranch(branchName) {
-    this.setState({currentBranchName: branchName})
+    this.setState({currentBranchName: branchName});
   }
 
   selectTab (tabName){
@@ -70,7 +74,7 @@ class App extends React.Component {
     const getTab = () => {
       switch(showTab){
         case TABS.overview:
-          return <div>Overview</div>;
+          return <BranchOverView selectedBranch={ this.state.currentBranchName } sendMessage={sendMessage}></BranchOverView>;
 
         case TABS.cypressCi:
           return <div>Cypress CI</div>;
