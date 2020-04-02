@@ -2,10 +2,12 @@ import data from "./data";
 import * as vscode from "vscode";
 import * as config from "./config";
 import  tfsHandler from "./tfs";
+import  gitHandler from "./git";
 
 export default async (panel: vscode.WebviewPanel) => {
     const workspaceConfig = await config.getConfig();
     const tfs = tfsHandler(panel, workspaceConfig);
+    const git = gitHandler(panel, workspaceConfig);
 
     return (message: { messageId: string;  data: object}) => {
         switch (message.messageId) {
@@ -13,6 +15,9 @@ export default async (panel: vscode.WebviewPanel) => {
                 // @ts-ignore
                 panel.webview.postMessage({messageId: 'set-data', data});
                 return;
+
+            case 'get-current-branch-info':
+                return git.getCheckedOutBranchInfo();
 
             case 'get-pull-request':
                 return tfs.getPullRequest(message.data);
