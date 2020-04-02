@@ -1,8 +1,8 @@
 import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
-import data from './data';
-import * as config from "./config";
+
+import messageHandler from './message-handler';
 
 const REACT_APP_NAME = 'reat-app';
 const REACT_APP_TITLE = 'React App';
@@ -17,7 +17,6 @@ export const render = async (context: vscode.ExtensionContext) => {
         return;
     }
 
-    const workspaceConfig = await config.getConfig();
 
     panel = vscode.window.createWebviewPanel(
         REACT_APP_NAME,
@@ -39,43 +38,5 @@ export const render = async (context: vscode.ExtensionContext) => {
         context.subscriptions
     );
     // Handle messages from the webview
-    panel.webview.onDidReceiveMessage(
-        message => {
-            switch (message.messageId) {
-                case 'load-ui':
-                    // @ts-ignore
-                    panel.webview.postMessage({ messageId: 'set-data', data });
-                    return;
-                case 'get-pull-request':
-                    if(workspaceConfig.enableMocks){
-                        // @ts-ignore
-                        return config.getMockPullRequestFor(message.data.branchName).then(mockPullRequest => {
-                            // @ts-ignore
-                            panel.webview.postMessage({ messageId: 'set-pull-request', data: mockPullRequest })
-                        });
-                    }
-                    // @ts-ignore
-                    // TODO : get pull request form TFS
-                    return;
-
-                case 'quit':
-                    vscode.window.showWarningMessage("Closed by clicking on quit.");
-                    panel?.dispose();
-                    return;
-                case 'view-commit-log':
-                    vscode.env.openExternal(message.commitLog.link);
-                    return;
-                case 'view-commit':
-                    vscode.env.openExternal(message.commit.link);
-                    return;
-                case 'handle-commit-log-action':
-                    vscode.window.showInformationMessage(
-                        `${message.action.id} -> ${message.commit.message}`
-                    );
-                    return;
-            }
-        },
-        undefined,
-        context.subscriptions
-    );
+    panel.webview.onDidReceiveMessage(await messageHandler(panel));
 };

@@ -3,7 +3,6 @@ import * as fs from 'fs';
 import * as path from 'path';
 const CONFIG_DIR_NAME = '.stgo-vscode';
 const CONFIG_FILE_NAME = 'config.json';
-const PR_MOCK_FILE = 'pull-request-mock.json';
 
 const getWorkspaceConfigFile = (fileName: string) => {
   try {
@@ -28,8 +27,8 @@ const getWorkspaceConfigFile = (fileName: string) => {
   }
 };
 
-export const getMockPullRequestFor = async () => {
-  return getWorkspaceConfigFile(PR_MOCK_FILE);
+export const getData = async (file: string) => {
+  return getWorkspaceConfigFile(file);
 };
 
 export const getConfig = async () => {
