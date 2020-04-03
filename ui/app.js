@@ -14,7 +14,7 @@ const sendMessage = message => {
 };
 
 class App extends React.Component {
-  state = { 
+  state = {
     showTab: TABS.overview,
     currentBranchName: null,
     screenshotDiffs: {files: [], unapproved: 0},
@@ -26,7 +26,9 @@ class App extends React.Component {
     this.setState({ message });
   }
   setCypressBuild(data) {
-    this.setState({ cypressData: data });
+    if (data.type === 'COMPLETED') {
+      this.setState({ cypressData: data.data });
+    }
   }
 
   closePanel() {
@@ -112,6 +114,15 @@ class App extends React.Component {
 
   setScreenshotDiffs(screenshotDiffs){
     this.setState({screenshotDiffs});
+  triggerCypressBuild() {
+    sendMessage({
+      messageId: "get-trigger-cypress-build",
+      data: { branchName: this.state.currentBranchName }
+    });
+  }
+
+  setScreenshotDiffs(screenshotDiffs) {
+    this.setState({ screenshotDiffs });
   }
 
   render() {
@@ -144,7 +155,12 @@ class App extends React.Component {
           );
 
         case TABS.cypressCi:
-          return <CypressCi data={this.state.cypressData} />;
+          return (
+            <CypressCi
+              data={this.state.cypressData}
+              callBack={this.triggerCypressBuild}
+            />
+          );
 
         case TABS.screenshotDiffs:
           return (
