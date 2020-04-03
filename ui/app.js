@@ -16,7 +16,7 @@ const sendMessage = message => {
 class App extends React.Component {
   state = { 
     showTab: TABS.overview,
-    currentBranchName: 'xyz-branch',
+    currentBranchName: null,
     screenshotDiffs: {files: [], unapproved: 0},
     branchList : [],
     cypressData: []
@@ -59,11 +59,6 @@ class App extends React.Component {
           break;
       }
     });
-    // TODO : Just to test, remove this
-    sendMessage({messageId: 'get-current-branch-info'});
-    sendMessage({messageId: 'get-branch-list'});
-    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
-    //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
 
   componentWillUnmount() {
@@ -82,6 +77,7 @@ class App extends React.Component {
 
   pupulateBranch(branch){
     this.setState(({branchList}) => ({
+      currentBranchName: branch,
       branchList: Array.from(new Set([...branchList, branch]))
     }));
 
