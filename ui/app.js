@@ -42,7 +42,7 @@ class App extends React.Component {
           this.setCypressBuild(data);
           break;
         case 'set-branch-info':
-          this.pupulateBranch('xyz-branch');
+          this.pupulateBranch(message.data.branchInfo.branchName);
           break;
         case 'set-screenshot-diffs':
           this.setScreenshotDiffs(message.data);
