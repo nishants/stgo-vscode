@@ -7,9 +7,9 @@ export default (props) => (
         return <option value={branch.name}>{branch.name}</option>
       })}
     </select>
-    <button type="button" class="refresh">Refresh</button>
-    <button type="button" class="push">Push (2 commits)</button>
-    <button type="button" class="sync">Sync with master (5 commits)</button>
+    <button type="button" className="refresh">Refresh</button>
+    <button type="button" className="push">Push (2 commits)</button>
+    <button type="button" className="sync">Sync with master (5 commits)</button>
   </div>
 );
 
