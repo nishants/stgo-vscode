@@ -151,7 +151,7 @@ class App extends React.Component {
                 <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
 
         <TabButtons selectTab={callbacks.selectTab} selectedTab={showTab}/>
-        {getTab()}
+        <div className="padding20">{getTab()}</div>
       </div>
     );
   }
