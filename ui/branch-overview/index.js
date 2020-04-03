@@ -1,4 +1,5 @@
 import React from 'React';
+import WithBranchChange  from '../withBranchChange';
 
 class Index extends React.Component {
   state = {
@@ -12,13 +13,6 @@ class Index extends React.Component {
         this.setState({ branchData: message.data });
       }
     });
-    this.props.getBranchDetails(this.props.selectedBranch);
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.selectedBranch !== this.props.selectedBranch) {
-      this.props.getBranchDetails(this.props.selectedBranch);
-    }
   }
 
   render() {
@@ -84,4 +78,4 @@ class Index extends React.Component {
 
 }
 
-export default Index;
+export default WithBranchChange(Index);

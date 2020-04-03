@@ -1,22 +1,8 @@
 import React from "react";
 import ScreenshotDiffItem from "./diff-item.js";
+import WithBranchChange  from '../withBranchChange';
 
 class ScreenshotDiffs extends React.Component {
-
-  loadDataForBranch(){
-    this.props.getScreenshotDiffs(this.props.branchName);
-  }
-
-  componentDidMount() {
-    this.loadDataForBranch();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.currentBranchName !== this.props.currentBranchName) {
-      this.loadDataForBranch();
-    }
-  }
-
   render() {
     const {screenshotDiffs, openUrl, sendHttpRequest, openFile} = this.props;
     return <div id="screenshot-diffs-tab">
@@ -42,5 +28,5 @@ class ScreenshotDiffs extends React.Component {
   }
 }
 
-export default ScreenshotDiffs;
+export default WithBranchChange(ScreenshotDiffs);
 

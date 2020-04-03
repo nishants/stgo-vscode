@@ -1,21 +1,8 @@
 import React from "react";
 import Status from './status';
+import WithBranchChange  from '../withBranchChange';
 
 class CypressCi extends React.Component{
-
-  loadBuildsForCurrentBranch(){
-    this.props.getCypressBuilds();
-  }
-
-  componentDidMount() {
-    this.loadBuildsForCurrentBranch();
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.currentBranchName !== this.props.currentBranchName) {
-      this.loadBuildsForCurrentBranch();
-    }
-  }
 
   render() {
     const {data, callBack} = this.props;
@@ -28,5 +15,5 @@ class CypressCi extends React.Component{
   }
 }
   
-export default CypressCi;
+export default WithBranchChange(CypressCi);
 
