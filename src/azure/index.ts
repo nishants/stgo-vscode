@@ -20,8 +20,6 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
         });
       });
     }
-    // TODO : get data from azure
-
     const azureObj = new AZURE(workspaceConfig.azureToken);
 
     const buildData = await azureObj.getAllBuildData(branchName);
