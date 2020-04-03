@@ -1,7 +1,6 @@
-import React from 'react';
-import './branchOverview.scss';
+import React from 'React';
 
-class BranchOverview extends React.Component {
+class Index extends React.Component {
   state = {
     branchData: {}
   };
@@ -39,45 +38,50 @@ class BranchOverview extends React.Component {
             <span className="label">Selected Branch :</span> 
             <span className="value">{selectedBranch}</span>
         </div>
-        {existing ?
-          (<div>
+        {existing &&
+          (<React.Fragment>
               <div className='row'>
-                <span className="label">Pull Request:</span> 
+                <span className="label">Pull Request :</span>
                 <span className="value">
-                    <a href={branchData.link}>#{branchData.data.pullRequestId}</a>
+                    <span>#{branchData.data.pullRequestId}</span>
                 </span>
               </div>
               <div className='row'>
-                <span className="label">Title:</span> 
+                <span className="label">Title :</span>
                 <span className="value">{branchData.data.title}</span>
               </div>
               <div className='row'>
-                <span className="label">Description:</span> 
+                <span className="label">Description :</span>
                 <span className="value">{branchData.data.description}</span>
               </div>
               <div className='row'>
-                <span className="label">Source:</span> 
+                <span className="label">Source :</span>
                 <span className="value">{sourceRefName}</span>
               </div>
               <div className='row'> 
-                <span className="label"> Target:</span> 
+                <span className="label"> Target :</span>
                 <span className="value">{targetRefName}</span>
               </div>
-              <div className='row'>
-                <a className='pr-btn' href={branchData.link}>Edit Pull Request</a>
-              </div>
-          </div>) :
-          (<div className='row'>
-            <a href={branchData.links} className='pr-btn'>Create Pull Request</a>
-          </div>)
+          </React.Fragment>)
         }
-        <div className='row'>
+        <div className='row no-label'>
           <div><a href={`https://stestr1-nl2.tst2.dom/${selectedBranch}`}>Open branch on DTE</a></div>
           <div><a href={`https://ba.orange.saxobank.com/${selectedBranch}`}>Open branch on Tst56</a></div>
         </div>
+
+        {existing ?
+          (            <div className='row no-label'>
+              <button className='button' onClick={() => this.props.openUrl(branchData.link)}>Open Pull Request</button>
+            </div>
+          ) :
+          (<div className='row no-label'>
+            <button onClick={() => this.props.openUrl(branchData.link)} className='button'>Create Pull Request</button>
+          </div>)
+        }
+
       </div >);
   }
 
 }
 
-export default BranchOverview;
+export default Index;

@@ -1,19 +1,12 @@
 #branch-selector{
-  display: block;
-  select {
-    font-family: $fontFamily;
-    width: 15%;
-    // color: $fontColor;
-    // background-color: $backgroundColor;
-  }
-  
-  button {
-    margin: 0px 5px;
-    // background-color: $backgroundColor;
-    // color: $fontColor;
+  padding: 5px;
+  @extend .resize-container;
+
+  select{
+    margin-bottom: 5px;
   }
 
-  .refresh {
-    margin-right: 10px;
+  select, button{
+    float: left;
   }
 }
