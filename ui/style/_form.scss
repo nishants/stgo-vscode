@@ -16,6 +16,10 @@ a.button{
   outline: 0;
 }
 
+a:not(.button){
+  font-style: italic;
+}
+
 button.warning{
   background: $warningBgColor;
 }
