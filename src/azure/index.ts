@@ -39,7 +39,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
     const triggerBuildObj = await azureObj.getTriggerBuild(branchName);
 
-    vscode.env.openExternal(triggerBuildObj.WebUr);
+    vscode.env.openExternal(triggerBuildObj.WebUrl);
     await getCypressBuilds({ branchName });
   };
 
