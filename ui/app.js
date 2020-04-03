@@ -18,7 +18,7 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0}};
+  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0}, branchList : [{ name: 'branch1'}, { name: 'branch2'}]};
 
   setMessage(message) {
     this.setState({ message })
@@ -40,7 +40,7 @@ class App extends React.Component {
           this.setMessage('Cant run more than one window. !');
           break;
         case 'set-branch-info':
-          this.setBranch(message.data.branchInfo.branchName);
+          this.pupulateBranch(message.data.branchInfo.branchName);
           break;
         case 'set-screenshot-diffs':
           this.setScreenshotDiffs(message.data);
@@ -56,6 +56,14 @@ class App extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener(this.messageListener);
+  }
+
+  pupulateBranch(branch){
+    // if  not present in branchList
+    this.setState({ branchList: [...this.state.branchList,{
+      'name' : branch
+    }] });
+    this.setBranch(branch);
   }
 
   setBranch(branchName) {
@@ -81,7 +89,7 @@ class App extends React.Component {
   }
 
   render() {
-    const {showTab, currentBranchName, screenshotDiffs} = this.state;
+    const {showTab, currentBranchName, screenshotDiffs,branchList} = this.state;
 
     const callbacks = {
       selectBranch: (event) => this.setBranch(event.target.value),
@@ -113,8 +121,8 @@ class App extends React.Component {
 
     return (
       <div>
-        <SelectBranch selectBranch={callbacks.selectBranch} />
-        <TabButtons selectTab={callbacks.selectTab} />
+        <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
+        <TabButtons selectTab={callbacks.selectTab}/>
         {getTab()}
       </div>
     );
