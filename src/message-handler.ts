@@ -46,18 +46,18 @@ export default async (panel: vscode.WebviewPanel) => {
             case 'get-screenshot-diffs':
                 // @ts-ignore
                 return integrationHelper.getScreenshotDiffs(message.data);
-      case "get-trigger-cypress-build":
-        return azure.triggerCypressBuild(message.data);
+            case "get-trigger-cypress-build":
+                return azure.triggerCypressBuild(message.data);
 
-      case "get-screenshot-diffs":
-        // @ts-ignore
-        return integrationHelper.getScreenshotDiffs(message.data);
+            case "get-screenshot-diffs":
+                // @ts-ignore
+                return integrationHelper.getScreenshotDiffs(message.data);
 
             case 'send-http-post-request':
                 // @ts-ignore
                 return axios.post(data.url, data.body).then((response) => {
                     // @ts-ignore
-                    panel.webview.postMessage({messageId: 'send-http-request-finished', requiresId: message.data.requestId, data: response});
+                    panel.webview.postMessage({ messageId: 'send-http-request-finished', requiresId: message.data.requestId, data: response });
                 });
 
             case 'quit':

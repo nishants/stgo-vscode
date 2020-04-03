@@ -142,7 +142,8 @@ class App extends React.Component {
       getScreenshotDiffs: () => this.getScreenshotDiffs(currentBranchName),
       openUrl: url => this.openUrl(url),
       sendHttpRequest: ({ url, body }) => this.sendHttpRequest({ url, body }),
-      openFile: url => this.openFile(url)
+      openFile: url => this.openFile(url),
+      triggerCypressBuild: () =>  this.triggerCypressBuild()
     };
 
     const getTab = () => {
@@ -160,7 +161,7 @@ class App extends React.Component {
           return (
             <CypressCi
               data={this.state.cypressData}
-              callBack={this.triggerCypressBuild}
+              callBack={callbacks.triggerCypressBuild}
             />
           );
 
