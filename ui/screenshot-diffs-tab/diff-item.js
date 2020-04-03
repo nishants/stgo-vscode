@@ -18,26 +18,28 @@ class ScreenshotDiffItem extends React.Component {
     const {isExpanded} = this.state;
 
     return (
-      <li className='screenshot-diff-item' key={diff.path+diff.fileName}>
-        <div onClick={() => this.toggleCollapse()}>
+      <li className={`screenshot-diff-item ${isExpanded ? 'expanded' : ''}`} key={diff.path+diff.fileName}>
+        <h4>{diff.path} <br/> {diff.fileName}</h4>
+        <div className='click-to-toggle' onClick={() => this.toggleCollapse()}>
           <Chevron className={isExpanded ? 'point-down' : 'point-right'}/>
         </div>
+        {
+          isExpanded && <ul className='image-comparison'>
+            <li>
+              <img src={diff.imageMaster} onClick={() => openUrl(diff.imageMaster)}/>
+              <label>Master</label>
+            </li>
+            <li>
+              <img src={diff.imageDifference} onClick={() => openUrl(diff.imageDifference)}/>
+              <label>Difference</label>
+            </li>
+            <li>
+              <img src={diff.imageBranch} onClick={() => openUrl(diff.imageBranch)}/>
+              <label>Branch</label>
+            </li>
+          </ul>
+        }
 
-        <h4>{diff.path} <br/> {diff.fileName}</h4>
-        <ul className='image-comparison'>
-          <li>
-            <img src={diff.imageMaster} onClick={() => openUrl(diff.imageMaster)}/>
-            <label>Master</label>
-          </li>
-          <li>
-            <img src={diff.imageDifference} onClick={() => openUrl(diff.imageDifference)}/>
-            <label>Difference</label>
-          </li>
-          <li>
-            <img src={diff.imageBranch} onClick={() => openUrl(diff.imageBranch)}/>
-            <label>Branch</label>
-          </li>
-        </ul>
       </li>
     );
   }
