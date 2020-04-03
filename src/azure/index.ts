@@ -1,22 +1,51 @@
 // @ts-nocheck
 import * as vscode from "vscode";
 import * as config from "../config";
-const CPYRESS_BUILDS_MOCK_DATA  = "cypress-mock-data.json";
+import AZURE from "./azure";
+const CPYRESS_BUILDS_MOCK_DATA = "cypress-mock-data.json";
 
 export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
+  const getCypressBuilds = async ({ branchName }: object) => {
+    if (workspaceConfig.enableMocks) {
+      return config.getData(CPYRESS_BUILDS_MOCK_DATA).then(mockData => {
+        vscode.window.showInformationMessage(
+          `Returning mock data for cyrpess build ${branchName}`
+        );
+        panel.webview.postMessage({
+          messageId: "set-cypress-builds",
+          data: mockData
+        });
+      });
+    }
+    // TODO : get data from azure
 
-    const getCypressBuilds =  async (data) => {
-        if (workspaceConfig.enableMocks) {
-            return config.getData(CPYRESS_BUILDS_MOCK_DATA).then(mockData => {
-                vscode.window.showInformationMessage(`Returning mock data for cyrpess build ${data.branchName}`)
-                panel.webview.postMessage({messageId: 'set-cypress-builds', data: mockData});
-            });
-        }
-        // TODO : get data from azure
-        return;
-    };
+    const azureObj = new AZURE(workspaceConfig.azureToken);
 
-    return {
-        getCypressBuilds
-    };
+    const buildData = await azureObj.getAllBuildData(branchName);
+
+    panel.webview.postMessage({
+      messageId: "set-cypress-builds",
+      data: buildData
+    });
+
+    return;
+  };
+
+  const triggerCypressBuild = async ({ branchName }: object) => {
+    const azureObj = new AZURE(workspaceConfig.azureToken);
+
+    const triggerBuildObj = await azureObj.getTriggerBuild(branchName);
+
+    panel.webview.postMessage({
+      messageId: "set-trigger-cypress-build",
+      data: triggerBuildObj
+    });
+
+    return;
+  };
+
+  return {
+    getCypressBuilds,
+    triggerCypressBuild
+  };
 };
