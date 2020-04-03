@@ -5,6 +5,7 @@ import  tfsHandler from "./tfs";
 import  gitHandler from "./git";
 import  azureHandler from "./azure";
 import  integreationHelperHandler from "./integration-helper";
+import pointToCodeHandler from "./point-to-code";
 
 export default async (panel: vscode.WebviewPanel) => {
     const workspaceConfig = await config.getConfig();
@@ -12,7 +13,7 @@ export default async (panel: vscode.WebviewPanel) => {
     const git = gitHandler(panel, workspaceConfig);
     const azure = azureHandler(panel, workspaceConfig);
     const integrationHelper = integreationHelperHandler(panel, workspaceConfig);
-
+    const pointToCode = pointToCodeHandler(panel, workspaceConfig);
     return (message: { messageId: string;  data: object}) => {
         switch (message.messageId) {
             case 'load-ui':
@@ -38,8 +39,7 @@ export default async (panel: vscode.WebviewPanel) => {
                 
             case 'point-to-screenshot-code':
                     // @ts-ignore
-                return vscode.openFolder("/Users/deepsaurabhsingh/Documents/SaxoTraderGo/.stgo-vscode/config.json");
-
+                return pointToCode.pointToCodeFn(message.data);
             case 'quit':
                 vscode.window.showWarningMessage("Closed by clicking on quit.");
                 panel?.dispose();
