@@ -26,7 +26,9 @@ class App extends React.Component {
     this.setState({ message });
   }
   setCypressBuild(data) {
-    this.setState({ cypressData: data });
+    if (data.type === "COMPLETED") {
+      this.setState({ cypressData: data.data });
+    }
   }
 
   closePanel() {
