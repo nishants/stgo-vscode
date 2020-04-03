@@ -156,6 +156,7 @@ class App extends React.Component {
               openUrl={callbacks.openUrl}
               selectedBranch={currentBranchName}
               getBranchDetails={callbacks.getBranchDetails}
+              selectTab={callbacks.selectTab}
             />
           );
 
