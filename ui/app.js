@@ -2,7 +2,6 @@ import React from "react";
 
 import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
-
 import BranchOverView from './components/branchOverview/branchOverview';
 import CypressCi from "./cypress-ci";
 
@@ -16,12 +15,12 @@ const sendMessage = message => {
 };
 
 class App extends React.Component {
-
-  state = {
-    cypressData: [],
-    showTab: TABS.overview, currentBranchName: 'xyz-branch',
-    screenshotDiffs: { files: [], unapproved: 0, currentBranchName: '' },
-    branchList: [{ name: 'branch1' }, { name: 'branch2' }]
+  state = { 
+    showTab: TABS.overview,
+    currentBranchName: 'xyz-branch',
+    screenshotDiffs: {files: [], unapproved: 0},
+    branchList : [{ name: 'branch1'}, { name: 'branch2'}],
+    cypressData: []
   };
 
   setMessage(message) {
@@ -59,9 +58,8 @@ class App extends React.Component {
       }
     });
     // TODO : Just to test, remove this
-    sendMessage({ messageId: 'get-current-branch-info' });
-    // todo remove sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
-    sendMessage({ messageId: 'get-cypress-builds', data: { branchName: this.state.currentBranchName } });
+    sendMessage({messageId: 'get-current-branch-info'});
+    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
     //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
 
@@ -69,7 +67,11 @@ class App extends React.Component {
     window.removeEventListener(this.messageListener);
   }
 
-  pupulateBranch(branch) {
+  sendHttpRequest({url, body}) {
+    sendMessage({messageId: 'send-http-post-request', data: {url, body, requestId: Math.random()}});
+  }
+
+  pupulateBranch(branch){
     // if  not present in branchList
     this.setState({
       branchList: [...this.state.branchList, {
@@ -82,10 +84,6 @@ class App extends React.Component {
   setBranch(branchName) {
     this.setState({ currentBranchName: branchName });
     //todo handled by the component
-    sendMessage({
-      messageId: "get-pull-request",
-      data: { branchName: this.state.currentBranchName }
-    });
     sendMessage({
       messageId: "get-cypress-builds",
       data: { branchName: this.state.currentBranchName }
@@ -103,6 +101,9 @@ class App extends React.Component {
   openUrl(url) {
     sendMessage({ messageId: 'open-url', data: { url } });
   }
+  getBranchDetails(branchName) {
+    sendMessage({messageId: 'get-pull-request', data: {branchName}});
+  }
 
   getBranchDetails(branchName) {
     sendMessage({ messageId: 'get-pull-request', data: { branchName } });
@@ -118,17 +119,18 @@ class App extends React.Component {
       selectBranch: (event) => this.setBranch(event.target.value),
       selectTab: (tabname) => this.selectTab(tabname),
       getBranchDetails: (branchName) => this.getBranchDetails(branchName),
-      getScreenshotDiffs: () => this.getScreenshotDiffs(this.state.currentBranchName),
+      getScreenshotDiffs: () => this.getScreenshotDiffs(currentBranchName),
       openUrl: (url) => this.openUrl(url),
+      sendHttpRequest: ({url, body}) => this.sendHttpRequest({url, body}),
     };
 
     const getTab = () => {
       switch (showTab) {
         case TABS.overview:
-          return <BranchOverView
-            selectedBranch={this.state.currentBranchName}
+          return <BranchOverView 
+            selectedBranch={ currentBranchName } 
             getBranchDetails={callbacks.getBranchDetails}
-          />;
+            />;
 
         case TABS.cypressCi:
           return (
@@ -143,6 +145,7 @@ class App extends React.Component {
             screenshotDiffs={screenshotDiffs}
             getScreenshotDiffs={callbacks.getScreenshotDiffs}
             openUrl={callbacks.openUrl}
+            sendHttpRequest={callbacks.sendHttpRequest}
           />;
 
         case TABS.ciLogs:

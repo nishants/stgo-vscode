@@ -1,11 +1,3 @@
 a {
     text-decoration: none;
 }
-
-button {
- background:var(--vscode-button-background);
- color: var(--vscode-button-foreground);
- &:hover{
-   background: var(--vscode-button-hoverBackground);
- }
-}

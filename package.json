@@ -75,8 +75,7 @@
     "webpack-cli": "^3.3.11"
   },
   "dependencies": {
-    "execa": "^4.0.0",
-    "os": "^0.1.1",
+    "axios": "^0.19.2",
     "svg-url-loader": "^5.0.0"
   }
 }
