@@ -79,15 +79,21 @@ class Index extends React.Component {
                 {screenShotComparisonStatus == "NOT_SCHEDULED" && (
                   <span>Screenshot comparison not yet scheduled</span>
                 )}
-                {screenShotComparisonStatus == "APPROVED" && (
-                  <span>All screenshot differences have been approved</span>
-                )}
               </a>
+            </div>
+            <div>
+              {screenShotComparisonStatus == "APPROVED" && (
+                  <a onClick={() => selectTab("screenshot-comparison")}>
+                    There are screenshot differences pending approval
+                  </a>
+                )}
+            </div>
+            <div>
               {screenShotComparisonStatus == "PENDING_APPROVAL" && (
-                <a onClick={() => selectTab("screenshotDiffs")}>
-                  There are screenshot differences pending approval
-                </a>
-              )}
+                  <a onClick={() => selectTab("screenshot-comparison")}>
+                    There are screenshot differences pending approval
+                  </a>
+                )}
             </div>
           </div>
         )}
