@@ -44,7 +44,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
         }catch(error){
             console.error(error);
             vscode.window.showErrorMessage(`Error fetching screenshot diffs from integration helper - ${branchURL}`);
-            return {};
+            panel.webview.postMessage({messageId: 'set-screenshot-diffs', data: {files: [], unapproved: 0}});
         }
     };
 

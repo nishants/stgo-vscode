@@ -59,7 +59,7 @@ class App extends React.Component {
   }
 
   setBranch(branchName) {
-    this.setState({ currentBranchName: 'test-1170325-pause-date' });
+    this.setState({ currentBranchName: branchName });
     sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
     sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
   }
