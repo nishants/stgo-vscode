@@ -2,7 +2,7 @@ import React from "react";
 
 import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
-import BranchOverView from './components/branchOverview/branchOverview';
+import BranchOverView from './branch-overview';
 import CypressCi from "./cypress-ci";
 
 import ScreenshotDiffsTab from "./screenshot-diffs-tab";
@@ -105,8 +105,12 @@ class App extends React.Component {
     sendMessage({messageId: 'get-pull-request', data: {branchName}});
   }
 
-  getBranchDetails(branchName) {
-    sendMessage({ messageId: 'get-pull-request', data: { branchName } });
+  openFile(data){
+    sendMessage({messageId: 'open-file', data});
+  }
+
+  setScreenshotDiffs(screenshotDiffs){
+    this.setState({screenshotDiffs});
   }
 
   setScreenshotDiffs(screenshotDiffs) {
@@ -122,22 +126,22 @@ class App extends React.Component {
       getScreenshotDiffs: () => this.getScreenshotDiffs(currentBranchName),
       openUrl: (url) => this.openUrl(url),
       sendHttpRequest: ({url, body}) => this.sendHttpRequest({url, body}),
+      openFile: (url) => this.openFile(url),
     };
 
     const getTab = () => {
       switch (showTab) {
         case TABS.overview:
-          return <BranchOverView 
+          return <BranchOverView
+            openUrl={callbacks.openUrl}
             selectedBranch={ currentBranchName } 
             getBranchDetails={callbacks.getBranchDetails}
             />;
 
         case TABS.cypressCi:
-          return (
-            <div>
-              <CypressCi data={this.state.cypressData} />
-            </div>
-          );
+          return   <CypressCi
+            data={this.state.cypressData}
+          />;
 
         case TABS.screenshotDiffs:
           return <ScreenshotDiffsTab
@@ -146,6 +150,7 @@ class App extends React.Component {
             getScreenshotDiffs={callbacks.getScreenshotDiffs}
             openUrl={callbacks.openUrl}
             sendHttpRequest={callbacks.sendHttpRequest}
+            openFile={callbacks.openFile}
           />;
 
         case TABS.ciLogs:
@@ -154,10 +159,10 @@ class App extends React.Component {
     };
 
     return (
-      <div>
-        <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName} list={branchList} />
-        <TabButtons selectTab={callbacks.selectTab} />
-        {getTab()}
+      <div id='app'>
+        <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
+        <TabButtons selectTab={callbacks.selectTab} selectedTab={showTab}/>
+        <div className='selected-tab-container'>{getTab()}</div>
       </div>
     );
   }

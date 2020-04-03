@@ -23,12 +23,13 @@ class ScreenshotDiffItem extends React.Component {
   }
 
   render() {
-    const {diff, openUrl} = this.props;
+    const {diff, openUrl, openFile} = this.props;
     const {isExpanded, approved} = this.state;
 
     return (
       <li className={`screenshot-diff-item ${isExpanded ? 'expanded' : ''} ${approved ? 'is-approved' : ''}`} key={diff.path+diff.fileName}>
         <h4>{diff.path} <br/> {diff.fileName}</h4>
+        <button onClick={() => openFile({ path: diff.path, name: diff.fileName })}>See In code</button>
         <div className='click-to-toggle' onClick={() => this.toggleCollapse()}>
           <Chevron className={isExpanded ? 'point-down' : 'point-right'}/>
         </div>
@@ -49,7 +50,7 @@ class ScreenshotDiffItem extends React.Component {
               </li>
             </ul>
             <div className='screenshot-diff-action-butttons'>
-              {approved ? <button onClick={() => this.reject()}>Reject</button> : <button onClick={() => this.approve()}>Approve</button>}
+              {approved ? <button className='warning' onClick={() => this.reject()}>Reject</button> : <button onClick={() => this.approve()}>Approve</button>}
             </div>
           </React.Fragment>
         }
