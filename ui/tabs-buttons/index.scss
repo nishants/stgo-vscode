@@ -1,3 +1,26 @@
-#tab-button{
+.tab-buttons{
   display: block;
+  overflow: hidden;
+
+  .tab {
+    float: left;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 30px;
+    background: $inactiveBackground;
+    color: $inactiveForeground;
+    border-color: $inactiveModifiedBorder;
+
+    &:hover{
+      background: $activeBackground;
+    }
+
+    &--active {
+      background: $activeBackground;
+      color: $activeForeground;
+      border-color: $activeModifiedBorder;
+      border-bottom: $activeBackground;
+      font-weight: bold;
+    }
+  }
 }

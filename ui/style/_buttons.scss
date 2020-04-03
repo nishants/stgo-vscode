@@ -1,0 +1,19 @@
+.btn {
+    padding: 5px 20px;
+    overflow: hidden;
+    border-width: 0;
+    font-weight: bold;
+    margin-right: 5px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    
+    background-color: $buttonBackground;
+    color: $buttonForeground;
+    
+    &--success {
+        background-color: #7ac139;
+    }
+
+    &--fail {
+        background-color: #d80808;
+    }
+}

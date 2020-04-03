@@ -1,8 +1,10 @@
 import React from "react";
+import Chevron from "../icons/chevron";
 
-const screenshotDiffItem = (diff, openUrl) => (
+const screenshotDiffItem = (diff, openUrl, isExpanded) => (
   <li className={'screenshot-diff-item'}>
     <h4>{diff.path} <br/> {diff.fileName}</h4>
+    <Chevron className={isExpanded ? 'point-down' : 'point-right'}/>
     <ul className='image-comparison'>
       <li>
         <img src={diff.imageMaster} onClick={() =>  openUrl(diff.imageMaster)}/>
