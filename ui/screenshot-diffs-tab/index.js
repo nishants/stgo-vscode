@@ -12,7 +12,7 @@ class ScreenshotDiffs extends React.Component {
     return <div id="screenshot-diffs-tab">
       <ul>
         {
-          screenshotDiffs.files.map(diff => (
+          screenshotDiffs.files.length ? screenshotDiffs.files.map(diff => (
             <li className='file-screenshot-diff-group'>
               <ul>
                 {
@@ -20,7 +20,7 @@ class ScreenshotDiffs extends React.Component {
                 }
               </ul>
             </li>
-          ))
+          )) : "No screenshot diffs found."
         }
       </ul>
     </div>;
