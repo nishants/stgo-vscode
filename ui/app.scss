@@ -1,6 +1,9 @@
 @import 'select-branch';
 @import 'tabs-buttons';
-@import 'Components';
 @import 'cypress-ci';
 @import 'screenshot-diffs-tab';
 @import './icons/chevron';
+
+.selected-tab-container{
+  padding: 5px;
+}

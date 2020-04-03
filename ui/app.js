@@ -150,7 +150,7 @@ class App extends React.Component {
       <div id='app'>
         <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
         <TabButtons selectTab={callbacks.selectTab} selectedTab={showTab}/>
-        {getTab()}
+        <div className='selected-tab-container'>{getTab()}</div>
       </div>
     );
   }

@@ -1,3 +1,3 @@
-import CypressCi from './cypressCi';
+import CypressCi from './cypres-ci';
 
 export default CypressCi;
