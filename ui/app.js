@@ -4,13 +4,7 @@ import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
 import CypressCi from "./cypress-ci";
 import ScreenshotDiffsTab from "./screenshot-diffs-tab";
-
-const TABS = {
-  overview: 'overview',
-  cypressCi: 'cypress-ci',
-  screenshotDiffs: 'screenshot-comparison',
-  ciLogs: 'ci-logs',
-};
+import { TABS } from "./constants";
 
 const vscode = acquireVsCodeApi();
 
@@ -139,8 +133,9 @@ class App extends React.Component {
 
     return (
       <div>
-        <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
-        <TabButtons selectTab={callbacks.selectTab}/>
+                <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
+
+        <TabButtons selectTab={callbacks.selectTab} selectedTab={showTab}/>
         {getTab()}
       </div>
     );
