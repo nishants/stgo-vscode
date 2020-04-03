@@ -39,12 +39,8 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
     const triggerBuildObj = await azureObj.getTriggerBuild(branchName);
 
-    panel.webview.postMessage({
-      messageId: "set-trigger-cypress-build",
-      data: triggerBuildObj
-    });
-
-    return;
+    vscode.env.openExternal(triggerBuildObj.WebUr);
+    await getCypressBuilds({ branchName });
   };
 
   return {
