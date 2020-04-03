@@ -1,15 +1,14 @@
 import React from "react";
+import Banner from '../Components/Banner.js';
 
-class CypressCi extends React.Component {
-    render() {
+function CypressCi ({data=[]}, callBack=()=>{}) {
       return (
         <div>
-          <button className='btn'>Run Cypress Tests</button>
-          <button className='btn btn--success'>Success</button>
-          <button className='btn btn--fail'>Failed</button>
+          <button className='btn cypButton' onClick={(e)=> callBack(e)}>Run Cypress Tests</button>
+          {data.map(item => <Banner commitId={item.sourceVersion} result={item.result} status={item.status} />)}
         </div>
+        
       );
-    }
   }
   
   export default CypressCi;

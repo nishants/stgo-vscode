@@ -1,12 +1,18 @@
 import React from "react";
 
-function Banner({text, className}) {
-
-    return (
-        <div className="default">
-            {text}
-         </div>   
-    )
+function Banner({ commitId, result, status }) {
+  const success = [2, 4].indexOf(result) !== -1 ? true : false;
+  const failure = [8].indexOf(result) !== -1 ? true : false;
+  const cancelled = [32].indexOf(result) !== -1 ? true : false;
+  return (
+    <div className="default">
+      <p>Commit</p>
+      <p>{commitId}</p>
+      {success && <button className="btn btn--success">Success</button>}
+      {failure && <button className="btn btn--fail">Failed</button>}
+      {cancelled && <button className="btn btn--warn">cancelled</button>}
+    </div>
+  );
 }
 
-export default Banner; 
+export default Banner;
