@@ -111,6 +111,10 @@ class App extends React.Component {
     sendMessage({messageId: 'get-pull-request', data: {branchName}});
   }
 
+  openFile(data){
+    sendMessage({messageId: 'open-file', data});
+  }
+
   setScreenshotDiffs(screenshotDiffs){
     this.setState({screenshotDiffs});
   }
@@ -125,6 +129,7 @@ class App extends React.Component {
       getScreenshotDiffs: () => this.getScreenshotDiffs(currentBranchName),
       openUrl: (url) => this.openUrl(url),
       sendHttpRequest: ({url, body}) => this.sendHttpRequest({url, body}),
+      openFile: (url) => this.openFile(url),
     };
 
     const getTab = () => {
@@ -148,6 +153,7 @@ class App extends React.Component {
             getScreenshotDiffs={callbacks.getScreenshotDiffs}
             openUrl={callbacks.openUrl}
             sendHttpRequest={callbacks.sendHttpRequest}
+            openFile={callbacks.openFile}
           />;
 
         case TABS.ciLogs:

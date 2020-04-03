@@ -23,12 +23,13 @@ class ScreenshotDiffItem extends React.Component {
   }
 
   render() {
-    const {diff, openUrl} = this.props;
+    const {diff, openUrl, openFile} = this.props;
     const {isExpanded, approved} = this.state;
 
     return (
       <li className={`screenshot-diff-item ${isExpanded ? 'expanded' : ''} ${approved ? 'is-approved' : ''}`} key={diff.path+diff.fileName}>
         <h4>{diff.path} <br/> {diff.fileName}</h4>
+        <button onClick={() => openFile({ path: diff.path, name: diff.fileName })}>See In code</button>
         <div className='click-to-toggle' onClick={() => this.toggleCollapse()}>
           <Chevron className={isExpanded ? 'point-down' : 'point-right'}/>
         </div>

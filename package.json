@@ -76,6 +76,10 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
-    "svg-url-loader": "^5.0.0"
+    "svg-url-loader": "^5.0.0",
+    "cherow": "^1.6.9",
+    "estraverse": "^5.0.0",
+    "execa": "^4.0.0",
+    "os": "^0.1.1"
   }
 }

@@ -3,11 +3,11 @@ import * as vscode from "vscode";
 import * as axios from 'axios';
 
 import * as config from "./config";
-import  tfsHandler from "./tfs";
-import  gitHandler from "./git";
-import  azureHandler from "./azure";
-
-import  integreationHelperHandler from "./integration-helper";
+import tfsHandler from "./tfs";
+import gitHandler from "./git";
+import azureHandler from "./azure";
+import integreationHelperHandler from "./integration-helper";
+import fileHelperHandler from "./fileHelper";
 
 export default async (panel: vscode.WebviewPanel) => {
     const workspaceConfig = await config.getConfig();
@@ -15,16 +15,21 @@ export default async (panel: vscode.WebviewPanel) => {
     const git = gitHandler(panel, workspaceConfig);
     const azure = azureHandler(panel, workspaceConfig);
     const integrationHelper = integreationHelperHandler(panel, workspaceConfig);
+    const fileHelper = fileHelperHandler(panel, workspaceConfig);
 
-    return (message: { messageId: string;  data: object}) => {
+    return (message: { messageId: string; data: object }) => {
         switch (message.messageId) {
             case 'load-ui':
                 // @ts-ignore
-                return panel.webview.postMessage({messageId: 'set-data', data});
+                return panel.webview.postMessage({ messageId: 'set-data', data });
 
             case 'open-url':
                 // @ts-ignore
                 return vscode.env.openExternal(message.data.url);
+
+            case 'open-file':
+                // @ts-ignore
+                return fileHelper.openFile(message.data);
 
             case 'get-current-branch-info':
                 return git.getCheckedOutBranchInfo();
