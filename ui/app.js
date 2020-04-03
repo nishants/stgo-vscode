@@ -119,41 +119,48 @@ class App extends React.Component {
   }
 
   render() {
-    const {showTab, currentBranchName, screenshotDiffs,branchList} = this.state;
+    const {
+      showTab,
+      currentBranchName,
+      screenshotDiffs,
+      branchList
+    } = this.state;
 
     const callbacks = {
-      selectBranch: (event) => this.setBranch(event.target.value),
-      selectTab: (tabname) => this.selectTab(tabname),
-      getBranchDetails: (branchName) => this.getBranchDetails(branchName),
+      selectBranch: event => this.setBranch(event.target.value),
+      selectTab: tabname => this.selectTab(tabname),
+      getBranchDetails: branchName => this.getBranchDetails(branchName),
       getScreenshotDiffs: () => this.getScreenshotDiffs(currentBranchName),
-      openUrl: (url) => this.openUrl(url),
-      sendHttpRequest: ({url, body}) => this.sendHttpRequest({url, body}),
-      openFile: (url) => this.openFile(url),
+      openUrl: url => this.openUrl(url),
+      sendHttpRequest: ({ url, body }) => this.sendHttpRequest({ url, body }),
+      openFile: url => this.openFile(url)
     };
 
     const getTab = () => {
       switch (showTab) {
         case TABS.overview:
-          return <BranchOverView
-            openUrl={callbacks.openUrl}
-            selectedBranch={ currentBranchName } 
-            getBranchDetails={callbacks.getBranchDetails}
-            />;
+          return (
+            <BranchOverView
+              openUrl={callbacks.openUrl}
+              selectedBranch={currentBranchName}
+              getBranchDetails={callbacks.getBranchDetails}
+            />
+          );
 
         case TABS.cypressCi:
-          return   <CypressCi
-            data={this.state.cypressData}
-          />;
+          return <CypressCi data={this.state.cypressData} />;
 
         case TABS.screenshotDiffs:
-          return <ScreenshotDiffsTab
-            branchName={currentBranchName}
-            screenshotDiffs={screenshotDiffs}
-            getScreenshotDiffs={callbacks.getScreenshotDiffs}
-            openUrl={callbacks.openUrl}
-            sendHttpRequest={callbacks.sendHttpRequest}
-            openFile={callbacks.openFile}
-          />;
+          return (
+            <ScreenshotDiffsTab
+              branchName={currentBranchName}
+              screenshotDiffs={screenshotDiffs}
+              getScreenshotDiffs={callbacks.getScreenshotDiffs}
+              openUrl={callbacks.openUrl}
+              sendHttpRequest={callbacks.sendHttpRequest}
+              openFile={callbacks.openFile}
+            />
+          );
 
         case TABS.ciLogs:
           return <div>Integration helper logs</div>;
@@ -161,10 +168,14 @@ class App extends React.Component {
     };
 
     return (
-      <div id='app'>
-        <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
-        <TabButtons selectTab={callbacks.selectTab} selectedTab={showTab}/>
-        <div className='selected-tab-container'>{getTab()}</div>
+      <div id="app">
+        <SelectBranch
+          selectBranch={callbacks.selectBranch}
+          currentBranch={currentBranchName}
+          list={branchList}
+        />
+        <TabButtons selectTab={callbacks.selectTab} selectedTab={showTab} />
+        <div className="selected-tab-container">{getTab()}</div>
       </div>
     );
   }

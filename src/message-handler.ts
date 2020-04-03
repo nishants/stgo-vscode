@@ -46,6 +46,12 @@ export default async (panel: vscode.WebviewPanel) => {
             case 'get-screenshot-diffs':
                 // @ts-ignore
                 return integrationHelper.getScreenshotDiffs(message.data);
+      case "get-trigger-cypress-build":
+        return azure.triggerCypressBuild(message.data);
+
+      case "get-screenshot-diffs":
+        // @ts-ignore
+        return integrationHelper.getScreenshotDiffs(message.data);
 
             case 'send-http-post-request':
                 // @ts-ignore
