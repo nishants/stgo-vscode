@@ -2,6 +2,7 @@ import React from "react";
 
 import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
+import BranchOverView from './components/branchOverview/branchOverview';
 import CypressCi from "./cypress-ci";
 import ScreenshotDiffsTab from "./screenshot-diffs-tab";
 import { TABS } from "./constants";
@@ -13,7 +14,13 @@ const sendMessage = message => {
 };
 
 class App extends React.Component {
-  state = {  cypressData: [], showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0, currentBranchName: ''}, branchList : [{ name: 'branch1'}, { name: 'branch2'}]};
+  state = { 
+    showTab: TABS.overview,
+    currentBranchName: 'xyz-branch',
+    screenshotDiffs: {files: [], unapproved: 0},
+    branchList : [{ name: 'branch1'}, { name: 'branch2'}],
+    cypressData: []
+  };
 
   setMessage(message) {
     this.setState({ message });
@@ -51,8 +58,7 @@ class App extends React.Component {
     });
     // TODO : Just to test, remove this
     sendMessage({messageId: 'get-current-branch-info'});
-    sendMessage({messageId: 'get-pull-request', data: {branchName: "xyz-branch"}});
-    sendMessage({messageId: 'get-cypress-builds', data: {branchName: "xyz-branch"}});
+    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
     //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
 
@@ -75,10 +81,6 @@ class App extends React.Component {
   setBranch(branchName) {
     this.setState({ currentBranchName: branchName });
     sendMessage({
-      messageId: "get-pull-request",
-      data: { branchName: this.state.currentBranchName }
-    });
-    sendMessage({
       messageId: "get-cypress-builds",
       data: { branchName: this.state.currentBranchName }
     });
@@ -95,6 +97,9 @@ class App extends React.Component {
   openUrl(url){
     sendMessage({messageId: 'open-url', data: {url}});
   }
+  getBranchDetails(branchName) {
+    sendMessage({messageId: 'get-pull-request', data: {branchName}});
+  }
 
   setScreenshotDiffs(screenshotDiffs){
     this.setState({screenshotDiffs});
@@ -106,7 +111,8 @@ class App extends React.Component {
     const callbacks = {
       selectBranch: (event) => this.setBranch(event.target.value),
       selectTab: (tabname) => this.selectTab(tabname),
-      getScreenshotDiffs: () => this.getScreenshotDiffs(this.state.currentBranchName),
+      getBranchDetails: (branchName) => this.getBranchDetails(branchName),
+      getScreenshotDiffs: () => this.getScreenshotDiffs(currentBranchName),
       openUrl: (url) => this.openUrl(url),
       sendHttpRequest: ({url, body}) => this.sendHttpRequest({url, body}),
     };
@@ -114,7 +120,10 @@ class App extends React.Component {
     const getTab = () => {
       switch (showTab) {
         case TABS.overview:
-          return <div>Overview</div>;
+          return <BranchOverView 
+            selectedBranch={ currentBranchName } 
+            getBranchDetails={callbacks.getBranchDetails}
+            />;
 
         case TABS.cypressCi:
           return (
