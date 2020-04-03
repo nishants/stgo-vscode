@@ -60,6 +60,10 @@ class App extends React.Component {
     window.removeEventListener(this.messageListener);
   }
 
+  sendHttpRequest({url, body}) {
+    sendMessage({messageId: 'send-http-post-request', data: {url, body, requestId: Math.random()}});
+  }
+
   pupulateBranch(branch){
     // if  not present in branchList
     this.setState({ branchList: [...this.state.branchList,{
@@ -104,6 +108,7 @@ class App extends React.Component {
       selectTab: (tabname) => this.selectTab(tabname),
       getScreenshotDiffs: () => this.getScreenshotDiffs(this.state.currentBranchName),
       openUrl: (url) => this.openUrl(url),
+      sendHttpRequest: ({url, body}) => this.sendHttpRequest({url, body}),
     };
 
     const getTab = () => {
@@ -124,6 +129,7 @@ class App extends React.Component {
             screenshotDiffs={screenshotDiffs}
             getScreenshotDiffs={callbacks.getScreenshotDiffs}
             openUrl={callbacks.openUrl}
+            sendHttpRequest={callbacks.sendHttpRequest}
           />;
 
         case TABS.ciLogs:
