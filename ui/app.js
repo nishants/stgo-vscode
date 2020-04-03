@@ -89,10 +89,6 @@ class App extends React.Component {
 
   setBranch(branchName) {
     this.setState({ currentBranchName: branchName });
-    sendMessage({
-      messageId: "get-cypress-builds",
-      data: { branchName: this.state.currentBranchName }
-    });
   }
 
   selectTab(tabName) {
