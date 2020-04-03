@@ -18,7 +18,7 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0}, branchList : [{ name: 'branch1'}, { name: 'branch2'}]};
+  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0, currentBranchName: ''}, branchList : [{ name: 'branch1'}, { name: 'branch2'}]};
 
   setMessage(message) {
     this.setState({ message })
@@ -94,7 +94,7 @@ class App extends React.Component {
     const callbacks = {
       selectBranch: (event) => this.setBranch(event.target.value),
       selectTab: (tabname) => this.selectTab(tabname),
-      getScreenshotDiffs: (branchName) => this.getScreenshotDiffs(branchName),
+      getScreenshotDiffs: () => this.getScreenshotDiffs(this.state.currentBranchName),
       openUrl: (url) => this.openUrl(url),
     };
 
