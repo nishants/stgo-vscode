@@ -13,7 +13,10 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
         );
         panel.webview.postMessage({
           messageId: "set-cypress-builds",
-          data: mockData
+          data: {
+            type: "COMPLETED",
+            data: mockData
+          }
         });
       });
     }

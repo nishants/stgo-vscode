@@ -26,7 +26,9 @@ class App extends React.Component {
     this.setState({ message });
   }
   setCypressBuild(data) {
-    this.setState({ cypressData: data });
+    if (data.type === "COMPLETED") {
+      this.setState({ cypressData: data.data });
+    }
   }
 
   closePanel() {
@@ -62,7 +64,7 @@ class App extends React.Component {
       messageId: "get-cypress-builds",
       data: { branchName: this.state.currentBranchName }
     });
-    // sendMessage({messageId: 'get-trigger-cypress-build', data: {branchName: this.state.currentBranchName}});
+
     //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
 
@@ -117,6 +119,13 @@ class App extends React.Component {
     sendMessage({ messageId: "open-file", data });
   }
 
+  triggerCypressBuild() {
+    sendMessage({
+      messageId: "get-trigger-cypress-build",
+      data: { branchName: this.state.currentBranchName }
+    });
+  }
+
   setScreenshotDiffs(screenshotDiffs) {
     this.setState({ screenshotDiffs });
   }
@@ -151,7 +160,12 @@ class App extends React.Component {
           );
 
         case TABS.cypressCi:
-          return <CypressCi data={this.state.cypressData} />;
+          return (
+            <CypressCi
+              data={this.state.cypressData}
+              callBack={this.triggerCypressBuild}
+            />
+          );
 
         case TABS.screenshotDiffs:
           return (
