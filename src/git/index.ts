@@ -1,40 +1,35 @@
 // @ts-nocheck
 import * as vscode from "vscode";
-import { platform } from 'os';
-const execa = require('execa');
 
 export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
-
     const getCheckedOutBranchInfo = async () => {
-        let data;
-        // get Branch name
+
         try {
-            console.log(process.cwd());
-            let folderPath = vscode.workspace.rootPath;
-            let cmd;
-            if (platform() === 'win32') {
-                cmd = `pushd ${folderPath} & git branch | findstr \\*`;
-            } else {
-                cmd = `(cd ${folderPath} ; git branch | grep \\*)`;
-            }
+            const gitExtension = vscode.extensions.getExtension('vscode.git').exports;
+            const api = gitExtension.getAPI(1);
 
-            const {stdout} = await execa(cmd,{ shell: true });
-            const branchName = stdout.slice(2, stdout.length);
+            // Choose the repo (their could be multiple here !!)
+            const repo = api.repositories[0];
+            const head = repo.state.HEAD;
 
-            data = {
+            // Get the branch and head
+            const {commit, name: branch} = head;
+
+            const data = {
                 status: 'Success',
                 branchInfo: {
-                    branchName
+                    branchName: branch,
+                    commit
                 }
             };
+
+            return panel.webview.postMessage({messageId: 'set-branch-info', data});
         } catch (e) {
-            data = {
-                status: 'Error',
-                error: e,
-            }
+
+            vscode.window.showErrorMessage("Git repo not found in workspace. Cannot continue.", "Okay, its not a valid git repo.");
+            return panel.webview.postMessage({messageId: 'set-branch-info', data: {status: 'Error',}});
         }
 
-        return panel.webview.postMessage({ messageId: 'set-branch-info', data });
     };
 
     return {
