@@ -4,24 +4,28 @@ const cherow = require("cherow");
 const estraverse = require('estraverse');
 
 
-function findScreenshotPos(AST) {
+function findScreenshotPos(AST, count) {
     let charPos;
     estraverse.traverse(AST, {
         enter: function (node, parent) {
             if (node.type === 'Identifier' && node.name === "screenshot") {
-                charPos = node.start;
-                return estraverse.VisitorOption.Break;
+                if (count === 0) {
+                    charPos = node.start;
+                    return estraverse.VisitorOption.Break;
+                }
+                count--;
             }
         }
     });
     return charPos;
 }
 
-function findScreenshotNode(documentAST, descriptonArr, index = 1) {
+function findScreenshotNode(documentAST, descriptonArr, count) {
 
+    let index = 1;
     let parentNode = documentAST;
     traverseToNode(parentNode, descriptonArr[index]);
-    return findScreenshotPos(parentNode);
+    return findScreenshotPos(parentNode, count);
 
     function traverseToNode(AST, description) {
         let foundNode = false;
@@ -46,6 +50,13 @@ function findScreenshotNode(documentAST, descriptonArr, index = 1) {
     }
 }
 
+function getScreenshotIndex(str) {
+    // Ref : https://stackoverflow.com/questions/432493/how-do-you-access-the-matched-groups-in-a-javascript-regular-expression
+    var myRegexp = /^.*?\([^\d]*(\d+)[^\d]*\).png$/g;
+    var match = myRegexp.exec(str);
+    return match ? match[1] : 0;
+}
+
 export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
     const workspaceFolder = [...vscode.workspace.workspaceFolders].pop();
@@ -53,10 +64,15 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
     const openFile = async ({ path, name }) => {
         const filePath = path.replace("\\drop\\cypress\\screenshots", `${workspaceFolderPath}\\src\\frontend`);
-        
-        //TODO - right now blindly removing extension name 
-        // we need to cater for count before that as well as the screenshots with name
-        name = name.replace(/\.[^/.]+$/, "");
+
+        const screenshotIndex = getScreenshotIndex(name);
+
+        // we need to cater for the screenshots with name
+        if (screenshotIndex > 0) {
+            name = name.replace(`(${screenshotIndex}).png`, '').trim()
+        } else {
+            name = name.replace(`.png`, "").trim();
+        }
 
         // array to find the screenshot in
         const descriptonArr = name.split('--').map(val => val.trim());
@@ -67,7 +83,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
         // create an AST of the document so that we are able to find the screenshot command
         const documentAST = cherow.parseModule(doc.getText(), { ranges: true });
 
-        const startChar = await findScreenshotNode(documentAST, descriptonArr);
+        const startChar = await findScreenshotNode(documentAST, descriptonArr, screenshotIndex);
 
         const lineNumber = doc.getText().substring(0, startChar).split('\n').length;
 
