@@ -18,7 +18,7 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0, currentBranchName: '', branchList : [{ name: 'branch1'}, { name: 'branch2'}]}};
+  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0, currentBranchName: ''}, branchList : [{ name: 'branch1'}, { name: 'branch2'}]};
 
   setMessage(message) {
     this.setState({ message })
