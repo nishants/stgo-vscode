@@ -4,4 +4,16 @@
   img{
     display: block;
   }
+
+  &.point-down{
+    transform: rotate(90deg);
+  }
+
+  &.point-up{
+    transform: rotate(-90deg);
+  }
+
+  &.point-left{
+      transform: rotate(180deg);
+  }
 }
