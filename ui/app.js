@@ -25,9 +25,10 @@ class App extends React.Component {
   setMessage(message) {
     this.setState({ message });
   }
+
   setCypressBuild(data) {
     if (data.type === 'COMPLETED') {
-      this.setState({ cypressData: data.data });
+      this.setState({ cypressData: data.data || [] });
     }
   }
 
@@ -101,9 +102,14 @@ class App extends React.Component {
     sendMessage({messageId: 'get-screenshot-diffs', data: {branchName}});
   }
 
+  getCypressBuilds(){
+    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
+  }
+
   openUrl(url){
     sendMessage({messageId: 'open-url', data: {url}});
   }
+
   getBranchDetails(branchName) {
     sendMessage({messageId: 'get-pull-request', data: {branchName}});
   }
@@ -143,7 +149,8 @@ class App extends React.Component {
       openUrl: url => this.openUrl(url),
       sendHttpRequest: ({ url, body }) => this.sendHttpRequest({ url, body }),
       openFile: url => this.openFile(url),
-      triggerCypressBuild: () =>  this.triggerCypressBuild()
+      triggerCypressBuild: () =>  this.triggerCypressBuild(),
+      getCypressBuilds: () =>  this.getCypressBuilds()
     };
 
     const getTab = () => {
@@ -161,7 +168,9 @@ class App extends React.Component {
           return (
             <CypressCi
               data={this.state.cypressData}
+              currentBranchName={this.state.currentBranchName}
               callBack={callbacks.triggerCypressBuild}
+              getCypressBuilds={callbacks.getCypressBuilds}
             />
           );
 

@@ -8,7 +8,6 @@ class ScreenshotDiffs extends React.Component {
 
   render() {
     const {screenshotDiffs, openUrl, sendHttpRequest, openFile} = this.props;
-    debugger;
     return <div id="screenshot-diffs-tab">
       <ul>
         {
