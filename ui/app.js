@@ -58,7 +58,6 @@ class App extends React.Component {
     });
     // TODO : Just to test, remove this
     sendMessage({messageId: 'get-current-branch-info'});
-    // todo remove sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
     sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
     //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
@@ -77,8 +76,6 @@ class App extends React.Component {
 
   setBranch(branchName) {
     this.setState({ currentBranchName: branchName });
-    //todo handled by the component
-    // sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
     sendMessage({
       messageId: "get-cypress-builds",
       data: { branchName: this.state.currentBranchName }
