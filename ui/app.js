@@ -37,6 +37,9 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    sendMessage({messageId: 'get-current-branch-info'});
+    sendMessage({messageId: 'get-branch-list'});
+
     this.messageListener = window.addEventListener("message", event => {
       const message = event.data;
       const {data} = event.data;
