@@ -1,26 +1,6 @@
 import React from "react";
-import Chevron from "../icons/chevron";
+import ScreenshotDiffItem from "./diff-item.js";
 
-const screenshotDiffItem = (diff, openUrl, isExpanded) => (
-  <li className={'screenshot-diff-item'}>
-    <h4>{diff.path} <br/> {diff.fileName}</h4>
-    <Chevron className={isExpanded ? 'point-down' : 'point-right'}/>
-    <ul className='image-comparison'>
-      <li>
-        <img src={diff.imageMaster} onClick={() =>  openUrl(diff.imageMaster)}/>
-        <label>Master</label>
-      </li>
-      <li>
-        <img src={diff.imageDifference} onClick={() =>  openUrl(diff.imageDifference)}/>
-        <label>Difference</label>
-      </li>
-      <li>
-        <img src={diff.imageBranch} onClick={() =>  openUrl(diff.imageBranch)}/>
-        <label>Branch</label>
-      </li>
-    </ul>
-  </li>
-);
 
 class ScreenshotDiffs extends React.Component {
   componentDidMount() {
@@ -36,7 +16,7 @@ class ScreenshotDiffs extends React.Component {
             <li className='file-screenshot-diff-group'>
               <ul>
                 {
-                  diff.screenshots.map(diff => screenshotDiffItem(diff, openUrl))
+                  diff.screenshots.map(diff => <ScreenshotDiffItem diff={diff} openUrl={openUrl}/>)
                 }
               </ul>
 

@@ -9,7 +9,7 @@ import {getJsonOverHttp} from "../utils";
 
 // Groups screenshot diffs
 const groupByPath = (data) => {
-    const unapproved = 0;
+    let unapproved = 0;
     const groups = data.reduce((g, d) => {
         g[d.path] = g[d.path] || [];
         g[d.path].push(d);
