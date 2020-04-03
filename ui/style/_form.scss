@@ -1,7 +1,11 @@
 button {
   background: var(--vscode-button-background);
-  color: var(--vscode-button-foreground);
   cursor: pointer;
+  border: none;
+  padding: 0 10px;
+  line-height: $rowHeight;
+  color: $buttonColor;
+
   &:hover{
     background: var(--vscode-button-hoverBackground);
   }
@@ -17,6 +21,9 @@ select {
   border-color:  var(--vscode-settings-dropdownBorder);
   color: var(--vscode-settings-dropdownForeground);
   cursor: pointer;
+  padding: 0 10px;
+  line-height: $rowHeight;
+  height: $rowHeight;
 
   font-size: $theme-font-weight;
   font-weight: $theme-font-weight;

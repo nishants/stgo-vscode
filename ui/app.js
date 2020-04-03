@@ -147,9 +147,8 @@ class App extends React.Component {
     };
 
     return (
-      <div>
-                <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
-
+      <div id='app'>
+        <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
         <TabButtons selectTab={callbacks.selectTab} selectedTab={showTab}/>
         {getTab()}
       </div>
