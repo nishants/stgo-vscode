@@ -112,8 +112,10 @@ class App extends React.Component {
     sendMessage({messageId: 'open-file', data});
   }
 
-  setScreenshotDiffs(screenshotDiffs){
+  setScreenshotDiffs(screenshotDiffs) {
     this.setState({screenshotDiffs});
+  }
+
   triggerCypressBuild() {
     sendMessage({
       messageId: "get-trigger-cypress-build",
