@@ -1,4 +1,4 @@
-button {
+button, .button {
   background: var(--vscode-button-background);
   cursor: pointer;
   border: none;
@@ -9,6 +9,11 @@ button {
   &:hover{
     background: var(--vscode-button-hoverBackground);
   }
+}
+
+a.button{
+  text-decoration: none;
+  outline: 0;
 }
 
 button.warning{

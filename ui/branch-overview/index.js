@@ -1,7 +1,6 @@
-import React from 'react';
-import './branchOverview.scss';
+import React from 'React';
 
-class BranchOverview extends React.Component {
+class Index extends React.Component {
   state = {
     branchData: {}
   };
@@ -64,11 +63,11 @@ class BranchOverview extends React.Component {
                 <span className="value">{targetRefName}</span>
               </div>
               <div className='row'>
-                <a className='pr-btn' href={branchData.link}>Edit Pull Request</a>
+                <button className='button' onClick={() => this.props.openUrl(branchData.link)}>Edit Pull Request</button>
               </div>
           </div>) :
           (<div className='row'>
-            <a href={branchData.links} className='pr-btn'>Create Pull Request</a>
+            <button onClick={() => this.props.openUrl(branchData.link)} className='button'>Create Pull Request</button>
           </div>)
         }
         <div className='row'>
@@ -80,4 +79,4 @@ class BranchOverview extends React.Component {
 
 }
 
-export default BranchOverview;
+export default Index;

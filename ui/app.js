@@ -2,7 +2,7 @@ import React from "react";
 
 import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
-import BranchOverView from './components/branchOverview/branchOverview';
+import BranchOverView from './branch-overview';
 import CypressCi from "./cypress-ci";
 import ScreenshotDiffsTab from "./screenshot-diffs-tab";
 import { TABS } from "./constants";
@@ -120,17 +120,16 @@ class App extends React.Component {
     const getTab = () => {
       switch (showTab) {
         case TABS.overview:
-          return <BranchOverView 
+          return <BranchOverView
+            openUrl={callbacks.openUrl}
             selectedBranch={ currentBranchName } 
             getBranchDetails={callbacks.getBranchDetails}
             />;
 
         case TABS.cypressCi:
-          return (
-            <div>
-              <CypressCi data={this.state.cypressData} />
-            </div>
-          );
+          return   <CypressCi
+            data={this.state.cypressData}
+          />;
 
         case TABS.screenshotDiffs:
           return <ScreenshotDiffsTab
