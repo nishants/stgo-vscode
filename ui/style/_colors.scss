@@ -5,9 +5,10 @@ $successColor: var(--vscode-gitDecoration-addedResourceForeground);
 $selectionBg: var(--vscode-focusBorder);
 $buttonBackground: var(--vscode-button-background);
 $buttonForeground: var(--vscode-button-foreground);
-$bgColour: var(--vscode-activityBar-background)
+$bgColour: var(--vscode-activityBar-background);
+$lightBorder: var(--vscode-editorGroup-border);
 
-//--vscode-activityBar-activeBorder: #ffffff;
+  //--vscode-activityBar-activeBorder: #ffffff;
 //--vscode-activityBar-background: #333333;
 //--vscode-activityBar-dropBackground: rgba(255, 255, 255, 0.12);
 //--vscode-activityBar-foreground: #ffffff;
