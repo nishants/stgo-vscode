@@ -3,7 +3,7 @@ import * as config from "../config";
 import * as vscode from "vscode";
 
 const SCREENSHOT_DIFFS_MOCK_FILE = 'screenshot-diffs-mock.json';
-const SCREENSHOT_API_URL = 'http://st-integration.sys.dom/branch/<branch-name>';
+const SCREENSHOT_API_URL = 'http://st-integration.sys.dom/publicApi/differences/<branch-name>';
 
 import {getJsonOverHttp} from "../utils";
 
@@ -39,8 +39,8 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
         }
         const branchURL = SCREENSHOT_API_URL.replace('<branch-name>', branchName);
         try{
-            const response =  await getJsonOverHttp(branchURL);
-            return response;
+            const response =  await getJsonOverHttp({url: branchURL});
+            panel.webview.postMessage({messageId: 'set-screenshot-diffs', data: groupByPath(response)});
         }catch(error){
             console.error(error);
             vscode.window.showErrorMessage(`Error fetching screenshot diffs from integration helper - ${branchURL}`);

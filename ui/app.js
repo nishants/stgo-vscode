@@ -18,7 +18,7 @@ const sendMessage = (message) => {
 };
 
 class App extends React.Component {
-  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0}};
+  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0, currentBranchName: ''}};
 
   setMessage(message) {
     this.setState({ message })
@@ -59,7 +59,7 @@ class App extends React.Component {
   }
 
   setBranch(branchName) {
-    this.setState({ currentBranchName: branchName });
+    this.setState({ currentBranchName: 'test-1170325-pause-date' });
     sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
     sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
   }
@@ -86,7 +86,7 @@ class App extends React.Component {
     const callbacks = {
       selectBranch: (event) => this.setBranch(event.target.value),
       selectTab: (tabname) => this.selectTab(tabname),
-      getScreenshotDiffs: (branchName) => this.getScreenshotDiffs(branchName),
+      getScreenshotDiffs: () => this.getScreenshotDiffs(this.state.currentBranchName),
       openUrl: (url) => this.openUrl(url),
     };
 
