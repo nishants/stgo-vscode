@@ -2,6 +2,7 @@ import React from "react";
 
 import SelectBranch from "./select-branch";
 import TabButtons from "./tabs-buttons";
+import CypressCi from "./cypress-ci";
 import ScreenshotDiffsTab from "./screenshot-diffs-tab";
 
 const TABS = {
@@ -13,31 +14,38 @@ const TABS = {
 
 const vscode = acquireVsCodeApi();
 
-const sendMessage = (message) => {
+const sendMessage = message => {
   vscode.postMessage(message);
 };
 
 class App extends React.Component {
-  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0, currentBranchName: ''}, branchList : [{ name: 'branch1'}, { name: 'branch2'}]};
+  state = {  cypressData: [], showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0, currentBranchName: ''}, branchList : [{ name: 'branch1'}, { name: 'branch2'}]};
 
   setMessage(message) {
-    this.setState({ message })
+    this.setState({ message });
+  }
+  setCypressBuild(data) {
+    this.setState({ cypressData: data });
   }
 
   closePanel() {
     vscode.postMessage({
-      messageId: 'quit',
-      text: 'Lets close the extension as user asked so.'
+      messageId: "quit",
+      text: "Lets close the extension as user asked so."
     });
   }
 
   componentDidMount() {
-    this.messageListener = window.addEventListener('message', event => {
+    this.messageListener = window.addEventListener("message", event => {
       const message = event.data;
+      const {data} = event.data;
       console.log("Received data from shell : ", message);
       switch (message.messageId) {
-        case 'retried':
-          this.setMessage('Cant run more than one window. !');
+        case "retried":
+          this.setMessage("Cant run more than one window. !");
+          break;
+        case "set-cypress-builds":
+          this.setCypressBuild(data);
           break;
         case 'set-branch-info':
           this.pupulateBranch(message.data.branchInfo.branchName);
@@ -68,8 +76,14 @@ class App extends React.Component {
 
   setBranch(branchName) {
     this.setState({ currentBranchName: branchName });
-    sendMessage({messageId: 'get-pull-request', data: {branchName: this.state.currentBranchName}});
-    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
+    sendMessage({
+      messageId: "get-pull-request",
+      data: { branchName: this.state.currentBranchName }
+    });
+    sendMessage({
+      messageId: "get-cypress-builds",
+      data: { branchName: this.state.currentBranchName }
+    });
   }
 
   selectTab(tabName) {
@@ -104,7 +118,11 @@ class App extends React.Component {
           return <div>Overview</div>;
 
         case TABS.cypressCi:
-          return <div>Cypress CI</div>;
+          return (
+            <div>
+              <CypressCi data={this.state.cypressData} />
+            </div>
+          );
 
         case TABS.screenshotDiffs:
           return <ScreenshotDiffsTab
@@ -130,4 +148,3 @@ class App extends React.Component {
 }
 
 export default App;
-
