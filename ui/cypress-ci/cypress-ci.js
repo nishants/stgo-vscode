@@ -2,11 +2,11 @@ import React from "react";
 import Status from './status';
 
 function CypressCi ({data=[]}, callBack=()=>{}) {
-      const classNam = [1].indexOf(data[0].status) > -1 ? 'btn disabled' : 'btn' ;
+      const btnClass = [1].indexOf(data[0].status) > -1 ? 'btn disabled' : 'btn' ;
 
       return (
         <div className='cypressCi'>
-          <button className={classNam} onClick={(e)=> callBack(e)}>Run Cpress Tests</button>
+          <button className={btnClass} onClick={(e)=> callBack(e)}>Run Cypress Tests</button>
           {data.map(item => <Status commitId={item.sourceVersion} result={item.result} status={item.status} commitBuildHref={item._links.web.href}/>)}
         </div>
         
