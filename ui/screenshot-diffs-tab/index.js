@@ -1,14 +1,14 @@
 import React from "react";
 import ScreenshotDiffItem from "./diff-item.js";
 
-
 class ScreenshotDiffs extends React.Component {
   componentDidMount() {
     this.props.getScreenshotDiffs(this.props.branchName);
   }
 
   render() {
-    const {screenshotDiffs, openUrl, sendHttpRequest} = this.props;
+    const {screenshotDiffs, openUrl, sendHttpRequest, openFile} = this.props;
+    debugger;
     return <div id="screenshot-diffs-tab">
       <ul>
         {
@@ -16,10 +16,9 @@ class ScreenshotDiffs extends React.Component {
             <li className='file-screenshot-diff-group'>
               <ul>
                 {
-                  diff.screenshots.map(diff => <ScreenshotDiffItem diff={diff} openUrl={openUrl} sendHttpRequest={sendHttpRequest}/>)
+                  diff.screenshots.map(diff => <ScreenshotDiffItem diff={diff} openUrl={openUrl} sendHttpRequest={sendHttpRequest} openFile={openFile}/>)
                 }
               </ul>
-
             </li>
           ))
         }
