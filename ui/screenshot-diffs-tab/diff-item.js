@@ -49,7 +49,7 @@ class ScreenshotDiffItem extends React.Component {
               </li>
             </ul>
             <div className='screenshot-diff-action-butttons'>
-              {approved ? <button onClick={() => this.reject()}>Reject</button> : <button onClick={() => this.approve()}>Approve</button>}
+              {approved ? <button className='warning' onClick={() => this.reject()}>Reject</button> : <button onClick={() => this.approve()}>Approve</button>}
             </div>
           </React.Fragment>
         }
