@@ -13,6 +13,10 @@ class ScreenshotDiffItem extends React.Component {
     this.setState({isExpanded: !this.state.isExpanded});
   }
 
+  approve(){
+    console.log("Approved");
+  }
+
   render() {
     const {diff, openUrl} = this.props;
     const {isExpanded} = this.state;
@@ -24,20 +28,25 @@ class ScreenshotDiffItem extends React.Component {
           <Chevron className={isExpanded ? 'point-down' : 'point-right'}/>
         </div>
         {
-          isExpanded && <ul className='image-comparison'>
-            <li>
-              <img src={diff.imageMaster} onClick={() => openUrl(diff.imageMaster)}/>
-              <label>Master</label>
-            </li>
-            <li>
-              <img src={diff.imageDifference} onClick={() => openUrl(diff.imageDifference)}/>
-              <label>Difference</label>
-            </li>
-            <li>
-              <img src={diff.imageBranch} onClick={() => openUrl(diff.imageBranch)}/>
-              <label>Branch</label>
-            </li>
-          </ul>
+          isExpanded && <React.Fragment>
+            <ul className='image-comparison'>
+              <li>
+                <img src={diff.imageMaster} onClick={() => openUrl(diff.imageMaster)}/>
+                <label>Master</label>
+              </li>
+              <li>
+                <img src={diff.imageDifference} onClick={() => openUrl(diff.imageDifference)}/>
+                <label>Difference</label>
+              </li>
+              <li>
+                <img src={diff.imageBranch} onClick={() => openUrl(diff.imageBranch)}/>
+                <label>Branch</label>
+              </li>
+            </ul>
+            <div className='screenshot-diff-action-butttons'>
+              {!diff.approved && <button onClick={() => this.approve()}>approve</button>}
+            </div>
+          </React.Fragment>
         }
 
       </li>
