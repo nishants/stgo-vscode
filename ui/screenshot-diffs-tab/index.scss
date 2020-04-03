@@ -41,6 +41,9 @@
     &.expanded{
       margin-bottom: 50px;
     }
+    &.is-approved{
+      border: 1px solid $successColor;
+    }
   }
 
 }
