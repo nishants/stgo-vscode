@@ -1,3 +1,19 @@
-#tabs-container{
+#branch-selector{
   display: block;
+  select {
+    font-family: $fontFamily;
+    width: 15%;
+    // color: $fontColor;
+    // background-color: $backgroundColor;
+  }
+  
+  button {
+    margin: 0px 5px;
+    // background-color: $backgroundColor;
+    // color: $fontColor;
+  }
+
+  .refresh {
+    margin-right: 10px;
+  }
 }
