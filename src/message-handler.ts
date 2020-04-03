@@ -35,6 +35,9 @@ export default async (panel: vscode.WebviewPanel) => {
             case 'get-cypress-builds':
                 return azure.getCypressBuilds(message.data);
 
+            case 'get-branch-list':
+                return integrationHelper.getAllBranches();
+
             case 'get-screenshot-diffs':
                 // @ts-ignore
                 return integrationHelper.getScreenshotDiffs(message.data);

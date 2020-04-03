@@ -18,7 +18,7 @@ class App extends React.Component {
     showTab: TABS.overview,
     currentBranchName: 'xyz-branch',
     screenshotDiffs: {files: [], unapproved: 0},
-    branchList : [{ name: 'branch1'}, { name: 'branch2'}],
+    branchList : [],
     cypressData: []
   };
 
@@ -40,7 +40,7 @@ class App extends React.Component {
     this.messageListener = window.addEventListener("message", event => {
       const message = event.data;
       const {data} = event.data;
-      console.log("Received data from shell : ", message);
+      console.log("Received data from shell : " + message.messageId, message);
       switch (message.messageId) {
         case "retried":
           this.setMessage("Cant run more than one window. !");
@@ -54,10 +54,14 @@ class App extends React.Component {
         case 'set-screenshot-diffs':
           this.setScreenshotDiffs(message.data);
           break;
+        case 'set-branch-list':
+          this.setBranchList(message.data);
+          break;
       }
     });
     // TODO : Just to test, remove this
     sendMessage({messageId: 'get-current-branch-info'});
+    sendMessage({messageId: 'get-branch-list'});
     sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
     //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
@@ -70,11 +74,17 @@ class App extends React.Component {
     sendMessage({messageId: 'send-http-post-request', data: {url, body, requestId: Math.random()}});
   }
 
+  setBranchList(list) {
+    this.setState(({branchList}) => ({
+      branchList: Array.from(new Set(list.concat(branchList)))
+    }));
+  }
+
   pupulateBranch(branch){
-    // if  not present in branchList
-    this.setState({ branchList: [...this.state.branchList,{
-      'name' : branch
-    }] });
+    this.setState(({branchList}) => ({
+      branchList: Array.from(new Set([...branchList, branch]))
+    }));
+
     this.setBranch(branch);
   }
 
