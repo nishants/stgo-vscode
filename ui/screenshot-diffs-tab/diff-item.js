@@ -2,10 +2,9 @@ import React from "react";
 import Chevron from "../icons/chevron";
 
 class ScreenshotDiffItem extends React.Component {
-  state = {isExpanded: true}
-
-  static getDerivedStateFromProps(props, state) {
-    return {isExpanded: state.isExpanded ||! props.diff.approved};
+  constructor(props){
+    super(props);
+    this.state = {isExpanded: !props.diff.approved};
   }
 
   toggleCollapse() {

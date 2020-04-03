@@ -20,6 +20,9 @@
     .click-to-toggle{
       padding-left: 25px;
     }
+    .screenshot-diff-action-butttons{
+      padding-left: 30px;
+    }
     ul.image-comparison{
       @extend .undo-list;
       @extend .resize-container;
