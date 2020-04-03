@@ -19,7 +19,7 @@ const sendMessage = message => {
 };
 
 class App extends React.Component {
-  state = { showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0},  cypressData: []};
+  state = {  cypressData: [], showTab: TABS.overview, screenshotDiffs: {files: [], unapproved: 0, currentBranchName: ''}, branchList : [{ name: 'branch1'}, { name: 'branch2'}]};
 
   setMessage(message) {
     this.setState({ message });
@@ -47,8 +47,8 @@ class App extends React.Component {
         case "set-cypress-builds":
           this.setCypressBuild(data);
           break;
-        case "set-branch-info":
-          this.setBranch(message.data.branchInfo.branchName);
+        case 'set-branch-info':
+          this.pupulateBranch(message.data.branchInfo.branchName);
           break;
         case 'set-screenshot-diffs':
           this.setScreenshotDiffs(message.data);
@@ -64,6 +64,14 @@ class App extends React.Component {
 
   componentWillUnmount() {
     window.removeEventListener(this.messageListener);
+  }
+
+  pupulateBranch(branch){
+    // if  not present in branchList
+    this.setState({ branchList: [...this.state.branchList,{
+      'name' : branch
+    }] });
+    this.setBranch(branch);
   }
 
   setBranch(branchName) {
@@ -95,12 +103,12 @@ class App extends React.Component {
   }
 
   render() {
-    const {showTab, currentBranchName, screenshotDiffs} = this.state;
+    const {showTab, currentBranchName, screenshotDiffs,branchList} = this.state;
 
     const callbacks = {
       selectBranch: (event) => this.setBranch(event.target.value),
       selectTab: (tabname) => this.selectTab(tabname),
-      getScreenshotDiffs: (branchName) => this.getScreenshotDiffs(branchName),
+      getScreenshotDiffs: () => this.getScreenshotDiffs(this.state.currentBranchName),
       openUrl: (url) => this.openUrl(url),
     };
 
@@ -131,8 +139,8 @@ class App extends React.Component {
 
     return (
       <div>
-        <SelectBranch selectBranch={callbacks.selectBranch} />
-        <TabButtons selectTab={callbacks.selectTab} />
+        <SelectBranch selectBranch={callbacks.selectBranch} currentBranch={currentBranchName}list={branchList}/>
+        <TabButtons selectTab={callbacks.selectTab}/>
         {getTab()}
       </div>
     );
