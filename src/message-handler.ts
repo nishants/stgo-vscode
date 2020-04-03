@@ -48,6 +48,7 @@ export default async (panel: vscode.WebviewPanel) => {
           // @ts-ignore
           panel.webview.postMessage({
             messageId: "send-http-request-finished",
+            // @ts-ignore
             requiresId: message.data.requestId,
             data: response
           });
