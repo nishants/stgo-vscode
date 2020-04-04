@@ -65,9 +65,6 @@ class App extends React.Component {
           break;
       }
     });
-    // TODO : Just to test, remove this
-    sendMessage({messageId: 'get-current-branch-info'});
-    //sendMessage({messageId: 'get-screenshot-diffs', data: {branchName: "xyz-branch"}});
   }
 
   componentWillUnmount() {

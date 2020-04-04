@@ -6,4 +6,3 @@ out
 publish.sh
 *.vsix
 yarn-error.log
-package-lock.json
