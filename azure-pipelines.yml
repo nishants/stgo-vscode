@@ -20,6 +20,9 @@ steps:
 - script: yarn build
   displayName: 'Compile UI, libs and extension tests in parallel'
 
+- script: yarn ui-test
+  displayName: 'End to End Tests'
+
 # TODO need to enable auto releaes of extension
 #- script: yarn publish
 #  displayName: 'Build exention'
