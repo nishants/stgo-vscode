@@ -1,0 +1,9 @@
+node_modules
+.idea
+.DS_Store
+.vscode-test
+out
+test-resources
+docs
+.vscode
+sample-data

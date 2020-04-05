@@ -3,10 +3,10 @@
     overflow: hidden;
     border-width: 0;
     margin-right: 5px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
     background-color: $buttonBackground;
     color: $buttonForeground;
-    
+
     &--success {
         background-color: #7ac139;
 

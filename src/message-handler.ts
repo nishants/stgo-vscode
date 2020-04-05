@@ -1,12 +1,12 @@
-import * as vscode from "vscode";
+import * as vscode from 'vscode';
 import * as axios from 'axios';
 
-import * as config from "./config";
-import tfsHandler from "./tfs";
-import gitHandler from "./git";
-import azureHandler from "./azure";
-import integreationHelperHandler from "./integration-helper";
-import fileHelperHandler from "./fileHelper";
+import * as config from './config';
+import tfsHandler from './tfs';
+import gitHandler from './git';
+import azureHandler from './azure';
+import integreationHelperHandler from './integration-helper';
+import fileHelperHandler from './fileHelper';
 
 export default async (panel: vscode.WebviewPanel) => {
     const workspaceConfig = await config.getConfig();
@@ -41,10 +41,10 @@ export default async (panel: vscode.WebviewPanel) => {
             case 'get-screenshot-diffs':
                 // @ts-ignore
                 return integrationHelper.getScreenshotDiffs(message.data);
-            case "get-trigger-cypress-build":
+            case 'get-trigger-cypress-build':
                 return azure.triggerCypressBuild(message.data);
 
-            case "get-screenshot-diffs":
+            case 'get-screenshot-diffs':
                 // @ts-ignore
                 return integrationHelper.getScreenshotDiffs(message.data);
 
@@ -52,13 +52,17 @@ export default async (panel: vscode.WebviewPanel) => {
                 // @ts-ignore
                 return axios.post(data.url, data.body).then((response) => {
                     // @ts-ignore
-                    panel.webview.postMessage({ messageId: 'send-http-request-finished', requiresId: message.data.requestId, data: response });
+                    panel.webview.postMessage({
+                        messageId: 'send-http-request-finished',
+                        requiresId: message.data.requestId,
+                        data: response,
+                    });
                 });
 
             case 'quit':
-                vscode.window.showWarningMessage("Closed by clicking on quit.");
+                vscode.window.showWarningMessage('Closed by clicking on quit.');
                 panel?.dispose();
                 return;
         }
-    }
-}
+    };
+};

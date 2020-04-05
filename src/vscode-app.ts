@@ -17,22 +17,24 @@ export const render = async (context: vscode.ExtensionContext) => {
         return;
     }
 
-
     panel = vscode.window.createWebviewPanel(
         REACT_APP_NAME,
         REACT_APP_TITLE,
         vscode.ViewColumn.Active,
-        { enableScripts: true, enableCommandUris: true, }
+        { enableScripts: true, enableCommandUris: true }
     );
 
-    const html = fs.readFileSync(path.join(context.extensionPath, 'out', 'ui', 'index.html'), 'utf-8');
+    const html = fs.readFileSync(
+        path.join(context.extensionPath, 'out', 'ui', 'index.html'),
+        'utf-8'
+    );
     // And set its HTML content
     panel.webview.html = html;
 
     panel.onDidDispose(
         () => {
             panel = undefined;
-            vscode.window.showInformationMessage("You closed the webview !");
+            vscode.window.showInformationMessage('You closed the webview !');
         },
         null,
         context.subscriptions

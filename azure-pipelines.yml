@@ -1,41 +1,43 @@
 trigger:
-  batch: true
-  branches:
-    include:
-      - master
+    batch: true
+    branches:
+        include:
+            - master
 
 pool:
-  vmImage: 'vs2017-win2016'
+    vmImage: 'vs2017-win2016'
 
 steps:
-- script: yarn  --ignore-engines
-  displayName: 'Install npm modules'
+    - script: yarn  --ignore-engines
+      displayName: 'Install npm modules'
 
-- script: yarn lint
-  displayName: 'Lint UI, libs and extension tests in parallel'
+    - script: yarn prettier:check
+      displayName: 'Prettier check'
 
-- script: yarn test
-  displayName: 'Run UI, libs and extension tests in parallel'
+    - script: yarn lint
+      displayName: 'Lint UI, libs and extension tests in parallel'
 
-- script: yarn build
-  displayName: 'Compile UI, libs and extension tests in parallel'
+    - script: yarn test
+      displayName: 'Run UI, libs and extension tests in parallel'
 
-- script: yarn e2e-test
-  displayName: 'End to End Tests'
+    - script: yarn build
+      displayName: 'Compile UI, libs and extension tests in parallel'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    path: $(Agent.BuildDirectory)/s/out
-    artifact: out
-  displayName: 'Publish output'
+    - script: yarn e2e-test
+      displayName: 'End to End Tests'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    path: $(Agent.BuildDirectory)/s/test-resources/screenshots
-    artifact: screenshots
-  condition: failed()
-  displayName: 'Publish e2e results'
+    - task: PublishPipelineArtifact@1
+      inputs:
+          path: $(Agent.BuildDirectory)/s/out
+          artifact: out
+      displayName: 'Publish output'
 
+    - task: PublishPipelineArtifact@1
+      inputs:
+          path: $(Agent.BuildDirectory)/s/test-resources/screenshots
+          artifact: screenshots
+      condition: failed()
+      displayName: 'Publish e2e results'
 # TODO need to enable auto releaes of extension
 #- script: yarn publish
 #  displayName: 'Build exention'
