@@ -10,28 +10,25 @@ import { expect } from 'chai';
 import * as path from 'path';
 
 const TIMEOUT = 100000;
-describe('Hello World Example UI Tests', () => {
+describe('e2e:extensoin-test', () => {
     let driver: WebDriver;
 
     before(() => {
         driver = VSBrowser.instance.driver;
     });
 
-    it('Command shows a notification with the correct text', async function() {
-        this.timeout(TIMEOUT);
-        const workbench = new Workbench();
+    const openMockWorkspace = async () => {
         const workspacePath = path.join(process.cwd(), 'test-resources', 'mock-saxotrader-workspace');
-
-        console.log("*********************************************");
-        console.log('Running e2e against workspace : ', workspacePath);
-        console.log("*********************************************");
-
         await new Workbench().executeCommand('Extest: Open Folder');
         const input = await InputBox.create();
-        // const input = new InputBox();
-
         await input.setText(workspacePath);
         await input.confirm();
+    };
+
+    it('Should load extension in mocked workspace', async function() {
+        this.timeout(TIMEOUT);
+        const workbench = new Workbench();
+        await openMockWorkspace();
 
         const expectedMockWarningMessage = 'Running stgoci against mocks.';
 
