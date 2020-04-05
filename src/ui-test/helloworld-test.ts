@@ -1,4 +1,11 @@
-import { Workbench, Notification, WebDriver, VSBrowser, NotificationType } from 'vscode-extension-tester';
+import {
+    Workbench,
+    Notification,
+    WebDriver,
+    VSBrowser,
+    NotificationType,
+    InputBox
+} from 'vscode-extension-tester';
 import { expect } from 'chai';
 
 describe('Hello World Example UI Tests', () => {
@@ -8,13 +15,31 @@ describe('Hello World Example UI Tests', () => {
         driver = VSBrowser.instance.driver;
     });
 
-    it('Command shows a notification with the correct text', async () => {
-        const workbench = new Workbench();
-        await workbench.executeCommand('stgoci');
-        const notification = await driver.wait(() => { return notificationExists('Hello'); }, 2000) as Notification;
+    it('Command shows a notification with the correct text', async function() {
+        this.timeout(100000);
 
-        expect(await notification.getMessage()).equals('Hello World!');
-        expect(await notification.getType()).equals(NotificationType.Info);
+        const workbench = new Workbench();
+
+        await new Workbench().executeCommand('Extest: Open Folder');
+        const input = await InputBox.create();
+        // const input = new InputBox();
+
+        await input.setText('/Users/dawn/Desktop/vs-code-test');
+        await input.confirm();
+
+        const expectedMockWarningMessage = 'Running stgoci against mocks.';
+
+        await workbench.executeCommand('stgoci');
+
+        const notification = await driver.wait(() => {
+            return notificationExists(expectedMockWarningMessage); }, 12000) as Notification;
+
+        expect(await notification.getMessage()).equals(expectedMockWarningMessage);
+        expect(await notification.getType()).equals(NotificationType.Warning);
+
+        const openTabs = await workbench.getEditorView().getOpenEditorTitles();
+        expect(openTabs).to.eql([ 'Welcome', 'React App' ]);
+
     });
 });
 

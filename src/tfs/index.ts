@@ -26,8 +26,6 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
       messageId: "set-pull-request",
       data: prDetails
     });
-
-    return;
   };
 
   return {
