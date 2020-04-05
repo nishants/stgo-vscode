@@ -11,6 +11,9 @@ steps:
   - script: yarn  --ignore-engines
     displayName: "Install npm modules"
 
+  - script: yarn prettier:check
+    displayName: "Prettier check"
+
   - script: yarn lint
     displayName: "Lint UI, libs and extension tests in parallel"
 

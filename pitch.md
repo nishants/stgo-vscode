@@ -36,13 +36,13 @@ Features
 
 -
 
-*
+\*
 
 -
 
-* intermittent build issues with cypress build (e.g. checkout failures)
+- intermittent build issues with cypress build (e.g. checkout failures)
 
-/**********\*\***********/
+/\***\*\*\*\*\***\*\*\***\*\*\*\*\***/
 
 ---
 
