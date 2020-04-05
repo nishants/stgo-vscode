@@ -6,3 +6,4 @@ out
 publish.sh
 *.vsix
 yarn-error.log
+test-resources

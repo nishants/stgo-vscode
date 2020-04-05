@@ -10,3 +10,4 @@ vsc-extension-quickstart.md
 **/*.ts
 sample-data/**
 docs/**
+test-resources/**

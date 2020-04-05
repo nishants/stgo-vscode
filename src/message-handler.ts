@@ -1,4 +1,3 @@
-import data from "./data";
 import * as vscode from "vscode";
 import * as axios from 'axios';
 
@@ -19,10 +18,6 @@ export default async (panel: vscode.WebviewPanel) => {
 
     return (message: { messageId: string; data: object }) => {
         switch (message.messageId) {
-            case 'load-ui':
-                // @ts-ignore
-                return panel.webview.postMessage({ messageId: 'set-data', data });
-
             case 'open-url':
                 // @ts-ignore
                 return vscode.env.openExternal(message.data.url);
