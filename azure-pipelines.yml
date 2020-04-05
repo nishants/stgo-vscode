@@ -20,7 +20,7 @@ steps:
 - script: yarn build
   displayName: 'Compile UI, libs and extension tests in parallel'
 
-- script: yarn ui-test
+- script: yarn e2e-test
   displayName: 'End to End Tests'
 
 - task: PublishPipelineArtifact@1
