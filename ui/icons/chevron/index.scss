@@ -1,19 +1,19 @@
 .icon-chevron {
-  height: $iconHeight;
-  width: $iconHeight;
-  img {
-    display: block;
-  }
+    height: $iconHeight;
+    width: $iconHeight;
+    img {
+        display: block;
+    }
 
-  &.point-down {
-    transform: rotate(90deg);
-  }
+    &.point-down {
+        transform: rotate(90deg);
+    }
 
-  &.point-up {
-    transform: rotate(-90deg);
-  }
+    &.point-up {
+        transform: rotate(-90deg);
+    }
 
-  &.point-left {
-    transform: rotate(180deg);
-  }
+    &.point-left {
+        transform: rotate(180deg);
+    }
 }

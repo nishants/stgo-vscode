@@ -1,6 +1,6 @@
 SaxoTrader CI Helper Vscode Extension
 
-- a vscode plugin to manage the lifecycle of a branch in saxotrader go app
+-   a vscode plugin to manage the lifecycle of a branch in saxotrader go app
 
 Currently as a developer, I have to jump between my editor, TFS, integration helper and azure while trying to build/debug and maintain my branch.
 
@@ -8,31 +8,31 @@ Also for some known CI issues, I often have to reach out to System engineer or f
 
 Some workflow that could be streamlined :
 
-- Navigating to the point in code from screenshot comparison
-- View all cypress builds of my branch in editor
-  - integration helper logs
-  - DTE deployment link
-  - TFS56 deployment link
-- Monitor, trigger and navigate to cypress builds from editor
+-   Navigating to the point in code from screenshot comparison
+-   View all cypress builds of my branch in editor
+    -   integration helper logs
+    -   DTE deployment link
+    -   TFS56 deployment link
+-   Monitor, trigger and navigate to cypress builds from editor
 
 Features
 
-- Diagnose and fix ci problem related to infrastructure
+-   Diagnose and fix ci problem related to infrastructure
 
-  - tfs-azure sync failures
-  - web-hook failures
+    -   tfs-azure sync failures
+    -   web-hook failures
 
-- Show screenshot differences in editor and navigate to code on selecting a difference
+-   Show screenshot differences in editor and navigate to code on selecting a difference
 
-- Show all links for which I have to type paste my branch name at various places right in my editor
+-   Show all links for which I have to type paste my branch name at various places right in my editor
 
-- View my PR details in editor
+-   View my PR details in editor
 
-- View cypress builds for my branch and their status in editor
+-   View cypress builds for my branch and their status in editor
 
-- Trigger screenshot builds from my editor
+-   Trigger screenshot builds from my editor
 
-- Approve/Reject/report on slack about screenshot differences from editor
+-   Approve/Reject/report on slack about screenshot differences from editor
 
 -
 
@@ -40,7 +40,7 @@ Features
 
 -
 
-- intermittent build issues with cypress build (e.g. checkout failures)
+-   intermittent build issues with cypress build (e.g. checkout failures)
 
 /\***\*\*\*\*\***\*\*\***\*\*\*\*\***/
 
@@ -54,28 +54,28 @@ Also for some known CI issues, we often have to reach out to System engineers or
 
 Features we want to try out :
 
-- Diagnose and fix ci problems related to infrastructure like :
+-   Diagnose and fix ci problems related to infrastructure like :
 
 tfs-azure sync failures
 web-hook failures
 
-- Show screenshot differences in editor
+-   Show screenshot differences in editor
 
-- Navigating to the point in code from screenshot comparison
+-   Navigating to the point in code from screenshot comparison
 
-- Show all links for which I have to type my branch name at various places right in my editor
+-   Show all links for which I have to type my branch name at various places right in my editor
 
-  Integration helper logs
-  DTE deployment link
-  TFS56 deployment link
+    Integration helper logs
+    DTE deployment link
+    TFS56 deployment link
 
-- View my PR details in editor
+-   View my PR details in editor
 
-- View,monitor, trigger and navigate to cypress builds from editor
+-   View,monitor, trigger and navigate to cypress builds from editor
 
-- Trigger screenshot builds from my editor
+-   Trigger screenshot builds from my editor
 
-- Approve/Reject/report on slack about screenshot differences from editor
+-   Approve/Reject/report on slack about screenshot differences from editor
 
 ---
 
@@ -83,12 +83,12 @@ web-hook failures
 
 For the hackathon, join us if if you are skilled in or interesting in learning and experimenting with following :
 
-- vs code extension development
-- CI/CD with Azure devops server
-- Azure/TFS NodeJs API
-- Typescript
-- Simple Git NodeJs API
-- CI/CD process at Saxobank
+-   vs code extension development
+-   CI/CD with Azure devops server
+-   Azure/TFS NodeJs API
+-   Typescript
+-   Simple Git NodeJs API
+-   CI/CD process at Saxobank
 
 Project wiki page : https://wiki/pages/viewpage.action?pageId=134875385
 

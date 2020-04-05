@@ -1,48 +1,48 @@
 #screenshot-diffs-tab {
-  > ul {
-    @extend .undo-list;
-  }
-  display: block;
-  .file-screenshot-diff-group {
-    ul {
-      @extend .undo-list;
+    > ul {
+        @extend .undo-list;
     }
-  }
-
-  .screenshot-diff-item {
-    padding: 10px;
-
-    h4 {
-      margin: 0;
-      padding-left: 10px;
-    }
-    .click-to-toggle {
-      padding-left: 25px;
-      cursor: pointer;
-    }
-    .screenshot-diff-action-butttons {
-      padding-left: 30px;
-    }
-    ul.image-comparison {
-      @extend .undo-list;
-      @extend .resize-container;
-      padding-left: 20px;
-
-      > li {
-        width: 33%;
-        float: left;
-        padding: 10px;
-        img {
-          cursor: pointer;
+    display: block;
+    .file-screenshot-diff-group {
+        ul {
+            @extend .undo-list;
         }
-      }
     }
 
-    &.expanded {
-      margin-bottom: 50px;
+    .screenshot-diff-item {
+        padding: 10px;
+
+        h4 {
+            margin: 0;
+            padding-left: 10px;
+        }
+        .click-to-toggle {
+            padding-left: 25px;
+            cursor: pointer;
+        }
+        .screenshot-diff-action-butttons {
+            padding-left: 30px;
+        }
+        ul.image-comparison {
+            @extend .undo-list;
+            @extend .resize-container;
+            padding-left: 20px;
+
+            > li {
+                width: 33%;
+                float: left;
+                padding: 10px;
+                img {
+                    cursor: pointer;
+                }
+            }
+        }
+
+        &.expanded {
+            margin-bottom: 50px;
+        }
+        &.is-approved {
+            border: 1px solid $successColor;
+        }
     }
-    &.is-approved {
-      border: 1px solid $successColor;
-    }
-  }
 }

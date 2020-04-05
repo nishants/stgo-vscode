@@ -1,3 +1,3 @@
 export default {
-  value: () => "Yeah !!! hello from a lib",
-};
+    value: () => 'Yeah !!! hello from a lib',
+}
