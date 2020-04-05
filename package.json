@@ -34,6 +34,10 @@
     "lint:ui": "eslint ui",
     "lint": "run-p lint:ui lint:vs",
     "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile",
+    "test": "run-p test:extension test:lib",
+    "test:extension": "node ./out/test/runTest.js",
+    "test:lib": "yarn jest ./src/lib",
     "ui-test": "npm run compile && extest setup-and-run out/ui-test/*.js"
   },
   "devDependencies": {
