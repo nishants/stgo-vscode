@@ -53,7 +53,6 @@
     "@types/vscode": "^1.42.0",
     "@typescript-eslint/eslint-plugin": "^2.18.0",
     "@typescript-eslint/parser": "^2.18.0",
-    "azure-devops-node-api": "^10.1.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
@@ -76,11 +75,13 @@
     "webpack-cli": "^3.3.11",
     "vscode-extension-tester": "^2.5.2",
     "@types/chai": "^4.2.11",
-    "svg-url-loader": "^5.0.0"
+    "svg-url-loader": "^5.0.0",
+    "chai": "^4.2.0"
   },
+
   "dependencies": {
     "axios": "^0.19.2",
-    "chai": "^4.2.0",
+    "azure-devops-node-api": "^10.1.0",
     "cherow": "^1.6.9",
     "estraverse": "^5.0.0",
     "execa": "^4.0.0",
