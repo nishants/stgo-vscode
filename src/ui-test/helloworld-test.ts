@@ -9,6 +9,7 @@ import {
 import { expect } from 'chai';
 import * as path from 'path';
 
+const TIMEOUT = 100000;
 describe('Hello World Example UI Tests', () => {
     let driver: WebDriver;
 
@@ -17,11 +18,13 @@ describe('Hello World Example UI Tests', () => {
     });
 
     it('Command shows a notification with the correct text', async function() {
-        this.timeout(100000);
+        this.timeout(TIMEOUT);
         const workbench = new Workbench();
+        const workspacePath = path.join(process.cwd(), 'test-resources', 'mock-saxotrader-workspace');
 
-        console.log("Running form dir : ", process.cwd())
-        const workspacePath = path.join(process.cwd(), 'test-resources', 'mock-saxotrader-workspace')
+        console.log("*********************************************");
+        console.log('Running e2e against workspace : ', workspacePath);
+        console.log("*********************************************");
 
         await new Workbench().executeCommand('Extest: Open Folder');
         const input = await InputBox.create();
@@ -35,7 +38,7 @@ describe('Hello World Example UI Tests', () => {
         await workbench.executeCommand('stgoci');
 
         const notification = await driver.wait(() => {
-            return notificationExists(expectedMockWarningMessage); }, 12000) as Notification;
+            return notificationExists(expectedMockWarningMessage); }, TIMEOUT) as Notification;
 
         expect(await notification.getMessage()).equals(expectedMockWarningMessage);
         expect(await notification.getType()).equals(NotificationType.Warning);
