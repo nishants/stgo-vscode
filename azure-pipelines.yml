@@ -31,8 +31,8 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    path: $(Agent.BuildDirectory)/s/test-resources
-    artifact: out
+    path: $(Agent.BuildDirectory)/s/test-resources/screenshots
+    artifact: screenshots
   condition: failed()
   displayName: 'Publish e2e results'
 
