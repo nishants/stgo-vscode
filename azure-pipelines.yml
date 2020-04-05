@@ -8,7 +8,7 @@ pool:
   vmImage: 'vs2017-win2016'
 
 steps:
-- script: yarn
+- script: yarn  --ignore-engines
   displayName: 'Install npm modules'
 
 - script: yarn lint
@@ -33,6 +33,7 @@ steps:
   inputs:
     path: $(Agent.BuildDirectory)/s/test-resources
     artifact: out
+  condition: failed()
   displayName: 'Publish e2e results'
 
 # TODO need to enable auto releaes of extension
