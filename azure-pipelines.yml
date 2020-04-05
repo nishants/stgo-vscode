@@ -23,6 +23,18 @@ steps:
 - script: yarn ui-test
   displayName: 'End to End Tests'
 
+- task: PublishPipelineArtifact@1
+  inputs:
+    path: $(Agent.BuildDirectory)/s/out
+    artifact: out
+  displayName: 'Publish output'
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    path: $(Agent.BuildDirectory)/s/test-resources
+    artifact: out
+  displayName: 'Publish e2e results'
+
 # TODO need to enable auto releaes of extension
 #- script: yarn publish
 #  displayName: 'Build exention'
