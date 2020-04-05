@@ -1,19 +1,19 @@
 const HTMLWebpackPlugin = require("html-webpack-plugin");
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
+const HtmlWebpackInlineSourcePlugin = require("html-webpack-inline-source-plugin");
 
-const isDevelopmentBuild = process.env.NODE_ENV === 'dev';
+const isDevelopmentBuild = process.env.NODE_ENV === "dev";
 
 module.exports = {
   entry: {
-    "main": "./ui/index.js",
+    main: "./ui/index.js",
   },
   output: {
-    path: __dirname + '/out/ui',
-    filename: "react-app-bundle.js"
+    path: __dirname + "/out/ui",
+    filename: "react-app-bundle.js",
   },
   mode: isDevelopmentBuild ? "development" : "production",
   optimization: {
-    minimize: !isDevelopmentBuild
+    minimize: !isDevelopmentBuild,
   },
   module: {
     rules: [
@@ -21,38 +21,38 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader"
-        }
+          loader: "babel-loader",
+        },
       },
       {
         test: /\.s[ac]ss$/i,
         use: [
           // Creates `style` nodes from JS strings
-          'style-loader',
+          "style-loader",
           // Translates CSS into CommonJS
-          'css-loader',
+          "css-loader",
           // Compiles Sass to CSS
-          'sass-loader',
+          "sass-loader",
         ],
       },
       {
         test: /\.svg$/,
         use: [
           {
-            loader: 'svg-url-loader',
+            loader: "svg-url-loader",
             options: {
               limit: 10000,
             },
           },
         ],
-      }
-    ]
+      },
+    ],
   },
   plugins: [
     new HTMLWebpackPlugin({
-      template: './ui/index.html',
-      inlineSource: '.(js|css)$'
+      template: "./ui/index.html",
+      inlineSource: ".(js|css)$",
     }),
-    new HtmlWebpackInlineSourcePlugin()
-  ]
-}
+    new HtmlWebpackInlineSourcePlugin(),
+  ],
+};

@@ -26,7 +26,7 @@ export default class TFS {
       const prDetails = await this.tfsConnectObj.getPullRequests(
         SaxoTrader_Project_TFS_REPO_ID,
         {
-          sourceRefName: `refs/heads/${branchName}`
+          sourceRefName: `refs/heads/${branchName}`,
         }
       );
 
@@ -51,14 +51,14 @@ export default class TFS {
       return {
         type: "EXISTING",
         data: prDetails[0],
-        link: `${TFS_URL}/_git/SaxoTrader/pullrequest/${prDetails[0]?.pullRequestId}?_a=overview`
+        link: `${TFS_URL}/_git/SaxoTrader/pullrequest/${prDetails[0]?.pullRequestId}?_a=overview`,
       };
     }
 
     //  returning object for New PR with create link
     return {
       type: "NEW",
-      link: `${TFS_URL}/_git/SaxoTrader/pullrequestcreate?sourceRef=${branchName}&targetRef=master&sourceRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}&targetRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}`
+      link: `${TFS_URL}/_git/SaxoTrader/pullrequestcreate?sourceRef=${branchName}&targetRef=master&sourceRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}&targetRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}`,
     };
   }
 }

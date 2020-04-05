@@ -1,9 +1,8 @@
-@import 'vars';
-@import 'colors';
-@import 'typography';
-@import 'form';
-@import 'buttons';
-
+@import "vars";
+@import "colors";
+@import "typography";
+@import "form";
+@import "buttons";
 
 * {
   box-sizing: border-box;
@@ -17,13 +16,13 @@ body {
   line-height: $rowHeight;
 }
 
-.column-label{
+.column-label {
   line-height: $rowHeight;
   width: $columnWidth;
 }
 
 .resize-container:after {
-  content: '';
+  content: "";
   display: table;
   clear: both;
 }

@@ -1,15 +1,15 @@
-const {defaults} = require('jest-config');
+const { defaults } = require("jest-config");
 module.exports = {
   // ...
-  moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
-  testRegex: 'spec\.[jt]sx?$',
+  moduleFileExtensions: [...defaults.moduleFileExtensions, "ts", "tsx"],
+  testRegex: "spec.[jt]sx?$",
   globals: {
-    'ts-jest': {
+    "ts-jest": {
       tsConfig: {
-        importHelpers: true
-      }
-    }
+        importHelpers: true,
+      },
+    },
   },
-  preset: 'ts-jest',
-  modulePathIgnorePatterns: ["out", ".vscode", "vscode-test"]
+  preset: "ts-jest",
+  modulePathIgnorePatterns: ["out", ".vscode", "vscode-test"],
 };

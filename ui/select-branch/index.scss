@@ -1,12 +1,13 @@
-#branch-selector{
+#branch-selector {
   padding: 5px;
   @extend .resize-container;
 
-  select{
+  select {
     margin-bottom: 5px;
   }
 
-  select, button{
+  select,
+  button {
     float: left;
   }
 }
