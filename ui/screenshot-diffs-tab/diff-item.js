@@ -1,5 +1,5 @@
 import React from "react";
-import Chevron from "../icons/chevron";
+// import Chevron from "../icons/chevron";
 
 class ScreenshotDiffItem extends React.Component {
   constructor(props){
@@ -31,7 +31,7 @@ class ScreenshotDiffItem extends React.Component {
         <h4>{diff.path} <br/> {diff.fileName}</h4>
         <button onClick={() => openFile({ path: diff.path, name: diff.fileName })}>See In code</button>
         <div className='click-to-toggle' onClick={() => this.toggleCollapse()}>
-          <Chevron className={isExpanded ? 'point-down' : 'point-right'}/>
+          {/*<Chevron className={isExpanded ? 'point-down' : 'point-right'}/>*/}
         </div>
         {
           isExpanded && <React.Fragment>
