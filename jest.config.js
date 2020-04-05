@@ -1,4 +1,4 @@
-const { defaults } = require('jest-config')
+const { defaults } = require('jest-config');
 module.exports = {
     // ...
     moduleFileExtensions: [...defaults.moduleFileExtensions, 'ts', 'tsx'],
@@ -12,4 +12,4 @@ module.exports = {
     },
     preset: 'ts-jest',
     modulePathIgnorePatterns: ['out', '.vscode', 'vscode-test'],
-}
+};
