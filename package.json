@@ -26,7 +26,7 @@
   "scripts": {
     "publish": "vsce publish -p *",
     "build": "run-p build:ui build:extension",
-    "build:extension": "vsce package",
+    "build:extension": "vsce package -o out/dist/",
     "build:ui": "webpack --config webpack.config.js",
     "vscode:prepublish": "run-s build:ui compile",
     "compile": "tsc -p ./",
