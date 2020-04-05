@@ -7,6 +7,7 @@ import {
     InputBox
 } from 'vscode-extension-tester';
 import { expect } from 'chai';
+import * as path from 'path';
 
 describe('Hello World Example UI Tests', () => {
     let driver: WebDriver;
@@ -17,14 +18,16 @@ describe('Hello World Example UI Tests', () => {
 
     it('Command shows a notification with the correct text', async function() {
         this.timeout(100000);
-
         const workbench = new Workbench();
+
+        console.log("Running form dir : ", process.cwd())
+        const workspacePath = path.join(process.cwd(), 'test-resources', 'mock-saxotrader-workspace')
 
         await new Workbench().executeCommand('Extest: Open Folder');
         const input = await InputBox.create();
         // const input = new InputBox();
 
-        await input.setText('/Users/dawn/Desktop/vs-code-test');
+        await input.setText(workspacePath);
         await input.confirm();
 
         const expectedMockWarningMessage = 'Running stgoci against mocks.';
