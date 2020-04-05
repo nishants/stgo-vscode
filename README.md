@@ -3,3 +3,5 @@
 ![](./docs/images/wtfpl-badge.png)
 
 Development build ui (wihtout minification ): `NODE_ENV=dev yarn build:ui`
+
+End to end testing tool : https://github.com/redhat-developer/vscode-extension-tester
