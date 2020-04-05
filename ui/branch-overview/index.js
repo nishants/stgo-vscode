@@ -1,38 +1,38 @@
-import React from 'React'
+import React from 'React';
 
 class Index extends React.Component {
     state = {
         branchData: {},
-    }
+    };
 
     componentDidMount() {
         window.addEventListener('message', (event) => {
-            const message = event.data
+            const message = event.data;
             if (message.messageId === 'set-pull-request') {
-                this.setState({ branchData: message.data })
+                this.setState({ branchData: message.data });
             }
-        })
-        this.props.getBranchDetails(this.props.selectedBranch)
+        });
+        this.props.getBranchDetails(this.props.selectedBranch);
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.selectedBranch !== this.props.selectedBranch) {
-            this.props.getBranchDetails(this.props.selectedBranch)
+            this.props.getBranchDetails(this.props.selectedBranch);
         }
     }
 
     render() {
-        const { selectedBranch } = this.props
-        const { branchData } = this.state
+        const { selectedBranch } = this.props;
+        const { branchData } = this.state;
 
         if (!branchData || !branchData.type) {
-            return null
+            return null;
         }
-        const existing = branchData.type === 'EXISTING'
+        const existing = branchData.type === 'EXISTING';
         var sourceRefName =
-            existing && branchData.data.sourceRefName.split('/')[2]
+            existing && branchData.data.sourceRefName.split('/')[2];
         var targetRefName =
-            existing && branchData.data.targetRefName.split('/')[2]
+            existing && branchData.data.targetRefName.split('/')[2];
 
         return (
             <div className="branch-details">
@@ -107,8 +107,8 @@ class Index extends React.Component {
                     </div>
                 )}
             </div>
-        )
+        );
     }
 }
 
-export default Index
+export default Index;

@@ -1,7 +1,7 @@
-const HTMLWebpackPlugin = require('html-webpack-plugin')
-const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin')
+const HTMLWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackInlineSourcePlugin = require('html-webpack-inline-source-plugin');
 
-const isDevelopmentBuild = process.env.NODE_ENV === 'dev'
+const isDevelopmentBuild = process.env.NODE_ENV === 'dev';
 
 module.exports = {
     entry: {
@@ -55,4 +55,4 @@ module.exports = {
         }),
         new HtmlWebpackInlineSourcePlugin(),
     ],
-}
+};

@@ -1,25 +1,25 @@
-import * as nodeApi from 'azure-devops-node-api'
-import * as GitApi from 'azure-devops-node-api/GitApi'
+import * as nodeApi from 'azure-devops-node-api';
+import * as GitApi from 'azure-devops-node-api/GitApi';
 
-import { TFS_URL, SaxoTrader_Project_TFS_REPO_ID } from '../constant'
+import { TFS_URL, SaxoTrader_Project_TFS_REPO_ID } from '../constant';
 
 export default class TFS {
-    tfsConnectObj: GitApi.IGitApi | undefined
-    private token: string = ''
+    tfsConnectObj: GitApi.IGitApi | undefined;
+    private token: string = '';
 
     constructor(token: string) {
-        this.token = token
+        this.token = token;
     }
 
     async createConnection() {
         try {
             const authHandler = nodeApi.getPersonalAccessTokenHandler(
                 this.token
-            )
-            const tfsConnection = new nodeApi.WebApi(TFS_URL, authHandler)
-            this.tfsConnectObj = await tfsConnection.getGitApi()
+            );
+            const tfsConnection = new nodeApi.WebApi(TFS_URL, authHandler);
+            this.tfsConnectObj = await tfsConnection.getGitApi();
         } catch (error) {
-            console.log('Error Orrcued in TF connection: ', error)
+            console.log('Error Orrcued in TF connection: ', error);
         }
     }
 
@@ -30,23 +30,23 @@ export default class TFS {
                 {
                     sourceRefName: `refs/heads/${branchName}`,
                 }
-            )
+            );
 
-            return prDetails
+            return prDetails;
         }
-        return []
+        return [];
     }
 
     async getPullRequestData(branchName: string) {
         if (!branchName) {
-            console.log('Brnach name is Must')
-            return
+            console.log('Brnach name is Must');
+            return;
         }
 
         if (!this.tfsConnectObj) {
-            await this.createConnection()
+            await this.createConnection();
         }
-        const prDetails = await this.getPr(branchName)
+        const prDetails = await this.getPr(branchName);
 
         if (prDetails.length) {
             //  returning object for Esiting PR with details and edit link
@@ -54,13 +54,13 @@ export default class TFS {
                 type: 'EXISTING',
                 data: prDetails[0],
                 link: `${TFS_URL}/_git/SaxoTrader/pullrequest/${prDetails[0]?.pullRequestId}?_a=overview`,
-            }
+            };
         }
 
         //  returning object for New PR with create link
         return {
             type: 'NEW',
             link: `${TFS_URL}/_git/SaxoTrader/pullrequestcreate?sourceRef=${branchName}&targetRef=master&sourceRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}&targetRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}`,
-        }
+        };
     }
 }

@@ -1,23 +1,23 @@
-import React from 'react'
-import Status from './status'
+import React from 'react';
+import Status from './status';
 
 class CypressCi extends React.Component {
     loadBuildsForCurrentBranch() {
-        this.props.getCypressBuilds()
+        this.props.getCypressBuilds();
     }
 
     componentDidMount() {
-        this.loadBuildsForCurrentBranch()
+        this.loadBuildsForCurrentBranch();
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.currentBranchName !== this.props.currentBranchName) {
-            this.loadBuildsForCurrentBranch()
+            this.loadBuildsForCurrentBranch();
         }
     }
 
     render() {
-        const { data, callBack } = this.props
+        const { data, callBack } = this.props;
         return (
             <div className="cypressCi">
                 <button onClick={callBack}>Run Cypress Tests</button>
@@ -30,8 +30,8 @@ class CypressCi extends React.Component {
                     />
                 ))}
             </div>
-        )
+        );
     }
 }
 
-export default CypressCi
+export default CypressCi;

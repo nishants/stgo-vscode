@@ -3,4 +3,4 @@ export const TABS = {
     cypressCi: 'cypress-ci',
     screenshotDiffs: 'screenshot-comparison',
     ciLogs: 'ci-logs',
-}
+};

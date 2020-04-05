@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default (props) => (
     <div id="branch-selector">
@@ -8,7 +8,7 @@ export default (props) => (
             value={props.currentBranch}
         >
             {props.list.map((branch) => {
-                return <option value={branch.name}>{branch.name}</option>
+                return <option value={branch.name}>{branch.name}</option>;
             })}
         </select>
 
@@ -16,4 +16,4 @@ export default (props) => (
             Refresh
         </button>
     </div>
-)
+);

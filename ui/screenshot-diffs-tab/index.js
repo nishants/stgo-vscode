@@ -1,18 +1,18 @@
-import React from 'react'
-import ScreenshotDiffItem from './diff-item.js'
+import React from 'react';
+import ScreenshotDiffItem from './diff-item.js';
 
 class ScreenshotDiffs extends React.Component {
     loadDataForBranch() {
-        this.props.getScreenshotDiffs(this.props.branchName)
+        this.props.getScreenshotDiffs(this.props.branchName);
     }
 
     componentDidMount() {
-        this.loadDataForBranch()
+        this.loadDataForBranch();
     }
 
     componentDidUpdate(prevProps) {
         if (prevProps.currentBranchName !== this.props.currentBranchName) {
-            this.loadDataForBranch()
+            this.loadDataForBranch();
         }
     }
 
@@ -22,7 +22,7 @@ class ScreenshotDiffs extends React.Component {
             openUrl,
             sendHttpRequest,
             openFile,
-        } = this.props
+        } = this.props;
         return (
             <div id="screenshot-diffs-tab">
                 <ul>
@@ -44,8 +44,8 @@ class ScreenshotDiffs extends React.Component {
                         : 'No screenshot diffs found.'}
                 </ul>
             </div>
-        )
+        );
     }
 }
 
-export default ScreenshotDiffs
+export default ScreenshotDiffs;

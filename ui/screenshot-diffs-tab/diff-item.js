@@ -1,33 +1,33 @@
-import React from 'react'
-import Chevron from '../icons/chevron'
+import React from 'react';
+import Chevron from '../icons/chevron';
 
 class ScreenshotDiffItem extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             isExpanded: !props.diff.approved,
             approved: props.diff.approved,
-        }
+        };
     }
 
     toggleCollapse() {
-        console.log('toggle', this.state.isExpanded)
-        this.setState({ isExpanded: !this.state.isExpanded })
+        console.log('toggle', this.state.isExpanded);
+        this.setState({ isExpanded: !this.state.isExpanded });
     }
 
     approve() {
-        this.props.sendHttpRequest(`${this.props.diff.approveUrl}/approve`)
-        this.setState({ approved: true })
+        this.props.sendHttpRequest(`${this.props.diff.approveUrl}/approve`);
+        this.setState({ approved: true });
     }
 
     reject() {
-        this.props.sendHttpRequest(`${this.props.diff.approveUrl}/reject`)
-        this.setState({ approved: false })
+        this.props.sendHttpRequest(`${this.props.diff.approveUrl}/reject`);
+        this.setState({ approved: false });
     }
 
     render() {
-        const { diff, openUrl, openFile } = this.props
-        const { isExpanded, approved } = this.state
+        const { diff, openUrl, openFile } = this.props;
+        const { isExpanded, approved } = this.state;
 
         return (
             <li
@@ -98,8 +98,8 @@ class ScreenshotDiffItem extends React.Component {
                     </React.Fragment>
                 )}
             </li>
-        )
+        );
     }
 }
 
-export default ScreenshotDiffItem
+export default ScreenshotDiffItem;
