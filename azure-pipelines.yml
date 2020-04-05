@@ -23,11 +23,17 @@ steps:
 - script: yarn e2e-test
   displayName: 'End to End Tests'
 
-- task: PublishPipelineArtifact@1
-  inputs:
-    path: $(Agent.BuildDirectory)/s/out/dist/*.vsix
-    artifact: dist
+- task: PublishPipelineArtifact@0
   displayName: 'Publish vsix artifact'
+  inputs:
+    targetPath: $(Agent.BuildDirectory)/s/out/dist
+    archiveFilePatterns: '**/*.vsix'
+
+#- task: PublishPipelineArtifact@1
+#  inputs:
+#    archiveFilePatterns: $(Agent.BuildDirectory)/s/out/dist/*.vsix
+#    artifact: dist
+#  displayName: 'Publish vsix artifact'
 
 - task: PublishPipelineArtifact@1
   inputs:
