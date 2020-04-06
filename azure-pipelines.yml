@@ -28,6 +28,7 @@ steps:
   inputs:
     targetPath: $(Agent.BuildDirectory)/s/out/dist
     archiveFilePatterns: '**/*.vsix'
+    artifactName: 'latest.vsix'
 
 #- task: PublishPipelineArtifact@1
 #  inputs:
