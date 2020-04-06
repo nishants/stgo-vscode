@@ -93,6 +93,12 @@ class App extends React.Component {
   setBranch(branchName) {
     this.setState({ currentBranchName: branchName });
   }
+  getCypressBuilds = (branchName) => {
+    sendMessage({
+      messageId: "get-cypress-builds",
+      data: { branchName}
+    });
+  };
 
   selectTab(tabName) {
     this.setState({ showTab: tabName });
@@ -101,16 +107,10 @@ class App extends React.Component {
   getScreenshotDiffs(branchName){
     sendMessage({messageId: 'get-screenshot-diffs', data: {branchName}});
   }
-
-  getCypressBuilds(){
-    sendMessage({messageId: 'get-cypress-builds', data: {branchName: this.state.currentBranchName}});
-  }
-
   openUrl(url){
     sendMessage({messageId: 'open-url', data: {url}});
   }
-
-  getBranchDetails(branchName) {
+  getBranchDetails = (branchName) => {
     sendMessage({messageId: 'get-pull-request', data: {branchName}});
   }
 
@@ -122,7 +122,7 @@ class App extends React.Component {
     this.setState({screenshotDiffs});
   }
 
-  triggerCypressBuild() {
+  triggerCypressBuild = () => {
     sendMessage({
       messageId: "get-trigger-cypress-build",
       data: { branchName: this.state.currentBranchName }
@@ -142,49 +142,39 @@ class App extends React.Component {
     } = this.state;
 
     const callbacks = {
-      selectBranch: event => this.setBranch(event.target.value),
-      selectTab: tabname => this.selectTab(tabname),
-      getBranchDetails: branchName => this.getBranchDetails(branchName),
-      getScreenshotDiffs: () => this.getScreenshotDiffs(currentBranchName),
-      openUrl: url => this.openUrl(url),
-      sendHttpRequest: ({ url, body }) => this.sendHttpRequest({ url, body }),
-      openFile: url => this.openFile(url),
-      triggerCypressBuild: () =>  this.triggerCypressBuild(),
-      getCypressBuilds: () =>  this.getCypressBuilds()
+      selectBranch: (event) => this.setBranch(event.target.value),
+      selectTab: (tabname) => this.selectTab(tabname),
+      openUrl: (url) => this.openUrl(url),
+      sendHttpRequest: ({url, body}) => this.sendHttpRequest({url, body}),
+      openFile: (url) => this.openFile(url),
     };
 
     const getTab = () => {
       switch (showTab) {
         case TABS.overview:
-          return (
-            <BranchOverView
-              openUrl={callbacks.openUrl}
-              selectedBranch={currentBranchName}
-              getBranchDetails={callbacks.getBranchDetails}
-            />
-          );
+          return <BranchOverView
+            openUrl={callbacks.openUrl}
+            selectedBranch={ currentBranchName } 
+            onBranchChange={ this.getBranchDetails}
+            />;
 
         case TABS.cypressCi:
-          return (
-            <CypressCi
-              data={this.state.cypressData}
-              currentBranchName={this.state.currentBranchName}
-              callBack={callbacks.triggerCypressBuild}
-              getCypressBuilds={callbacks.getCypressBuilds}
-            />
-          );
+          return   <CypressCi
+            data={this.state.cypressData}
+            selectedBranch={ currentBranchName } 
+            onBranchChange={ this.getCypressBuilds }
+            callBack={callbacks.triggerCypressBuild}
+          />;
 
         case TABS.screenshotDiffs:
-          return (
-            <ScreenshotDiffsTab
-              branchName={currentBranchName}
-              screenshotDiffs={screenshotDiffs}
-              getScreenshotDiffs={callbacks.getScreenshotDiffs}
-              openUrl={callbacks.openUrl}
-              sendHttpRequest={callbacks.sendHttpRequest}
-              openFile={callbacks.openFile}
-            />
-          );
+          return <ScreenshotDiffsTab
+            selectedBranch={ currentBranchName }
+            screenshotDiffs={screenshotDiffs}
+            onBranchChange={this.getScreenshotDiffs}
+            openUrl={callbacks.openUrl}
+            sendHttpRequest={callbacks.sendHttpRequest}
+            openFile={callbacks.openFile}
+          />;
 
         case TABS.ciLogs:
           return <div>Integration helper logs</div>;
