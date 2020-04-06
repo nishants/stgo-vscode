@@ -2,11 +2,33 @@
   padding: 5px;
   @extend .resize-container;
 
-  select{
+  #branch{
     margin-bottom: 5px;
+      display: block;
+      background: var(--vscode-settings-dropdownBackground);
+      border-color:  var(--vscode-settings-dropdownBorder);
+      color: var(--vscode-settings-dropdownForeground);
+      cursor: pointer;
+      padding: 0 10px;
+      line-height: $rowHeight;
+      height: $rowHeight;
+    
+      font-size: $theme-font-weight;
+      font-weight: $theme-font-weight;
+      font-family: $theme-font-family;
+    
+      border-radius: $border-radius;
+      -webkit-appearance: none;
+      -webkit-border-radius: $border-radius;
+      
   }
 
-  select, button{
+  ul.options > li.option-active {
+    background: var(--vscode-button-hoverBackground);
+    font-size: 1.5rem;
+  }
+
+  #branch, button{
     float: left;
   }
 }
