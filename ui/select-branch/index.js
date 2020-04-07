@@ -104,8 +104,9 @@ export class SelectBranch extends Component {
             value={userInput}
           />
           <button type="button" className="refresh">Refresh</button>
+          {optionList}
         </div>
-        {optionList}
+        
       </React.Fragment>
     );
   }

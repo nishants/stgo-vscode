@@ -3,7 +3,7 @@
   @extend .resize-container;
 
   #branch{
-    margin-bottom: 5px;
+      margin-bottom: 5px;
       display: block;
       background: var(--vscode-settings-dropdownBackground);
       border-color:  var(--vscode-settings-dropdownBorder);
@@ -23,9 +23,28 @@
       
   }
 
-  ul.options > li.option-active {
+  ul.options {
+    display: block;
+    list-style: none;
+    transition: width 0.3s;
+    margin: auto;
+    position: relative;
+  }
+  ul.options li {
+    display: flex;
+    font-size: 0.8rem;
+    width: 100%;
+    border-radius: 2px;
+  }
+  ul.options li:hover {
+    font-weight: bold;
+    color:var(--vscode-button-hoverBackground);
+    cursor: pointer;
+    transition: 0.3s all;
+  }
+  ul.options li.option-active {
     background: var(--vscode-button-hoverBackground);
-    font-size: 1.5rem;
+    font-size: 1;
   }
 
   #branch, button{
