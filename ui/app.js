@@ -142,7 +142,7 @@ class App extends React.Component {
     } = this.state;
 
     const callbacks = {
-      selectBranch: event => this.setBranch(event.target.value),
+      selectBranch: branchName => this.setBranch(branchName),
       selectTab: tabname => this.selectTab(tabname),
       getBranchDetails: branchName => this.getBranchDetails(branchName),
       getScreenshotDiffs: () => this.getScreenshotDiffs(currentBranchName),

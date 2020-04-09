@@ -35,6 +35,7 @@ export class SelectBranch extends Component {
       showOptions: false,
       userInput: e.currentTarget.innerText
     });
+    this.props.selectBranch(e.currentTarget.innerText);
   };
   onKeyDown = (e) => {
     const { activeOption, filteredOptions } = this.state;
@@ -43,8 +44,9 @@ export class SelectBranch extends Component {
       this.setState({
         activeOption: 0,
         showOptions: false,
-        userInput: filteredOptions[activeOption]
+        userInput: filteredOptions[activeOption].name
       });
+      this.props.selectBranch(filteredOptions[activeOption].name);
     } else if (e.keyCode === 38) {
       if (activeOption === 0) {
         return;
