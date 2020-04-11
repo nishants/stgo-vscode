@@ -1,34 +1,56 @@
 // @ts-nocheck
 import * as config from "../config";
 import * as vscode from "vscode";
-import TFS from "./tfs";
+import {TFS_PROJECT, TFS_REPO, TFS_URL} from "../constant";
+const tfs = require('azure-devops-node-api');
+
 const PR_MOCK_FILE = "pull-request-mock.json";
 
 export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
-  const getPullRequest = async ({ branchName }: object) => {
-    if (workspaceConfig.enableMocks) {
-      return config.getData(PR_MOCK_FILE).then(mockPullRequest => {
-        vscode.window.showInformationMessage(
-          `Returning mock data for ${branchName}`
-        );
+    let tfsConnection;
+
+    const initializeTFSConnection = () => {
+        const tfsAuthHandler = tfs.getPersonalAccessTokenHandler(workspaceConfig.tfsToken);
+        tfsConnection = new tfs.WebApi(TFS_URL, tfsAuthHandler);
+    };
+
+    const getPullRequestFromTFS = async (branchName) => {
+        if(!tfsConnection){
+            initializeTFSConnection();
+        }
+
+        const gitApi = await tfsConnection.getGitApi();
+        return gitApi.getPullRequests(
+            TFS_REPO,
+            {"sourceRefName": `refs/heads/${branchName}`},
+            TFS_PROJECT,
+            10,
+            0,
+            10);
+    };
+
+    const getPullRequest = async ({branchName}: object) => {
+        if (workspaceConfig.enableMocks) {
+            return config.getData(PR_MOCK_FILE).then(mockPullRequest => {
+                vscode.window.showInformationMessage(
+                    `Returning mock data for ${branchName}`
+                );
+                panel.webview.postMessage({
+                    messageId: "set-pull-request",
+                    data: mockPullRequest
+                });
+            });
+        }
+
+        const prDetails = await getPullRequestFromTFS(branchName);
+
         panel.webview.postMessage({
-          messageId: "set-pull-request",
-          data: mockPullRequest
+            messageId: "set-pull-request",
+            data: prDetails
         });
-      });
-    }
+    };
 
-    const tfsObj = new TFS(workspaceConfig.tfsToken);
-
-    const prDetails = await tfsObj.getPullRequestData(branchName);
-
-    panel.webview.postMessage({
-      messageId: "set-pull-request",
-      data: prDetails
-    });
-  };
-
-  return {
-    getPullRequest
-  };
+    return {
+        getPullRequest
+    };
 };
