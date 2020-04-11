@@ -1,4 +1,4 @@
-{
+[{
   "repository": {
     "id": "de3a9280-eeb1-4d1f-b391-956cb5eee690",
     "name": "SaxoTrader",
@@ -97,4 +97,4 @@
   ],
   "url": "http://tfs.sys.dom:8080/tfs/DefaultCollection/4f9bf1fa-80cd-4072-becb-6b8ec74b3e26/_apis/git/repositories/de3a9280-eeb1-4d1f-b391-956cb5eee690/pullRequests/63238",
   "supportsIterations": true
-}
+}]
