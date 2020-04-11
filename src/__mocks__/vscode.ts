@@ -1,4 +1,4 @@
 export const window  = {
-    activeTextEditor: "dosa"
+    showErrorMessage: jest.fn(),
+    showInformationMessage: jest.fn(),
 };
-
