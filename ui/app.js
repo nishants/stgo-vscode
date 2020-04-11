@@ -34,7 +34,7 @@ class App extends React.Component {
   }
 
   setShouldFilterBranchesWithPr(shouldFilterBranchesWithPr) {
-    this.setState({ shouldFilterBranchesWithPr });
+    this.setState({ shouldFilterBranchesWithPr }, () => this.getBranchList());
   }
 
   closePanel() {
@@ -45,6 +45,10 @@ class App extends React.Component {
   }
 
   getBranchList(){
+    if(this.state.shouldFilterBranchesWithPr){
+      sendMessage({messageId: 'get-branch-with-pull-requests'});
+      return;
+    }
     sendMessage({messageId: 'get-branch-list'});
   }
 

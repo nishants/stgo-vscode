@@ -38,6 +38,10 @@ export default async (panel: vscode.WebviewPanel) => {
             case 'get-branch-list':
                 return integrationHelper.getAllBranches();
 
+
+            case 'get-branch-with-pull-requests':
+                return vscode.window.showErrorMessage("no api to get branches with pull requests", "Under progress");
+
             case 'get-screenshot-diffs':
                 // @ts-ignore
                 return integrationHelper.getScreenshotDiffs(message.data);
