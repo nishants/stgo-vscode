@@ -36,16 +36,16 @@ class Index extends React.Component {
               <div className='row'>
                 <span className="label">Pull Request :</span>
                 <span className="value">
-                    <span>#{pullRequest.pullRequestId}</span>
+                    <span>#{branchPullRequest.pullRequestId}</span>
                 </span>
               </div>
               <div className='row'>
                 <span className="label">Title :</span>
-                <span className="value">{pullRequest.title}</span>
+                <span className="value">{branchPullRequest.title}</span>
               </div>
               <div className='row'>
                 <span className="label">Description :</span>
-                <span className="value">{pullRequest.description}</span>
+                <span className="value">{branchPullRequest.description}</span>
               </div>
               <div className='row'>
                 <span className="label">Source :</span>
