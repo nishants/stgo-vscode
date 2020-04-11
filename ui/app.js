@@ -19,7 +19,8 @@ class App extends React.Component {
     currentBranchName: null,
     screenshotDiffs: {files: [], unapproved: 0},
     branchList : [],
-    cypressData: []
+    cypressData: [],
+    shouldFilterBranchesWithPr: true
   };
 
   setMessage(message) {
@@ -30,6 +31,10 @@ class App extends React.Component {
     if (data.type === 'COMPLETED') {
       this.setState({ cypressData: data.data || [] });
     }
+  }
+
+  setShouldFilterBranchesWithPr(shouldFilterBranchesWithPr) {
+    this.setState({ shouldFilterBranchesWithPr });
   }
 
   closePanel() {
@@ -138,7 +143,8 @@ class App extends React.Component {
       showTab,
       currentBranchName,
       screenshotDiffs,
-      branchList
+      branchList,
+      shouldFilterBranchesWithPr
     } = this.state;
 
     const callbacks = {
@@ -150,7 +156,11 @@ class App extends React.Component {
       sendHttpRequest: ({ url, body }) => this.sendHttpRequest({ url, body }),
       openFile: url => this.openFile(url),
       triggerCypressBuild: () =>  this.triggerCypressBuild(),
-      getCypressBuilds: () =>  this.getCypressBuilds()
+      getCypressBuilds: () =>  this.getCypressBuilds(),
+      setShouldFilterBranchesWithPr: (event) =>  {
+        console.log('setting branch with pr filter : ' , event.target);
+        this.setShouldFilterBranchesWithPr(event.target.checked);
+      }
     };
 
     const getTab = () => {
@@ -197,6 +207,8 @@ class App extends React.Component {
           selectBranch={callbacks.selectBranch}
           currentBranch={currentBranchName}
           list={branchList}
+          setShouldFilterBranchesWithPr={callbacks.setShouldFilterBranchesWithPr}
+          shouldFilterBranchesWithPr={shouldFilterBranchesWithPr}
         />
         <TabButtons selectTab={callbacks.selectTab} selectedTab={showTab} />
         <div className="selected-tab-container">{getTab()}</div>

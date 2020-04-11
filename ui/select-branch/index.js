@@ -9,6 +9,15 @@ export default (props) => (
     </select>
 
     <button type="button" className="refresh">Refresh</button>
+
+    <label>
+      <input
+        name="isGoing"
+        type="checkbox"
+        checked={props.shouldFilterBranchesWithPr}
+        onChange={props.setShouldFilterBranchesWithPr}/>
+      Hide branches with no pull requests
+    </label>
   </div>
 );
 
