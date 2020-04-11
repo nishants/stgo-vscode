@@ -28,8 +28,11 @@ class ScreenshotDiffItem extends React.Component {
 
     return (
       <li className={`screenshot-diff-item ${isExpanded ? 'expanded' : ''} ${approved ? 'is-approved' : ''}`} key={diff.path+diff.fileName}>
-        <h4>{diff.path} <br/> {diff.fileName}</h4>
-        <button onClick={() => openFile({ path: diff.path, name: diff.fileName })}>See In code</button>
+        <h4>
+          {diff.fileName}
+          <br/>
+          <a onClick={() => openFile({ path: diff.path, name: diff.fileName })}>{diff.path}</a>
+        </h4>
         <div className='click-to-toggle' onClick={() => this.toggleCollapse()}>
           <Chevron className={isExpanded ? 'point-down' : 'point-right'}/>
         </div>

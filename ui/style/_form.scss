@@ -20,6 +20,10 @@ a:not(.button){
   font-style: italic;
 }
 
+a{
+  cursor: pointer;
+}
+
 button.warning{
   background: $warningBgColor;
 }
