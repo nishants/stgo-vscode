@@ -41,7 +41,7 @@
     "test": "run-p test:extension test:unit test:react",
     "test:extension": "node ./out/test/runTest.js",
     "test:unit": "yarn jest ./src",
-    "test:react": "yarn jest --config jest.react.config.js ./ui",
+    "test:react": "yarn jest --config ui/jest.react.config.js ./ui",
     "e2e-test": "npm run compile && extest --code_version 1.43.2 setup-and-run out/e2e/*.js"
   },
   "devDependencies": {
