@@ -28,7 +28,23 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
     });
   };
 
+  const getBranchesWithPullRequests = async () => {
+    if (workspaceConfig.enableMocks) {
+      vscode.window.showInformationMessage(
+          `Returning mock data for branches with pull requests`
+      );
+
+      return panel.webview.postMessage({
+        messageId: "set-branch-with-pull-requests",
+        data: [{name: 'branch-with-pr-one'}, {name: 'branch-with-pr-two'}]
+      });
+    }
+
+    // TODO get branches with pull requests.
+  };
+
   return {
-    getPullRequest
+    getPullRequest,
+    getBranchesWithPullRequests,
   };
 };

@@ -164,10 +164,7 @@ class App extends React.Component {
       openFile: url => this.openFile(url),
       triggerCypressBuild: () =>  this.triggerCypressBuild(),
       getCypressBuilds: () =>  this.getCypressBuilds(),
-      setShouldFilterBranchesWithPr: (event) =>  {
-        console.log('setting branch with pr filter : ' , event.target);
-        this.setShouldFilterBranchesWithPr(event.target.checked);
-      }
+      setShouldFilterBranchesWithPr: (event) =>  this.setShouldFilterBranchesWithPr(event.target.checked)
     };
 
     const getTab = () => {
