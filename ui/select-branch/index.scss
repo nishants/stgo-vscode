@@ -6,7 +6,10 @@
     margin-bottom: 5px;
   }
 
-  select, button{
+  select, button, label{
     float: left;
+  }
+  label{
+    margin-left: 10px;
   }
 }

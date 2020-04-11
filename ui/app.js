@@ -44,10 +44,13 @@ class App extends React.Component {
     });
   }
 
+  getBranchList(){
+    sendMessage({messageId: 'get-branch-list'});
+  }
+
   componentDidMount() {
     sendMessage({messageId: 'get-current-branch-info'});
-    sendMessage({messageId: 'get-branch-list'});
-
+    this.getBranchList();
     this.messageListener = window.addEventListener("message", event => {
       const message = event.data;
       const {data} = event.data;
@@ -148,7 +151,7 @@ class App extends React.Component {
     } = this.state;
 
     const callbacks = {
-      selectBranch: event => this.setBranch(event.target.value),
+      setBranch: event => this.setBranch(event.target.value),
       selectTab: tabname => this.selectTab(tabname),
       getBranchDetails: branchName => this.getBranchDetails(branchName),
       getScreenshotDiffs: () => this.getScreenshotDiffs(currentBranchName),
@@ -204,7 +207,7 @@ class App extends React.Component {
     return (
       <div id="app">
         <SelectBranch
-          selectBranch={callbacks.selectBranch}
+          selectBranch={callbacks.setBranch}
           currentBranch={currentBranchName}
           list={branchList}
           setShouldFilterBranchesWithPr={callbacks.setShouldFilterBranchesWithPr}

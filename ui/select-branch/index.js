@@ -2,7 +2,7 @@ import React from "react";
 
 export default (props) => (
   <div id='branch-selector'>
-    <select id="branch" onChange={props.selectBranch} value={props.currentBranch}>
+    <select id="branch" onChange={props.setBranch} value={props.currentBranch}>
       {props.list.map(branch => {
         return <option value={branch.name}>{branch.name}</option>
       })}
