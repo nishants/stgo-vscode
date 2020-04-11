@@ -3,6 +3,8 @@ import * as GitApi from "azure-devops-node-api/GitApi";
 
 import { TFS_URL, SaxoTrader_Project_TFS_REPO_ID } from "../constant";
 
+import {PullRequestStatus} from "azure-devops-node-api/interfaces/GitInterfaces";
+
 export default class TFS {
   tfsConnectObj: GitApi.IGitApi | undefined;
   private token: string = "";
@@ -61,4 +63,29 @@ export default class TFS {
       link: `${TFS_URL}/_git/SaxoTrader/pullrequestcreate?sourceRef=${branchName}&targetRef=master&sourceRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}&targetRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}`
     };
   }
+
+    async _getActivePullRequests() {
+        if (this.tfsConnectObj) {
+            const prDetails = await this.tfsConnectObj.getPullRequests(
+                SaxoTrader_Project_TFS_REPO_ID,
+                {
+                    status: PullRequestStatus.Active
+                }
+            );
+
+            return prDetails;
+        }
+        return [];
+    }
+
+    async getActivePullRequests() {
+
+        if (!this.tfsConnectObj) {
+            await this.createConnection();
+        }
+
+        const pullRequets = await this._getActivePullRequests();
+
+        return pullRequets;
+    }
 }

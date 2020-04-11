@@ -40,7 +40,14 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
       });
     }
 
-    // TODO get branches with pull requests.
+      const tfsObj = new TFS(workspaceConfig.tfsToken);
+
+      const pullRequests = await tfsObj.getActivePullRequests();
+
+      return panel.webview.postMessage({
+          messageId: "set-branch-with-pull-requests",
+          data: pullRequests.map(pr => ({name: pr.sourceRefName}))
+      });
   };
 
   return {
