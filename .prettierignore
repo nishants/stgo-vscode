@@ -1,0 +1,7 @@
+.vscode
+.vscode-test
+out
+sample-data
+docs
+node_modules
+test-resources

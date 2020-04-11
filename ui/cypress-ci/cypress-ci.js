@@ -1,9 +1,8 @@
 import React from "react";
-import Status from './status';
+import Status from "./status";
 
-class CypressCi extends React.Component{
-
-  loadBuildsForCurrentBranch(){
+class CypressCi extends React.Component {
+  loadBuildsForCurrentBranch() {
     this.props.getCypressBuilds();
   }
 
@@ -18,15 +17,21 @@ class CypressCi extends React.Component{
   }
 
   render() {
-    const {data, callBack} = this.props;
+    const { data, callBack } = this.props;
     return (
-      <div className='cypressCi'>
-        <button  onClick={callBack}>Run Cypress Tests</button>
-        {data.map(item => <Status commitId={item.sourceVersion} result={item.result} status={item.status} commitBuildHref={item._links.web.href}/>)}
+      <div className="cypressCi">
+        <button onClick={callBack}>Run Cypress Tests</button>
+        {data.map((item) => (
+          <Status
+            commitId={item.sourceVersion}
+            result={item.result}
+            status={item.status}
+            commitBuildHref={item._links.web.href}
+          />
+        ))}
       </div>
     );
   }
 }
-  
-export default CypressCi;
 
+export default CypressCi;

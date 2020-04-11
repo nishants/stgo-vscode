@@ -4,7 +4,7 @@ import * as BuildApi from "azure-devops-node-api/BuildApi";
 import {
   AZURE_URL,
   AZURE_PROJECT,
-  AZURE_INTEGRATION_BUILDID
+  AZURE_INTEGRATION_BUILDID,
 } from "../constant";
 
 export default class AZURE {
@@ -59,8 +59,8 @@ export default class AZURE {
       const body = {
         definition: {
           id: AZURE_INTEGRATION_BUILDID,
-          sourceBranch: `refs/heads/${branchName}`
-        }
+          sourceBranch: `refs/heads/${branchName}`,
+        },
       };
       const buildResp = await this.azureConnectObj.queueBuild(
         body,
@@ -87,13 +87,13 @@ export default class AZURE {
       //  returning object for Esiting PR with details and edit link
       return {
         type: "COMPLETED",
-        data: buildData
+        data: buildData,
       };
     }
 
     return {
       type: "COMPLETED",
-      data: []
+      data: [],
     };
   }
 
@@ -108,13 +108,13 @@ export default class AZURE {
       return {
         type: "NEW",
         WebUrl: buildResp._links.web.href,
-        data: buildResp
+        data: buildResp,
       };
     }
 
     return {
       type: "NEW",
-      status: 404
+      status: 404,
     };
   }
 }

@@ -1,4 +1,5 @@
-button, .button {
+button,
+.button {
   background: var(--vscode-button-background);
   cursor: pointer;
   border: none;
@@ -6,32 +7,32 @@ button, .button {
   line-height: $rowHeight;
   color: $buttonColor;
 
-  &:hover{
+  &:hover {
     background: var(--vscode-button-hoverBackground);
   }
 }
 
-a.button{
+a.button {
   text-decoration: none;
   outline: 0;
 }
 
-a:not(.button){
+a:not(.button) {
   font-style: italic;
 }
 
-a{
+a {
   cursor: pointer;
 }
 
-button.warning{
+button.warning {
   background: $warningBgColor;
 }
 
 select {
   display: block;
   background: var(--vscode-settings-dropdownBackground);
-  border-color:  var(--vscode-settings-dropdownBorder);
+  border-color: var(--vscode-settings-dropdownBorder);
   color: var(--vscode-settings-dropdownForeground);
   cursor: pointer;
   padding: 0 10px;
@@ -47,7 +48,7 @@ select {
   -webkit-border-radius: $border-radius;
 }
 
-.column-label{
+.column-label {
   padding: 0 10px;
   font-weight: bold;
 }
