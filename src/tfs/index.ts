@@ -43,10 +43,11 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
       const tfsObj = new TFS(workspaceConfig.tfsToken);
 
       const pullRequests = await tfsObj.getActivePullRequests();
+      const branches = pullRequests.map(pr => ({name: pr.sourceRefName?.split('refs/heads/').pop()}));
 
       return panel.webview.postMessage({
           messageId: "set-branch-with-pull-requests",
-          data: pullRequests.map(pr => ({name: pr.sourceRefName}))
+          data: branches
       });
   };
 

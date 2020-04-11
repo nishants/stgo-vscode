@@ -16,7 +16,7 @@ export default (props) => (
         type="checkbox"
         checked={props.shouldFilterBranchesWithPr}
         onChange={props.setShouldFilterBranchesWithPr}/>
-      Hide branches with no pull requests
+      Branches with active pull request only
     </label>
   </div>
 );
