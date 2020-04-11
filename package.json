@@ -43,7 +43,8 @@
     "test:unit": "yarn jest  --config src/jest.config.js ./src",
     "test:react": "yarn jest --config ui/jest.react.config.js ./ui",
     "e2e-test": "npm run compile && extest --code_version 1.43.2 setup-and-run out/e2e/*.js",
-    "pretiier-write": "prettier --write ."
+    "pretiier:write": "prettier --write .",
+    "pretiier:check": "prettier --check ."
   },
   "devDependencies": {
     "@babel/core": "^7.8.4",
