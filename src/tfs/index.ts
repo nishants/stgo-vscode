@@ -1,7 +1,7 @@
 // @ts-nocheck
 import * as config from "../config";
 import * as vscode from "vscode";
-import {TFS_PROJECT, TFS_REPO, TFS_URL} from "../constant";
+import {SaxoTrader_Project_TFS_REPO_ID, TFS_PROJECT, TFS_REPO, TFS_URL} from "../constant";
 const tfs = require('azure-devops-node-api');
 
 const PR_MOCK_FILE = "pull-request-mock.json";
@@ -46,7 +46,10 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
         panel.webview.postMessage({
             messageId: "set-pull-request",
-            data: prDetails
+            data: {
+                pullRequest: prDetails[0],
+                createPullRequestUrl: `http://tfs:8080/tfs/DefaultCollection/_git/SaxoTrader/pullrequestcreate?sourceRef=<source-branch-name>&targetRef=master&sourceRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}&targetRepositoryId=${SaxoTrader_Project_TFS_REPO_ID}`
+            }
         });
     };
 
