@@ -64,7 +64,7 @@ class Index extends React.Component {
 
         {existing ?
           (            <div className='row no-label'>
-              <button className='button' onClick={() => this.props.openUrl(branchData.link)}>Open Pull Request</button>
+              <button className='button' onClick={() => this.props.openUrl(branchPullRequest.url)}>Open Pull Request</button>
             </div>
           ) :
           (<div className='row no-label'>
