@@ -30,7 +30,8 @@ export default async (panel: vscode.WebviewPanel) => {
                 return git.getCheckedOutBranchInfo();
 
             case 'get-pull-request':
-                return tfs.getPullRequest(message.data);
+                // @ts-ignore
+                return tfs.getPullRequest(message.data.branchName);
 
             case 'get-cypress-builds':
                 return azure.getCypressBuilds(message.data);
