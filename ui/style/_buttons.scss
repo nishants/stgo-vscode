@@ -1,32 +1,32 @@
 .btn {
-    padding: 0 20px;
-    overflow: hidden;
-    border-width: 0;
-    margin-right: 5px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, .6);
-    background-color: $buttonBackground;
-    color: $buttonForeground;
-    
-    &--success {
-        background-color: #7ac139;
+  padding: 0 20px;
+  overflow: hidden;
+  border-width: 0;
+  margin-right: 5px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
+  background-color: $buttonBackground;
+  color: $buttonForeground;
 
-        &:hover {
-            background-color: #539422;
-        }
+  &--success {
+    background-color: #7ac139;
+
+    &:hover {
+      background-color: #539422;
     }
+  }
 
-    &--fail {
-        background-color: #d80808;
+  &--fail {
+    background-color: #d80808;
 
-        &:hover {
-            background-color: #a91b1b;
-        }
+    &:hover {
+      background-color: #a91b1b;
     }
+  }
 
-    a {
-        font-style: normal;
-        color: inherit;
-        text-decoration: inherit;
-        display: block;
-    }
+  a {
+    font-style: normal;
+    color: inherit;
+    text-decoration: inherit;
+    display: block;
+  }
 }

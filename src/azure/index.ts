@@ -7,7 +7,7 @@ const CPYRESS_BUILDS_MOCK_DATA = "cypress-mock-data.json";
 export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
   const getCypressBuilds = async ({ branchName }: object) => {
     if (workspaceConfig.enableMocks) {
-      return config.getData(CPYRESS_BUILDS_MOCK_DATA).then(mockData => {
+      return config.getData(CPYRESS_BUILDS_MOCK_DATA).then((mockData) => {
         vscode.window.showInformationMessage(
           `Returning mock data for cyrpess build ${branchName}`
         );
@@ -15,8 +15,8 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
           messageId: "set-cypress-builds",
           data: {
             type: "COMPLETED",
-            data: mockData
-          }
+            data: mockData,
+          },
         });
       });
     }
@@ -26,7 +26,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
     panel.webview.postMessage({
       messageId: "set-cypress-builds",
-      data: buildData
+      data: buildData,
     });
 
     return;
@@ -43,6 +43,6 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
   return {
     getCypressBuilds,
-    triggerCypressBuild
+    triggerCypressBuild,
   };
 };

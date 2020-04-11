@@ -1,4 +1,4 @@
-.tab-buttons{
+.tab-buttons {
   display: block;
   overflow: hidden;
 
@@ -11,7 +11,7 @@
     color: $inactiveForeground;
     border-color: $inactiveModifiedBorder;
 
-    &:hover{
+    &:hover {
       background: $activeBackground;
     }
 

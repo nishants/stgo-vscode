@@ -1,30 +1,29 @@
-
-#screenshot-diffs-tab{
-  > ul{
+#screenshot-diffs-tab {
+  > ul {
     @extend .undo-list;
   }
   display: block;
-  .file-screenshot-diff-group{
+  .file-screenshot-diff-group {
     ul {
       @extend .undo-list;
     }
   }
 
-  .screenshot-diff-item{
+  .screenshot-diff-item {
     padding: 10px;
 
-    h4{
+    h4 {
       margin: 0;
       padding-left: 10px;
     }
-    .click-to-toggle{
+    .click-to-toggle {
       padding-left: 10px;
       cursor: pointer;
     }
-    .screenshot-diff-action-butttons{
+    .screenshot-diff-action-butttons {
       padding-left: 10px;
     }
-    ul.image-comparison{
+    ul.image-comparison {
       @extend .undo-list;
       @extend .resize-container;
 
@@ -32,18 +31,17 @@
         width: 33%;
         float: left;
         padding: 10px;
-        img{
+        img {
           cursor: pointer;
         }
       }
     }
 
-    &.expanded{
+    &.expanded {
       margin-bottom: 50px;
     }
-    &.is-approved{
+    &.is-approved {
       border: 1px solid $successColor;
     }
   }
-
 }
