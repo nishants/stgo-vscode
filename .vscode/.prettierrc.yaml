@@ -1,6 +1,6 @@
 arrowParens: always
 jsxBracketSameLine: false
-endOfLine: crlf
+endOfLine: lf
 printWidth: 90
 singleQuote: true
 jsxSingleQuote: true
