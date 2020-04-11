@@ -1,5 +1,3 @@
 {
-    "enableMocks": true,
-    "tfsToken": "2jeuwk35cpb7hj63qkj2xt3ikgs6zhrrmngzxpbmvz5uhf2sjnjq",
-    "azureToken": "hgnnecwmo34vdrg4biuvsabgvusbm5s5jayola5hn35tucrdetuq"
+    "enableMocks": true
 }
