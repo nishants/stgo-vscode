@@ -66,7 +66,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
             panel.webview.postMessage({messageId: 'set-branch-list', data: setName(response)});
         }catch(error){
             console.error(error);
-            vscode.window.showErrorMessage(`Error fetching screenshot diffs from integration helper - ${branchURL}`);
+            vscode.window.showErrorMessage(`Error fetching screenshot diffs from integration helper - ${url}`);
             panel.webview.postMessage({messageId: 'set-branch-list', data: []});
         }
     };
