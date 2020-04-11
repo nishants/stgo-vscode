@@ -63,12 +63,22 @@ class App extends React.Component {
         case 'set-branch-list':
           this.setBranchList(message.data);
           break;
+        case 'set-pull-request':
+          this.setBranchPR(message.data);
+          break;
       }
     });
   }
 
   componentWillUnmount() {
     window.removeEventListener(this.messageListener);
+  }
+
+  setBranchPR({pullRequest, createPullRequestUrl}) {
+    this.setState({
+      branchPullRequest: pullRequest,
+      createPullRequestUrl: createPullRequestUrl
+    });
   }
 
   sendHttpRequest({url, body}) {
@@ -138,7 +148,9 @@ class App extends React.Component {
       showTab,
       currentBranchName,
       screenshotDiffs,
-      branchList
+      branchList,
+      branchPullRequest,
+      createPullRequestUrl
     } = this.state;
 
     const callbacks = {
@@ -161,6 +173,8 @@ class App extends React.Component {
               openUrl={callbacks.openUrl}
               selectedBranch={currentBranchName}
               getBranchDetails={callbacks.getBranchDetails}
+              createPullRequestUrl={createPullRequestUrl}
+              branchPullRequest={branchPullRequest}
             />
           );
 

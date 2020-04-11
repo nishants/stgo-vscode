@@ -6,12 +6,6 @@ class Index extends React.Component {
   };
 
   componentDidMount() {
-    window.addEventListener('message', event => {
-      const message = event.data;
-      if (message.messageId === 'set-pull-request') {
-        this.setState({ branchData: message.data });
-      }
-    });
     this.props.getBranchDetails(this.props.selectedBranch);
   }
 
@@ -22,15 +16,14 @@ class Index extends React.Component {
   }
 
   render() {
-    const { selectedBranch } = this.props;
+    const { selectedBranch, createPullRequestUrl, branchPullRequest } = this.props;
     const { branchData } = this.state;
 
-    if (!branchData || !branchData.type) {
-      return null;
-    }
-    const existing = branchData.type === "EXISTING";
-    var sourceRefName = existing && branchData.data.sourceRefName.split('/')[2];
-    var targetRefName = existing && branchData.data.targetRefName.split('/')[2];
+    // TODO breakdown : two components : one when pr is created, one when no PR is created
+
+    const existing = Boolean(branchPullRequest);
+    var sourceRefName = existing && branchPullRequest.sourceRefName.split('/')[2];
+    var targetRefName = existing && branchPullRequest.targetRefName.split('/')[2];
 
     return (
       <div className="branch-details">
@@ -43,16 +36,16 @@ class Index extends React.Component {
               <div className='row'>
                 <span className="label">Pull Request :</span>
                 <span className="value">
-                    <span>#{branchData.data.pullRequestId}</span>
+                    <span>#{pullRequest.pullRequestId}</span>
                 </span>
               </div>
               <div className='row'>
                 <span className="label">Title :</span>
-                <span className="value">{branchData.data.title}</span>
+                <span className="value">{pullRequest.title}</span>
               </div>
               <div className='row'>
                 <span className="label">Description :</span>
-                <span className="value">{branchData.data.description}</span>
+                <span className="value">{pullRequest.description}</span>
               </div>
               <div className='row'>
                 <span className="label">Source :</span>
@@ -75,7 +68,7 @@ class Index extends React.Component {
             </div>
           ) :
           (<div className='row no-label'>
-            <button onClick={() => this.props.openUrl(branchData.link)} className='button'>Create Pull Request</button>
+            <button onClick={() => this.props.openUrl(createPullRequestUrl)} className='button'>Create Pull Request</button>
           </div>)
         }
 
