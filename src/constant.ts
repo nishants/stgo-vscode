@@ -10,3 +10,4 @@ export const AZURE_PROJECT = "Platforms";
 export const AZURE_INTEGRATION_BUILDID = 22;
 
 export const CREATE_PR_URL = `http://tfs:8080/tfs/DefaultCollection/_git/SaxoTrader/pullrequestcreate?sourceRef=<source-branch-name>&targetRef=master&sourceRepositoryId=${TFS_REPO_ID}&targetRepositoryId=${TFS_REPO_ID}`;
+export const getCreatePullRequestUrl = (branchName: string) => CREATE_PR_URL.replace('<source-branch-name>', encodeURIComponent(branchName));

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import * as config from "../config";
 import * as vscode from "vscode";
-import { TFS_PROJECT, TFS_REPO, TFS_URL, CREATE_PR_URL} from "../constant";
+import { TFS_PROJECT, TFS_REPO, TFS_URL, getCreatePullRequestUrl} from "../constant";
 const tfs = require('azure-devops-node-api');
 
 const PR_MOCK_FILE = "pull-request-mock.json";
@@ -40,7 +40,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
                     messageId: "set-pull-request",
                     data:{
                         pullRequest: mockPullRequest,
-                        createPullRequestUrl: CREATE_PR_URL
+                        createPullRequestUrl: getCreatePullRequestUrl(branchName)
                     }
                 });
             });
@@ -52,7 +52,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
             messageId: "set-pull-request",
             data: {
                 pullRequest: prDetails[0],
-                createPullRequestUrl: CREATE_PR_URL
+                createPullRequestUrl: getCreatePullRequestUrl(branchName)
             }
         });
     };
