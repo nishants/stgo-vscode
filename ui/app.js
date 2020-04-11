@@ -19,7 +19,8 @@ class App extends React.Component {
     currentBranchName: null,
     screenshotDiffs: {files: [], unapproved: 0},
     branchList : [],
-    cypressData: []
+    cypressData: [],
+    pullRequestUrl: null
   };
 
   setMessage(message) {
@@ -74,10 +75,10 @@ class App extends React.Component {
     window.removeEventListener(this.messageListener);
   }
 
-  setBranchPR({pullRequest, createPullRequestUrl}) {
+  setBranchPR({pullRequest, link}) {
     this.setState({
       branchPullRequest: pullRequest,
-      createPullRequestUrl: createPullRequestUrl
+      pullRequestUrl: link
     });
   }
 
@@ -150,7 +151,7 @@ class App extends React.Component {
       screenshotDiffs,
       branchList,
       branchPullRequest,
-      createPullRequestUrl
+      pullRequestUrl
     } = this.state;
 
     const callbacks = {
@@ -173,7 +174,7 @@ class App extends React.Component {
               openUrl={callbacks.openUrl}
               selectedBranch={currentBranchName}
               getBranchDetails={callbacks.getBranchDetails}
-              createPullRequestUrl={createPullRequestUrl}
+              pullRequestUrl={pullRequestUrl}
               branchPullRequest={branchPullRequest}
             />
           );

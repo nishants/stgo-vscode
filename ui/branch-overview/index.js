@@ -1,12 +1,11 @@
 import React from 'React';
 
 class Index extends React.Component {
-  state = {
-    branchData: {}
-  };
 
   componentDidMount() {
-    this.props.getBranchDetails(this.props.selectedBranch);
+    if(this.props.selectedBranch){
+      this.props.getBranchDetails(this.props.selectedBranch);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -16,8 +15,7 @@ class Index extends React.Component {
   }
 
   render() {
-    const { selectedBranch, createPullRequestUrl, branchPullRequest } = this.props;
-    const { branchData } = this.state;
+    const { selectedBranch, pullRequestUrl, branchPullRequest } = this.props;
 
     // TODO breakdown : two components : one when pr is created, one when no PR is created
 
@@ -62,15 +60,11 @@ class Index extends React.Component {
           <div><a href={`https://ba.orange.saxobank.com/${selectedBranch}`}>Open branch on Tst56</a></div>
         </div>
 
-        {existing ?
-          (            <div className='row no-label'>
-              <button className='button' onClick={() => this.props.openUrl(branchPullRequest.url)}>Open Pull Request</button>
-            </div>
-          ) :
-          (<div className='row no-label'>
-            <button onClick={() => this.props.openUrl(createPullRequestUrl)} className='button'>Create Pull Request</button>
-          </div>)
-        }
+        <div className='row no-label'>
+          <button className='button' onClick={() => this.props.openUrl(pullRequestUrl)}>
+            {existing ? "Open Pull Request" : "Create Pull Request"}
+          </button>
+        </div>
 
       </div >);
   }
