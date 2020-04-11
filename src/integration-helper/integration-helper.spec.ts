@@ -1,13 +1,9 @@
 jest.mock('vscode');
-jest.mock('../utils');
-jest.mock('../config');
 
 import * as vscode from "vscode";
-import * as utils from "../utils";
-import * as config from "../config";
 
 import panel from "../__mocks__/fakePanel";
-
+import "../__mocks__/helper";
 import handler from "./index";
 
 describe('src/integration-helper', () => {
@@ -15,13 +11,6 @@ describe('src/integration-helper', () => {
 
     test('should fetch screenshot diffs for branches', async () => {
         const workspaceConfig = {};
-        // @ts-ignore
-        utils.getJsonOverHttp = () => new Promise((resolve) => {
-            resolve([{branchName: 'dabba'}])
-        });
-
-        console.log({vscode});
-
         await handler(panel, workspaceConfig).getAllBranches();
 
         // @ts-ignore
@@ -32,18 +21,6 @@ describe('src/integration-helper', () => {
 
     test('should return mock with', async () => {
         const workspaceConfig = { enableMocks: true};
-
-        // @ts-ignore
-        utils.getJsonOverHttp = () => new Promise((resolve) => {
-            resolve([{branchName: 'dabba'}])
-        });
-
-        // @ts-ignore
-        config.getData = (file) => ({'branch-list-mock.json': new Promise((resolve) => {
-                resolve([{branchName: 'dabba'}])
-            })}[file]) ;
-
-        console.log({vscode});
 
         await handler(panel, workspaceConfig).getAllBranches();
 
