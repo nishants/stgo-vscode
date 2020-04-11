@@ -75,6 +75,9 @@ class App extends React.Component {
         case 'set-branch-list':
           this.setBranchList(message.data);
           break;
+        case 'set-branch-with-pull-requests':
+          this.setBranchesWithPullRequst(message.data);
+          break;
       }
     });
   }
@@ -93,8 +96,15 @@ class App extends React.Component {
     }));
   }
 
+  setBranchesWithPullRequst(list) {
+    this.setState(({checkedOutBranch}) => ({
+      branchList: list.concat(checkedOutBranch)
+    }));
+  }
+
   pupulateBranch(branch){
     this.setState(({branchList}) => ({
+      checkedOutBranch: branch,
       currentBranchName: branch,
       branchList: Array.from(new Set([...branchList, branch]))
     }));
