@@ -3,14 +3,20 @@ jest.mock('vscode');
 import * as vscode from "vscode";
 
 import panel from "../__mocks__/fakePanel";
-import "../__mocks__/helper";
+import {setJsonOverHttp, setMockFile, resetMocks} from "../__mocks__/helper";
+
 import handler from "./index";
 
 describe('src/integration-helper', () => {
-    beforeEach( () => jest.resetAllMocks());
+    beforeEach( () => {
+        jest.resetAllMocks();
+        resetMocks();
+    });
 
     test('should fetch screenshot diffs for branches', async () => {
         const workspaceConfig = {};
+        setJsonOverHttp('http://st-integration.sys.dom/publicApi/branches', [{branchName: 'dabba'}])
+
         await handler(panel, workspaceConfig).getAllBranches();
 
         // @ts-ignore
@@ -21,6 +27,8 @@ describe('src/integration-helper', () => {
 
     test('should return mock with', async () => {
         const workspaceConfig = { enableMocks: true};
+
+        setMockFile('branch-list-mock.json', [{branchName: 'dabba'}]);
 
         await handler(panel, workspaceConfig).getAllBranches();
 
