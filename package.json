@@ -40,7 +40,7 @@
     "pretest": "npm run compile",
     "test": "run-p test:extension test:lib",
     "test:extension": "node ./out/test/runTest.js",
-    "test:lib": "yarn jest ./src/lib",
+    "test:lib": "yarn jest ./src",
     "e2e-test": "npm run compile && extest --code_version 1.43.2 setup-and-run out/e2e/*.js"
   },
   "devDependencies": {
