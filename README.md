@@ -8,5 +8,5 @@ End to end testing tool : https://github.com/redhat-developer/vscode-extension-t
 
 
 
-Download Latest Version : https://saxolab.z10.web.core.windows.net//download/downloads/stgo-vscode.vsix
+Download latest build from master : https://stgovscode.z22.web.core.windows.net/downloads/branch/master/stgo-vscode.vsix
 
