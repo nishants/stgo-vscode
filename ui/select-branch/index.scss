@@ -1,57 +1,56 @@
+$branchSelectorInputWidth: $columnWidth*3;
+
 #branch-selector{
   padding: 5px;
   @extend .resize-container;
 
+  #branch, button{
+    float: left;
+    margin-top: 1px;
+    outline: none;
+  }
 
   #branch{
-      margin-bottom: 5px;
       display: block;
-      background: var(--vscode-settings-dropdownBackground);
-      border-color:  var(--vscode-settings-dropdownBorder);
-      color: var(--vscode-settings-dropdownForeground);
+      background: $dropdownBg;
+      color: $dropdownForeground;
       cursor: pointer;
       padding: 0 10px;
       line-height: $rowHeight;
       height: $rowHeight;
-    
+
       font-size: $theme-font-weight;
       font-weight: $theme-font-weight;
       font-family: $theme-font-family;
-    
+
       border-radius: $border-radius;
       -webkit-appearance: none;
       -webkit-border-radius: $border-radius;
-      width: 300px;
-      
+      width: $branchSelectorInputWidth;
+      border: none;
   }
 
   ul.options {
+    @extend .undo-list;
+
     display: block;
-    list-style: none;
     position: absolute;
-    background: #4d4d4d;
-    margin-top: 30px;
-    border-radius: 8px;
-  }
-  ul.options li {
-    display: flex;
-    font-size: 0.8rem;
-    width: 100%;
-    border-radius: 2px;
-    margin-right: 15px;
-  }
-  ul.options li:hover {
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s all;
-  }
-  ul.options li.option-active {
-    background: var(--vscode-button-hoverBackground);
-    font-size: 1;
+
+    max-height: calc(100% - #{$fixedSpaceForTabTop});
+    overflow: auto;
+
+    background: $inactiveBackground;
+    margin-top: 25px;
+    width: $branchSelectorInputWidth;
+
+    li {
+      padding: 0 10px;
+      border: 1px solid transparent;
+    }
+
+    li.option-active {
+      border-color: $buttonHoverBg;
+    }
   }
 
-  #branch, button{
-    float: left;
-    margin-top: 1px;
-  }
 }

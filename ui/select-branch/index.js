@@ -9,13 +9,20 @@ export class SelectBranch extends Component {
     userInput: ''
   };
 
-  onChange = (e) => {
-    console.log('onChanges');
+  static getDerivedStateFromProps(props, state){
+    if(!state.showOptions){
+      return {
+        userInput: state.userInput || props.currentBranch
+      };
+    }
+  }
 
+  onChange = (e) => {
     const { list } = this.props;
     const userInput = e.currentTarget.value;
+    const showAll = !Boolean(userInput?.length) || this.props.currentBranch === userInput;
 
-    const filteredOptions = list.filter(
+    const filteredOptions = showAll ? list: list.filter(
       (optionName) =>
         optionName.name ? optionName.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1 : false
     );
@@ -37,10 +44,22 @@ export class SelectBranch extends Component {
     });
     this.props.selectBranch(e.currentTarget.innerText);
   };
+
+  cancelSearch(){
+    const {currentBranch} = this.props;
+    this.setState({
+      activeOption: 0,
+      showOptions: false,
+      userInput: currentBranch
+    });
+  }
+
   onKeyDown = (e) => {
     const { activeOption, filteredOptions } = this.state;
 
-    if (e.keyCode === 13) {
+    if (e.keyCode === 27) {
+      this.cancelSearch();
+    }   else if (e.keyCode === 13) {
       this.setState({
         activeOption: 0,
         showOptions: false,
@@ -61,6 +80,10 @@ export class SelectBranch extends Component {
     }
   };
 
+  setActiveOption(index){
+    this.setState({ activeOption: index });
+  }
+
   render() {
     const {
       onChange,
@@ -70,7 +93,7 @@ export class SelectBranch extends Component {
       state: { activeOption, filteredOptions, showOptions, userInput }
     } = this;
     let optionList;
-    if (showOptions && userInput) {
+    if (showOptions) {
       if (filteredOptions.length) {
         optionList = (
           <ul className="options">
@@ -80,7 +103,7 @@ export class SelectBranch extends Component {
                 className = 'option-active';
               }
               return (
-                <li className={className} key={index} onClick={onClick}>
+                <li className={className} key={index} onClick={onClick} onMouseEnter={() =>  this.setActiveOption(index)}>
                   {optionName.name}
                 </li>
               );
@@ -89,12 +112,16 @@ export class SelectBranch extends Component {
         );
       } else {
         optionList = (
-          <div className="no-options">
-            <em>No Option!</em>
-          </div>
+          <ul className="options">
+            <li>
+              No results !
+            </li>
+          </ul>
+
         );
       }
     }
+
     return (
       <React.Fragment>
         <div className="search" id='branch-selector'>
@@ -102,6 +129,7 @@ export class SelectBranch extends Component {
             type="text"
             className="search-box"
             onChange={onChange}
+            onClick={onChange}
             onKeyDown={onKeyDown}
             value={userInput}
           />
@@ -115,17 +143,3 @@ export class SelectBranch extends Component {
 }
 
 export default SelectBranch;
-
-
-/*export default (props) => (
-  <div id='branch-selector'>
-    <select id="branch" onChange={props.selectBranch} value={props.currentBranch}>
-      {props.list.map(branch => {
-        return <option value={branch.name}>{branch.name}</option>
-      })}
-    </select>
-
-    <button type="button" className="refresh">Refresh</button>
-  </div>
-);*/
-
