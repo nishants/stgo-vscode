@@ -62,16 +62,15 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
       status={2}
     >
       <div
-        className="build-status"
+        className="build-info"
         key="123"
       >
-        Commit
-        <div>
-          123
-        </div>
         <div>
           Mon Mar 23 2020 19:04:05
 
+        </div>
+        <div>
+          123
         </div>
         <span
           className="status-flag warning"
@@ -80,6 +79,9 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
             href="http://path-to-build-1"
           >
             Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
           </a>
         </span>
       </div>
@@ -93,16 +95,15 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
       status={1}
     >
       <div
-        className="build-status"
+        className="build-info"
         key="456"
       >
-        Commit
-        <div>
-          456
-        </div>
         <div>
           Mon Mar 23 2020 19:04:05
 
+        </div>
+        <div>
+          456
         </div>
         <span
           className="status-flag warning"
@@ -111,6 +112,9 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
             href="http://path-to-build-2"
           >
             Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
           </a>
         </span>
       </div>
@@ -181,16 +185,15 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
       status={3}
     >
       <div
-        className="build-status"
+        className="build-info"
         key="456"
       >
-        Commit
-        <div>
-          456
-        </div>
         <div>
           Mon Mar 23 2020 19:04:05
 
+        </div>
+        <div>
+          456
         </div>
         <span
           className="status-flag warning"
@@ -199,6 +202,9 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
             href="http://path-to-build-1"
           >
             Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
           </a>
         </span>
       </div>
@@ -212,16 +218,15 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
       status={2}
     >
       <div
-        className="build-status"
+        className="build-info"
         key="123"
       >
-        Commit
-        <div>
-          123
-        </div>
         <div>
           Mon Mar 23 2020 19:04:05
 
+        </div>
+        <div>
+          123
         </div>
         <span
           className="status-flag warning"
@@ -230,6 +235,9 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
             href="http://path-to-build-1"
           >
             Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
           </a>
         </span>
       </div>
