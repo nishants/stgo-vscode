@@ -60,6 +60,10 @@ export class SelectBranch extends Component {
     }
   };
 
+  setActiveOption(index){
+    this.setState({ activeOption: index });
+  }
+
   render() {
     const {
       onChange,
@@ -79,7 +83,7 @@ export class SelectBranch extends Component {
                 className = 'option-active';
               }
               return (
-                <li className={className} key={index} onClick={onClick}>
+                <li className={className} key={index} onClick={onClick} onMouseEnter={() =>  this.setActiveOption(index)}>
                   {optionName.name}
                 </li>
               );
