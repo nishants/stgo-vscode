@@ -25,8 +25,8 @@ steps:
 
 - task: PublishPipelineArtifact@1
   inputs:
-    path: $(Agent.BuildDirectory)/s/out
-    artifact: out
+    path: $(Agent.BuildDirectory)/s/out/dist
+    artifact: dist
   displayName: 'Publish output'
 
 - task: PublishPipelineArtifact@1
