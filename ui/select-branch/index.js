@@ -12,11 +12,14 @@ export class SelectBranch extends Component {
   onChange = (e) => {
     const { list } = this.props;
     const userInput = e.currentTarget.value;
+    const showAll = !Boolean(userInput?.length);
 
-    const filteredOptions = list.filter(
+    const filteredOptions = showAll ? list: list.filter(
       (optionName) =>
         optionName.name ? optionName.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1 : false
     );
+
+    console.log("onChange", {userInput, showAll, filteredOptions, list});
 
     this.setState({
       activeOption: 0,
@@ -73,7 +76,7 @@ export class SelectBranch extends Component {
       state: { activeOption, filteredOptions, showOptions, userInput }
     } = this;
     let optionList;
-    if (showOptions && userInput) {
+    if (showOptions) {
       if (filteredOptions.length) {
         optionList = (
           <ul className="options">
@@ -106,6 +109,7 @@ export class SelectBranch extends Component {
             type="text"
             className="search-box"
             onChange={onChange}
+            onClick={onChange}
             onKeyDown={onKeyDown}
             value={userInput}
           />
