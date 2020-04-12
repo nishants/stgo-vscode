@@ -7,6 +7,7 @@ $branchSelectorInputWidth: $columnWidth*3;
   #branch, button{
     float: left;
     margin-top: 1px;
+    outline: none;
   }
 
   #branch{
@@ -40,14 +41,11 @@ $branchSelectorInputWidth: $columnWidth*3;
 
     li {
       padding: 0 10px;
+      border: 1px solid transparent;
     }
-    li:hover {
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s all;
-    }
+
     li.option-active {
-      background: $buttonHoverBg;
+      border-color: $buttonHoverBg;
     }
   }
 
