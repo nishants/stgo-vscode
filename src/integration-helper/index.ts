@@ -5,6 +5,9 @@ import * as vscode from "vscode";
 const SCREENSHOT_DIFFS_MOCK_FILE = 'screenshot-diffs-mock.json';
 const SCREENSHOT_API_URL = 'http://st-integration.sys.dom/publicApi/differences/<branch-name>';
 
+const BRANCH_LIST__MOCK_FILE = 'branch-list-mock.json';
+const BRANCH_LIST_API_URL = 'http://st-integration.sys.dom/publicApi/branches';
+
 import {getJsonOverHttp} from "../utils";
 
 // Groups screenshot diffs
@@ -28,6 +31,8 @@ const groupByPath = (data) => {
     };
 };
 
+const setName = branches => branches.map(({branchName}) => ({name: branchName}));
+
 export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
     const getScreenshotDiffs = async ({branchName}) => {
@@ -48,7 +53,26 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
         }
     };
 
+    const getAllBranches = async () => {
+        if (workspaceConfig.enableMocks) {
+            return config.getData(BRANCH_LIST__MOCK_FILE).then(data => {
+                vscode.window.showInformationMessage(`Returning mock data for list of branches`)
+                panel.webview.postMessage({messageId: 'set-branch-list', data: setName(data)});
+            });
+        }
+        const url = BRANCH_LIST_API_URL;
+        try{
+            const response =  await getJsonOverHttp({url});
+            panel.webview.postMessage({messageId: 'set-branch-list', data: setName(response)});
+        }catch(error){
+            console.error(error);
+            vscode.window.showErrorMessage(`Error fetching screenshot diffs from integration helper - ${url}`);
+            panel.webview.postMessage({messageId: 'set-branch-list', data: []});
+        }
+    };
+
     return {
-        getScreenshotDiffs
+        getScreenshotDiffs,
+        getAllBranches
     };
 };

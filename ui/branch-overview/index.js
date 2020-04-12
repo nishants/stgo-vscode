@@ -37,8 +37,8 @@ class Index extends React.Component {
     return (
       <div className="branch-details">
         <div className='row'>
-          <span className="label">Selected Branch :</span>
-          <span className="value">{selectedBranch}</span>
+            <span className="label">Selected Branch :</span> 
+            <span className="value">{selectedBranch}</span>
         </div>
         {existing &&
           (<React.Fragment>
@@ -82,9 +82,9 @@ class Index extends React.Component {
         </div>
 
         {existing ?
-          (<div className='row no-label'>
-            <button className='button' onClick={() => this.props.openUrl(branchData.link)}>Open Pull Request</button>
-          </div>
+          (            <div className='row no-label'>
+              <button className='button' onClick={() => this.props.openUrl(branchData.link)}>Open Pull Request</button>
+            </div>
           ) :
           (<div className='row no-label'>
             <button onClick={() => this.props.openUrl(branchData.link)} className='button'>Create Pull Request</button>

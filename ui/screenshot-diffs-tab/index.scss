@@ -18,16 +18,15 @@
       padding-left: 10px;
     }
     .click-to-toggle{
-      padding-left: 25px;
+      padding-left: 10px;
       cursor: pointer;
     }
     .screenshot-diff-action-butttons{
-      padding-left: 30px;
+      padding-left: 10px;
     }
     ul.image-comparison{
       @extend .undo-list;
       @extend .resize-container;
-      padding-left: 20px;
 
       > li {
         width: 33%;

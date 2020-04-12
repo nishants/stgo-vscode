@@ -1,15 +1,45 @@
 import React from "react";
-import Status from './status';
+import CypressBuildInfo from './cypress-build-info';
 
-function CypressCi ({data=[]}, callBack=()=>{}) {
-      return (
-        <div className='cypressCi'>
-          <button className='btn' onClick={(e)=> callBack(e)}>Run Cypress Tests</button>
-          {data.map(item => <Status commitId={item.sourceVersion} result={item.result} status={item.status} commitBuildHref={item._links.web.href}/>)}
-        </div>
-        
-      );
+import {isBuildInProgress} from './buildStatus';
+
+class CypressCi extends React.Component {
+
+  loadBuildsForCurrentBranch() {
+    this.props.getCypressBuilds();
   }
-  
-  export default CypressCi;
+
+  componentDidMount() {
+    this.loadBuildsForCurrentBranch();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.currentBranchName !== this.props.currentBranchName) {
+      this.loadBuildsForCurrentBranch();
+    }
+  }
+
+  render() {
+    const {data, callBack} = this.props;
+    const buildInProgress = Boolean(data.find(isBuildInProgress));
+
+    return (
+      <div className='cypressCi'>
+        <button onClick={callBack} disabled={buildInProgress}>Run Cypress Tests</button>
+        {
+          data.map(item => (
+            <CypressBuildInfo
+              key={item.sourceVersion}
+              commitId={item.sourceVersion}
+              result={item.result}
+              status={item.status}
+              commitBuildHref={item._links.web.href}
+            />
+          ))}
+      </div>
+    );
+  }
+}
+
+export default CypressCi;
 

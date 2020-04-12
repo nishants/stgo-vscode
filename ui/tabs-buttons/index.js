@@ -16,7 +16,7 @@ export default ({ selectTab, selectedTab }) => {
         className1+= " tab--active";
       }
 
-      return <button className={className1} onClick={() => selectTab(TABS[key])}>{TAB_NAMES[key]}</button>
+      return <button key={key} className={className1} onClick={() => selectTab(TABS[key])}>{TAB_NAMES[key]}</button>
   }
 
   return (

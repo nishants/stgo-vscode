@@ -4,8 +4,8 @@ import * as path from 'path';
 
 import messageHandler from './message-handler';
 
-const REACT_APP_NAME = 'reat-app';
-const REACT_APP_TITLE = 'React App';
+const REACT_APP_NAME = 'stgoci';
+const REACT_APP_TITLE = 'stgoci';
 
 //  allow only one instance of webview at a time
 let panel: vscode.WebviewPanel | undefined = undefined;
