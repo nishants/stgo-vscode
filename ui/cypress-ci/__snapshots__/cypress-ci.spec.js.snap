@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progress 1`] = `
+<CypressCi
+  callBack={[MockFunction]}
+  currentBranchName="zyx-branch"
+  data={
+    Array [
+      Object {
+        "_links": Object {
+          "web": Object {
+            "href": "http://path-to-build-1",
+          },
+        },
+        "sourceVersion": "123",
+        "status": 2,
+      },
+      Object {
+        "_links": Object {
+          "web": Object {
+            "href": "http://path-to-build-2",
+          },
+        },
+        "sourceVersion": "456",
+        "status": 1,
+      },
+    ]
+  }
+  getCypressBuilds={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+>
+  <div
+    className="cypressCi"
+  >
+    <button
+      disabled={true}
+      onClick={[MockFunction]}
+    >
+      Run Cypress Tests
+    </button>
+    <CypressBuildInfo
+      commitBuildHref="http://path-to-build-1"
+      commitId="123"
+      key="123"
+      status={2}
+    >
+      <div
+        className="build-status"
+        key="123"
+      >
+        Commit
+        <div>
+          123
+        </div>
+      </div>
+    </CypressBuildInfo>
+    <CypressBuildInfo
+      commitBuildHref="http://path-to-build-2"
+      commitId="456"
+      key="456"
+      status={1}
+    >
+      <div
+        className="build-status"
+        key="456"
+      >
+        Commit
+        <div>
+          456
+        </div>
+      </div>
+    </CypressBuildInfo>
+  </div>
+</CypressCi>
+`;
+
+exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in progress 1`] = `
+<CypressCi
+  callBack={[MockFunction]}
+  currentBranchName="zyx-branch"
+  data={
+    Array [
+      Object {
+        "_links": Object {
+          "web": Object {
+            "href": "http://path-to-build-1",
+          },
+        },
+        "sourceVersion": "456",
+        "status": 3,
+      },
+      Object {
+        "_links": Object {
+          "web": Object {
+            "href": "http://path-to-build-1",
+          },
+        },
+        "sourceVersion": "123",
+        "status": 2,
+      },
+    ]
+  }
+  getCypressBuilds={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+>
+  <div
+    className="cypressCi"
+  >
+    <button
+      disabled={false}
+      onClick={[MockFunction]}
+    >
+      Run Cypress Tests
+    </button>
+    <CypressBuildInfo
+      commitBuildHref="http://path-to-build-1"
+      commitId="456"
+      key="456"
+      status={3}
+    >
+      <div
+        className="build-status"
+        key="456"
+      >
+        Commit
+        <div>
+          456
+        </div>
+      </div>
+    </CypressBuildInfo>
+    <CypressBuildInfo
+      commitBuildHref="http://path-to-build-1"
+      commitId="123"
+      key="123"
+      status={2}
+    >
+      <div
+        className="build-status"
+        key="123"
+      >
+        Commit
+        <div>
+          123
+        </div>
+      </div>
+    </CypressBuildInfo>
+  </div>
+</CypressCi>
+`;
