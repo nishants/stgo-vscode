@@ -73,6 +73,15 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
           Mon Mar 23 2020 19:04:05
 
         </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-1"
+          >
+            Unknown
+          </a>
+        </span>
       </div>
     </CypressBuildInfo>
     <CypressBuildInfo
@@ -95,6 +104,15 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
           Mon Mar 23 2020 19:04:05
 
         </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-2"
+          >
+            Unknown
+          </a>
+        </span>
       </div>
     </CypressBuildInfo>
   </div>
@@ -174,6 +192,15 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
           Mon Mar 23 2020 19:04:05
 
         </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-1"
+          >
+            Unknown
+          </a>
+        </span>
       </div>
     </CypressBuildInfo>
     <CypressBuildInfo
@@ -196,6 +223,15 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
           Mon Mar 23 2020 19:04:05
 
         </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-1"
+          >
+            Unknown
+          </a>
+        </span>
       </div>
     </CypressBuildInfo>
   </div>
