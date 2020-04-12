@@ -35,6 +35,10 @@ $branchSelectorInputWidth: $columnWidth*3;
 
     display: block;
     position: absolute;
+
+    max-height: calc(100% - #{$fixedSpaceForTabTop});
+    overflow: auto;
+
     background: $inactiveBackground;
     margin-top: 25px;
     width: $branchSelectorInputWidth;
