@@ -51,3 +51,7 @@ select {
   padding: 0 10px;
   font-weight: bold;
 }
+
+button, select{
+  min-width: $columnWidth;
+}

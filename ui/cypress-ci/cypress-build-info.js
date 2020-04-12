@@ -1,16 +1,24 @@
 import React from "react";
 
-function CypressBuildInfo({ commitId, result, status , commitBuildHref}) {
+function CypressBuildInfo({commitId, result, commitBuildHref, buildTime}) {
   const success = [2, 4].indexOf(result) !== -1 ? true : false;
   const failure = [8].indexOf(result) !== -1 ? true : false;
   const cancelled = [32].indexOf(result) !== -1 ? true : false;
+  const statusClass = success ? 'success' : failure ? 'error' : 'warning';
+  const label = success ? 'Success' : failure ? 'Failed' : cancelled ? 'Cancelled' : 'Unknown';
+
   return (
-    <div className="build-status" key={commitId}>
-      Commit
+    <div className="build-info" key={commitId}>
+      <div>{buildTime}</div>
       <div>{commitId}</div>
-      {success && <button className="btn btn--success"><a href={commitBuildHref}>Success</a></button>}
-      {failure && <button className="btn btn--fail"><a href={commitBuildHref}>Failed</a></button>}
-      {cancelled && <button className="btn btn--warn"><a href={commitBuildHref}>Cancelled</a></button>}
+      <span
+        className={`status-flag ${statusClass}`}>
+        <a
+          href={commitBuildHref}>
+          {label}
+          <i className="icon fas fa-external-link-square-alt"></i>
+        </a>
+      </span>
     </div>
   );
 }

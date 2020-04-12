@@ -3,9 +3,9 @@ import {mount} from 'enzyme';
 
 import CypressBuildTab from './index';
 
-const comletedBuild = {status: 2, _links: {web: {href: 'http://path-to-build-1'}}, sourceVersion: "123"};
-const CancellingBuild = {status: 3, _links: {web: {href: 'http://path-to-build-1'}}, sourceVersion: "456"};
-const buildInProgress = {status: 1, _links: {web: {href: 'http://path-to-build-2'}}, sourceVersion: "456"};
+const comletedBuild = {status: 2, _links: {web: {href: 'http://path-to-build-1'}},   sourceVersion: "123", buildTime: 'Mon Mar 23 2020 19:04:05\n'};
+const CancellingBuild = {status: 3, _links: {web: {href: 'http://path-to-build-1'}}, sourceVersion: "456", buildTime: 'Mon Mar 23 2020 19:04:05\n'};
+const buildInProgress = {status: 1, _links: {web: {href: 'http://path-to-build-2'}}, sourceVersion: "456", buildTime: 'Mon Mar 23 2020 19:04:05\n'};
 
 describe('ui/cypress-ci/cypress-ci', () => {
   it('should disable button if a build is in progress', () => {
