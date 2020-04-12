@@ -1,18 +1,11 @@
 import React from 'React';
 
 class Index extends React.Component {
-  state = {
-    branchData: {}
-  };
 
   componentDidMount() {
-    window.addEventListener('message', event => {
-      const message = event.data;
-      if (message.messageId === 'set-pull-request') {
-        this.setState({ branchData: message.data });
-      }
-    });
-    this.props.getBranchDetails(this.props.selectedBranch);
+    if(this.props.selectedBranch){
+      this.props.getBranchDetails(this.props.selectedBranch);
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -22,15 +15,13 @@ class Index extends React.Component {
   }
 
   render() {
-    const { selectedBranch } = this.props;
-    const { branchData } = this.state;
+    const { selectedBranch, pullRequestUrl, branchPullRequest } = this.props;
 
-    if (!branchData || !branchData.type) {
-      return null;
-    }
-    const existing = branchData.type === "EXISTING";
-    var sourceRefName = existing && branchData.data.sourceRefName.split('/')[2];
-    var targetRefName = existing && branchData.data.targetRefName.split('/')[2];
+    // TODO breakdown : two components : one when pr is created, one when no PR is created
+
+    const existing = Boolean(branchPullRequest);
+    var sourceRefName = existing && branchPullRequest.sourceRefName.split('/')[2];
+    var targetRefName = existing && branchPullRequest.targetRefName.split('/')[2];
 
     return (
       <div className="branch-details">
@@ -43,16 +34,16 @@ class Index extends React.Component {
               <div className='row'>
                 <span className="label">Pull Request :</span>
                 <span className="value">
-                    <span>#{branchData.data.pullRequestId}</span>
+                    <span>#{branchPullRequest.pullRequestId}</span>
                 </span>
               </div>
               <div className='row'>
                 <span className="label">Title :</span>
-                <span className="value">{branchData.data.title}</span>
+                <span className="value">{branchPullRequest.title}</span>
               </div>
               <div className='row'>
                 <span className="label">Description :</span>
-                <span className="value">{branchData.data.description}</span>
+                <span className="value">{branchPullRequest.description}</span>
               </div>
               <div className='row'>
                 <span className="label">Source :</span>
@@ -69,15 +60,11 @@ class Index extends React.Component {
           <div><a href={`https://ba.orange.saxobank.com/${selectedBranch}`}>Open branch on Tst56</a></div>
         </div>
 
-        {existing ?
-          (            <div className='row no-label'>
-              <button className='button' onClick={() => this.props.openUrl(branchData.link)}>Open Pull Request</button>
-            </div>
-          ) :
-          (<div className='row no-label'>
-            <button onClick={() => this.props.openUrl(branchData.link)} className='button'>Create Pull Request</button>
-          </div>)
-        }
+        <div className='row no-label'>
+          <button className='button' onClick={() => this.props.openUrl(pullRequestUrl)}>
+            {existing ? "Open Pull Request" : "Create Pull Request"}
+          </button>
+        </div>
 
       </div >);
   }

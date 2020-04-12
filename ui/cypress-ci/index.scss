@@ -2,18 +2,15 @@
     margin: 15px;
 }
 .build-status{
-    width: 90%;
-    height: auto;
-    padding: 5px;
-    display: inline-block;
-    border: 1px solid $bgColour;
-    margin: 10px auto 0 auto;
-    text-align: left;
-    background-color: $bgColour ;
-    font-size: 11px;
-  } 
+  height: auto;
+  padding: 5px;
+  border: 1px solid $bgColour;
+  margin: 10px auto 0 auto;
+  text-align: left;
+  background-color: $bgColour ;
+}
 
-  .disabled{
+.disabled{
     border: 1px solid #999999;
     background-color: #cccccc;
     color: #666666;

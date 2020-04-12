@@ -13,12 +13,13 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
         );
         panel.webview.postMessage({
           messageId: "set-cypress-builds",
-          data: mockData
+          data: {
+            type: "COMPLETED",
+            data: mockData
+          }
         });
       });
     }
-    // TODO : get data from azure
-
     const azureObj = new AZURE(workspaceConfig.azureToken);
 
     const buildData = await azureObj.getAllBuildData(branchName);
@@ -36,12 +37,8 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
     const triggerBuildObj = await azureObj.getTriggerBuild(branchName);
 
-    panel.webview.postMessage({
-      messageId: "set-trigger-cypress-build",
-      data: triggerBuildObj
-    });
-
-    return;
+    vscode.env.openExternal(triggerBuildObj.WebUrl);
+    await getCypressBuilds({ branchName });
   };
 
   return {
