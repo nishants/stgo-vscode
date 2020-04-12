@@ -12,6 +12,8 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
             "href": "http://path-to-build-1",
           },
         },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
         "sourceVersion": "123",
         "status": 2,
       },
@@ -21,6 +23,8 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
             "href": "http://path-to-build-2",
           },
         },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
         "sourceVersion": "456",
         "status": 1,
       },
@@ -50,6 +54,8 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
       Run Cypress Tests
     </button>
     <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
       commitBuildHref="http://path-to-build-1"
       commitId="123"
       key="123"
@@ -63,9 +69,15 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
         <div>
           123
         </div>
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
       </div>
     </CypressBuildInfo>
     <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
       commitBuildHref="http://path-to-build-2"
       commitId="456"
       key="456"
@@ -78,6 +90,10 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
         Commit
         <div>
           456
+        </div>
+        <div>
+          Mon Mar 23 2020 19:04:05
+
         </div>
       </div>
     </CypressBuildInfo>
@@ -97,6 +113,8 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
             "href": "http://path-to-build-1",
           },
         },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
         "sourceVersion": "456",
         "status": 3,
       },
@@ -106,6 +124,8 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
             "href": "http://path-to-build-1",
           },
         },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
         "sourceVersion": "123",
         "status": 2,
       },
@@ -135,6 +155,8 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
       Run Cypress Tests
     </button>
     <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
       commitBuildHref="http://path-to-build-1"
       commitId="456"
       key="456"
@@ -148,9 +170,15 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
         <div>
           456
         </div>
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
       </div>
     </CypressBuildInfo>
     <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
       commitBuildHref="http://path-to-build-1"
       commitId="123"
       key="123"
@@ -163,6 +191,10 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
         Commit
         <div>
           123
+        </div>
+        <div>
+          Mon Mar 23 2020 19:04:05
+
         </div>
       </div>
     </CypressBuildInfo>
