@@ -9,10 +9,18 @@ export class SelectBranch extends Component {
     userInput: ''
   };
 
+  static getDerivedStateFromProps(props, state){
+    if(!state.showOptions){
+      return {
+        userInput: state.userInput || props.currentBranch
+      };
+    }
+  }
+
   onChange = (e) => {
     const { list } = this.props;
     const userInput = e.currentTarget.value;
-    const showAll = !Boolean(userInput?.length);
+    const showAll = !Boolean(userInput?.length) || this.props.currentBranch === userInput;
 
     const filteredOptions = showAll ? list: list.filter(
       (optionName) =>
