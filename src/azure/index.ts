@@ -4,6 +4,12 @@ import * as config from "../config";
 import AZURE from "./azure";
 const CPYRESS_BUILDS_MOCK_DATA = "cypress-mock-data.json";
 
+const setBuildTime = data => data.map(build => ({
+        ...build,
+        buildTime : new Date(build.queueTime).toString().split("GMT")[0]
+    }
+));
+
 export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
   const getCypressBuilds = async ({ branchName }: object) => {
     if (workspaceConfig.enableMocks) {
@@ -15,7 +21,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
           messageId: "set-cypress-builds",
           data: {
             type: "COMPLETED",
-            data: mockData
+            data: setBuildTime(mockData)
           }
         });
       });
@@ -26,7 +32,7 @@ export default (panel: vscode.WebviewPanel, workspaceConfig: object) => {
 
     panel.webview.postMessage({
       messageId: "set-cypress-builds",
-      data: buildData
+      data: setBuildTime(buildData)
     });
 
     return;

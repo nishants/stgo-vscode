@@ -10,6 +10,5 @@ module.exports = {
       }
     }
   },
-  preset: 'ts-jest',
-  modulePathIgnorePatterns: ["out", ".vscode", "vscode-test"]
+  preset: 'ts-jest'
 };

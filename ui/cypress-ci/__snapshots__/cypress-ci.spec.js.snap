@@ -1,0 +1,247 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progress 1`] = `
+<CypressCi
+  callBack={[MockFunction]}
+  currentBranchName="zyx-branch"
+  data={
+    Array [
+      Object {
+        "_links": Object {
+          "web": Object {
+            "href": "http://path-to-build-1",
+          },
+        },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
+        "sourceVersion": "123",
+        "status": 2,
+      },
+      Object {
+        "_links": Object {
+          "web": Object {
+            "href": "http://path-to-build-2",
+          },
+        },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
+        "sourceVersion": "456",
+        "status": 1,
+      },
+    ]
+  }
+  getCypressBuilds={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+>
+  <div
+    className="cypressCi"
+  >
+    <button
+      disabled={true}
+      onClick={[MockFunction]}
+    >
+      Run Cypress Tests
+    </button>
+    <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
+      commitBuildHref="http://path-to-build-1"
+      commitId="123"
+      key="123"
+      status={2}
+    >
+      <div
+        className="build-info"
+        key="123"
+      >
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
+        <div>
+          123
+        </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-1"
+          >
+            Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
+          </a>
+        </span>
+      </div>
+    </CypressBuildInfo>
+    <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
+      commitBuildHref="http://path-to-build-2"
+      commitId="456"
+      key="456"
+      status={1}
+    >
+      <div
+        className="build-info"
+        key="456"
+      >
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
+        <div>
+          456
+        </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-2"
+          >
+            Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
+          </a>
+        </span>
+      </div>
+    </CypressBuildInfo>
+  </div>
+</CypressCi>
+`;
+
+exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in progress 1`] = `
+<CypressCi
+  callBack={[MockFunction]}
+  currentBranchName="zyx-branch"
+  data={
+    Array [
+      Object {
+        "_links": Object {
+          "web": Object {
+            "href": "http://path-to-build-1",
+          },
+        },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
+        "sourceVersion": "456",
+        "status": 3,
+      },
+      Object {
+        "_links": Object {
+          "web": Object {
+            "href": "http://path-to-build-1",
+          },
+        },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
+        "sourceVersion": "123",
+        "status": 2,
+      },
+    ]
+  }
+  getCypressBuilds={
+    [MockFunction] {
+      "calls": Array [
+        Array [],
+      ],
+      "results": Array [
+        Object {
+          "type": "return",
+          "value": undefined,
+        },
+      ],
+    }
+  }
+>
+  <div
+    className="cypressCi"
+  >
+    <button
+      disabled={false}
+      onClick={[MockFunction]}
+    >
+      Run Cypress Tests
+    </button>
+    <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
+      commitBuildHref="http://path-to-build-1"
+      commitId="456"
+      key="456"
+      status={3}
+    >
+      <div
+        className="build-info"
+        key="456"
+      >
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
+        <div>
+          456
+        </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-1"
+          >
+            Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
+          </a>
+        </span>
+      </div>
+    </CypressBuildInfo>
+    <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
+      commitBuildHref="http://path-to-build-1"
+      commitId="123"
+      key="123"
+      status={2}
+    >
+      <div
+        className="build-info"
+        key="123"
+      >
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
+        <div>
+          123
+        </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-1"
+          >
+            Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
+          </a>
+        </span>
+      </div>
+    </CypressBuildInfo>
+  </div>
+</CypressCi>
+`;

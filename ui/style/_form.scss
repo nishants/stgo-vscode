@@ -20,6 +20,10 @@ a:not(.button){
   font-style: italic;
 }
 
+a{
+  cursor: pointer;
+}
+
 button.warning{
   background: $warningBgColor;
 }
@@ -46,4 +50,8 @@ select {
 .column-label{
   padding: 0 10px;
   font-weight: bold;
+}
+
+button, select{
+  min-width: $columnWidth;
 }

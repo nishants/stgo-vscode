@@ -17,9 +17,9 @@ describe('e2e:extensoin-test', () => {
         driver = VSBrowser.instance.driver;
     });
 
-    const openMockWorkspace = async () => {
+    const openMockWorkspace = async (workbench: Workbench) => {
         const workspacePath = path.join(process.cwd(), 'test-resources', 'mock-saxotrader-workspace');
-        await new Workbench().executeCommand('Extest: Open Folder');
+        await workbench.executeCommand('Extest: Open Folder');
         const input = await InputBox.create();
         await input.setText(workspacePath);
         await input.confirm();
@@ -28,7 +28,7 @@ describe('e2e:extensoin-test', () => {
     it('Should load extension in mocked workspace', async function() {
         this.timeout(TIMEOUT);
         const workbench = new Workbench();
-        await openMockWorkspace();
+        await openMockWorkspace(workbench);
 
         const expectedMockWarningMessage = 'Running stgoci against mocks.';
 
@@ -41,7 +41,7 @@ describe('e2e:extensoin-test', () => {
         expect(await notification.getType()).equals(NotificationType.Warning);
 
         const openTabs = await workbench.getEditorView().getOpenEditorTitles();
-        expect(openTabs).to.eql([ 'Welcome', 'React App' ]);
+        expect(openTabs).to.eql([ 'Welcome', 'stgoci' ]);
 
     });
 });

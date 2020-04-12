@@ -19,7 +19,8 @@ class App extends React.Component {
     currentBranchName: null,
     screenshotDiffs: {files: [], unapproved: 0},
     branchList : [],
-    cypressData: []
+    cypressData: [],
+    pullRequestUrl: null
   };
 
   setMessage(message) {
@@ -63,12 +64,22 @@ class App extends React.Component {
         case 'set-branch-list':
           this.setBranchList(message.data);
           break;
+        case 'set-pull-request':
+          this.setBranchPR(message.data);
+          break;
       }
     });
   }
 
   componentWillUnmount() {
     window.removeEventListener(this.messageListener);
+  }
+
+  setBranchPR({pullRequest, link}) {
+    this.setState({
+      branchPullRequest: pullRequest,
+      pullRequestUrl: link
+    });
   }
 
   sendHttpRequest({url, body}) {
@@ -138,7 +149,9 @@ class App extends React.Component {
       showTab,
       currentBranchName,
       screenshotDiffs,
-      branchList
+      branchList,
+      branchPullRequest,
+      pullRequestUrl
     } = this.state;
 
     const callbacks = {
@@ -161,6 +174,8 @@ class App extends React.Component {
               openUrl={callbacks.openUrl}
               selectedBranch={currentBranchName}
               getBranchDetails={callbacks.getBranchDetails}
+              pullRequestUrl={pullRequestUrl}
+              branchPullRequest={branchPullRequest}
             />
           );
 

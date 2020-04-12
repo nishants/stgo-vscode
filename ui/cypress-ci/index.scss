@@ -1,11 +1,5 @@
-.cypressCi {
-    margin: 15px;
+.build-info{
+  padding: 10px;
+  margin: 10px 0;
+  background: $inactiveBackground;
 }
-.build-status{
-    height: auto;
-    padding: 5px;
-    border: 1px solid $bgColour;
-    margin: 10px auto 0 auto;
-    text-align: left;
-    background-color: $bgColour ;
-  } 
