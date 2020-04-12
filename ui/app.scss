@@ -4,3 +4,9 @@
 @import 'screenshot-diffs-tab';
 @import './icons/chevron';
 @import './branch-overview';
+
+.selected-tab-container{
+  max-height: calc(100vh - #{$fixedSpaceForTabTop});
+  overflow: auto;
+  padding: 0 10px;
+}

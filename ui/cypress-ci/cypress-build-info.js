@@ -8,14 +8,17 @@ function CypressBuildInfo({commitId, result, commitBuildHref, buildTime}) {
   const label = success ? 'Success' : failure ? 'Failed' : cancelled ? 'Cancelled' : 'Unknown';
 
   return (
-    <div className="build-status" key={commitId}>
+    <div className="build-info" key={commitId}>
       Commit
       <div>{commitId}</div>
       <div>{buildTime}</div>
       <span
         className={`status-flag ${statusClass}`}>
         <a
-          href={commitBuildHref}>{label}</a>
+          href={commitBuildHref}>
+          {label}
+          <i className="icon fas fa-external-link-square-alt"></i>
+        </a>
       </span>
     </div>
   );

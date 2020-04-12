@@ -1,6 +1,7 @@
 .tab-buttons{
   display: block;
   overflow: hidden;
+  border-bottom: 10px solid $activeBackground;
 
   .tab {
     float: left;
