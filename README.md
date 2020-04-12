@@ -5,3 +5,8 @@
 Development build ui (wihtout minification ): `NODE_ENV=dev yarn build:ui`
 
 End to end testing tool : https://github.com/redhat-developer/vscode-extension-tester
+
+
+
+Download Latest Version : https://saxolab.z10.web.core.windows.net//download/downloads/stgo-vscode.vsix
+
