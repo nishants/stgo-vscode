@@ -10,5 +10,5 @@ End to end testing tool : https://github.com/redhat-developer/vscode-extension-t
 
 Download latest build from master : https://stgovscode.z22.web.core.windows.net/downloads/branch/master/stgo-vscode.vsix
 
-Or download for a specific branch from : Download latest build from master : https://stgovscode.z22.web.core.windows.net/downloads/branch/<branch-name>/stgo-vscode.vsix
+Or download for a specific branch from : Download latest build from master : https://stgovscode.z22.web.core.windows.net/downloads/branch/{branch-name}/stgo-vscode.vsix
 
