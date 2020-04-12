@@ -27,8 +27,6 @@ export class SelectBranch extends Component {
         optionName.name ? optionName.name.toLowerCase().indexOf(userInput.toLowerCase()) > -1 : false
     );
 
-    console.log("onChange", {userInput, showAll, filteredOptions, list});
-
     this.setState({
       activeOption: 0,
       filteredOptions,
@@ -47,10 +45,21 @@ export class SelectBranch extends Component {
     this.props.selectBranch(e.currentTarget.innerText);
   };
 
+  cancelSearch(){
+    const {currentBranch} = this.props;
+    this.setState({
+      activeOption: 0,
+      showOptions: false,
+      userInput: currentBranch
+    });
+  }
+
   onKeyDown = (e) => {
     const { activeOption, filteredOptions } = this.state;
 
-    if (e.keyCode === 13) {
+    if (e.keyCode === 27) {
+      this.cancelSearch();
+    }   else if (e.keyCode === 13) {
       this.setState({
         activeOption: 0,
         showOptions: false,
