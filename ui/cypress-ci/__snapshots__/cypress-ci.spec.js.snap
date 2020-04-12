@@ -12,6 +12,8 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
             "href": "http://path-to-build-1",
           },
         },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
         "sourceVersion": "123",
         "status": 2,
       },
@@ -21,6 +23,8 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
             "href": "http://path-to-build-2",
           },
         },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
         "sourceVersion": "456",
         "status": 1,
       },
@@ -50,35 +54,69 @@ exports[`ui/cypress-ci/cypress-ci should disable button if a build is in progres
       Run Cypress Tests
     </button>
     <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
       commitBuildHref="http://path-to-build-1"
       commitId="123"
       key="123"
       status={2}
     >
       <div
-        className="build-status"
+        className="build-info"
         key="123"
       >
-        Commit
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
         <div>
           123
         </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-1"
+          >
+            Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
+          </a>
+        </span>
       </div>
     </CypressBuildInfo>
     <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
       commitBuildHref="http://path-to-build-2"
       commitId="456"
       key="456"
       status={1}
     >
       <div
-        className="build-status"
+        className="build-info"
         key="456"
       >
-        Commit
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
         <div>
           456
         </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-2"
+          >
+            Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
+          </a>
+        </span>
       </div>
     </CypressBuildInfo>
   </div>
@@ -97,6 +135,8 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
             "href": "http://path-to-build-1",
           },
         },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
         "sourceVersion": "456",
         "status": 3,
       },
@@ -106,6 +146,8 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
             "href": "http://path-to-build-1",
           },
         },
+        "buildTime": "Mon Mar 23 2020 19:04:05
+",
         "sourceVersion": "123",
         "status": 2,
       },
@@ -135,35 +177,69 @@ exports[`ui/cypress-ci/cypress-ci should enable button if there are no builds in
       Run Cypress Tests
     </button>
     <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
       commitBuildHref="http://path-to-build-1"
       commitId="456"
       key="456"
       status={3}
     >
       <div
-        className="build-status"
+        className="build-info"
         key="456"
       >
-        Commit
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
         <div>
           456
         </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-1"
+          >
+            Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
+          </a>
+        </span>
       </div>
     </CypressBuildInfo>
     <CypressBuildInfo
+      buildTime="Mon Mar 23 2020 19:04:05
+"
       commitBuildHref="http://path-to-build-1"
       commitId="123"
       key="123"
       status={2}
     >
       <div
-        className="build-status"
+        className="build-info"
         key="123"
       >
-        Commit
+        <div>
+          Mon Mar 23 2020 19:04:05
+
+        </div>
         <div>
           123
         </div>
+        <span
+          className="status-flag warning"
+        >
+          <a
+            href="http://path-to-build-1"
+          >
+            Unknown
+            <i
+              className="icon fas fa-external-link-square-alt"
+            />
+          </a>
+        </span>
       </div>
     </CypressBuildInfo>
   </div>

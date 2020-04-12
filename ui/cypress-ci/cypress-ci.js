@@ -30,6 +30,7 @@ class CypressCi extends React.Component {
           data.map(item => (
             <CypressBuildInfo
               key={item.sourceVersion}
+              buildTime={item.buildTime}
               commitId={item.sourceVersion}
               result={item.result}
               status={item.status}
