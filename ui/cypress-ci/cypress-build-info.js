@@ -9,9 +9,8 @@ function CypressBuildInfo({commitId, result, commitBuildHref, buildTime}) {
 
   return (
     <div className="build-info" key={commitId}>
-      Commit
-      <div>{commitId}</div>
       <div>{buildTime}</div>
+      <div>{commitId}</div>
       <span
         className={`status-flag ${statusClass}`}>
         <a

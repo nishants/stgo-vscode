@@ -10,18 +10,12 @@
     padding: 5px 30px;
     background: $inactiveBackground;
     color: $inactiveForeground;
-    border-color: $inactiveModifiedBorder;
-
-    &:hover{
-      background: $activeBackground;
-    }
+    border: 1px solid transparent;
+    font-weight: bold;
 
     &--active {
       background: $activeBackground;
       color: $activeForeground;
-      border-color: $activeModifiedBorder;
-      border-bottom: $activeBackground;
-      font-weight: bold;
     }
   }
 }
