@@ -1,57 +1,54 @@
+$branchSelectorInputWidth: $columnWidth*3;
+
 #branch-selector{
   padding: 5px;
   @extend .resize-container;
-
-
-  #branch{
-      margin-bottom: 5px;
-      display: block;
-      background: var(--vscode-settings-dropdownBackground);
-      border-color:  var(--vscode-settings-dropdownBorder);
-      color: var(--vscode-settings-dropdownForeground);
-      cursor: pointer;
-      padding: 0 10px;
-      line-height: $rowHeight;
-      height: $rowHeight;
-    
-      font-size: $theme-font-weight;
-      font-weight: $theme-font-weight;
-      font-family: $theme-font-family;
-    
-      border-radius: $border-radius;
-      -webkit-appearance: none;
-      -webkit-border-radius: $border-radius;
-      width: 300px;
-      
-  }
-
-  ul.options {
-    display: block;
-    list-style: none;
-    position: absolute;
-    background: #4d4d4d;
-    margin-top: 30px;
-    border-radius: 8px;
-  }
-  ul.options li {
-    display: flex;
-    font-size: 0.8rem;
-    width: 100%;
-    border-radius: 2px;
-    margin-right: 15px;
-  }
-  ul.options li:hover {
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.3s all;
-  }
-  ul.options li.option-active {
-    background: var(--vscode-button-hoverBackground);
-    font-size: 1;
-  }
 
   #branch, button{
     float: left;
     margin-top: 1px;
   }
+
+  #branch{
+      display: block;
+      background: $dropdownBg;
+      color: $dropdownForeground;
+      cursor: pointer;
+      padding: 0 10px;
+      line-height: $rowHeight;
+      height: $rowHeight;
+
+      font-size: $theme-font-weight;
+      font-weight: $theme-font-weight;
+      font-family: $theme-font-family;
+
+      border-radius: $border-radius;
+      -webkit-appearance: none;
+      -webkit-border-radius: $border-radius;
+      width: $branchSelectorInputWidth;
+      border: none;
+  }
+
+  ul.options {
+    @extend .undo-list;
+
+    display: block;
+    position: absolute;
+    background: $inactiveBackground;
+    margin-top: 25px;
+    width: $branchSelectorInputWidth;
+
+    li {
+      padding: 0 10px;
+    }
+    li:hover {
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s all;
+    }
+    li.option-active {
+      background: $buttonHoverBg;
+    }
+  }
+
 }

@@ -10,8 +10,6 @@ export class SelectBranch extends Component {
   };
 
   onChange = (e) => {
-    console.log('onChanges');
-
     const { list } = this.props;
     const userInput = e.currentTarget.value;
 
@@ -37,6 +35,7 @@ export class SelectBranch extends Component {
     });
     this.props.selectBranch(e.currentTarget.innerText);
   };
+
   onKeyDown = (e) => {
     const { activeOption, filteredOptions } = this.state;
 
@@ -95,6 +94,7 @@ export class SelectBranch extends Component {
         );
       }
     }
+
     return (
       <React.Fragment>
         <div className="search" id='branch-selector'>
@@ -115,17 +115,3 @@ export class SelectBranch extends Component {
 }
 
 export default SelectBranch;
-
-
-/*export default (props) => (
-  <div id='branch-selector'>
-    <select id="branch" onChange={props.selectBranch} value={props.currentBranch}>
-      {props.list.map(branch => {
-        return <option value={branch.name}>{branch.name}</option>
-      })}
-    </select>
-
-    <button type="button" className="refresh">Refresh</button>
-  </div>
-);*/
-
