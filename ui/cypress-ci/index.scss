@@ -2,10 +2,18 @@
     margin: 15px;
 }
 .build-status{
-    height: auto;
-    padding: 5px;
-    border: 1px solid $bgColour;
-    margin: 10px auto 0 auto;
-    text-align: left;
-    background-color: $bgColour ;
-  } 
+  height: auto;
+  padding: 5px;
+  border: 1px solid $bgColour;
+  margin: 10px auto 0 auto;
+  text-align: left;
+  background-color: $bgColour ;
+}
+
+.disabled{
+    border: 1px solid #999999;
+    background-color: #cccccc;
+    color: #666666;
+    cursor: default;
+    pointer-events: none;
+  }

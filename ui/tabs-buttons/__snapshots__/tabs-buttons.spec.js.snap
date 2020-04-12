@@ -6,24 +6,28 @@ exports[`ui/tabs-buttons should render tab buttons 1`] = `
 >
   <button
     className="tab"
+    key="overview"
     onClick={[Function]}
   >
     Overview
   </button>
   <button
     className="tab"
+    key="cypressCi"
     onClick={[Function]}
   >
     Cypress CI
   </button>
   <button
     className="tab"
+    key="screenshotDiffs"
     onClick={[Function]}
   >
     Screenshot Differences
   </button>
   <button
     className="tab"
+    key="ciLogs"
     onClick={[Function]}
   >
     Branch Logs

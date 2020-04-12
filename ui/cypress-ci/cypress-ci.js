@@ -1,9 +1,11 @@
 import React from "react";
-import Status from './status';
+import CypressBuildInfo from './cypress-build-info';
 
-class CypressCi extends React.Component{
+import {isBuildInProgress} from './buildStatus';
 
-  loadBuildsForCurrentBranch(){
+class CypressCi extends React.Component {
+
+  loadBuildsForCurrentBranch() {
     this.props.getCypressBuilds();
   }
 
@@ -19,14 +21,25 @@ class CypressCi extends React.Component{
 
   render() {
     const {data, callBack} = this.props;
+    const buildInProgress = Boolean(data.find(isBuildInProgress));
+
     return (
       <div className='cypressCi'>
-        <button  onClick={callBack}>Run Cypress Tests</button>
-        {data.map(item => <Status commitId={item.sourceVersion} result={item.result} status={item.status} commitBuildHref={item._links.web.href}/>)}
+        <button onClick={callBack} disabled={buildInProgress}>Run Cypress Tests</button>
+        {
+          data.map(item => (
+            <CypressBuildInfo
+              key={item.sourceVersion}
+              commitId={item.sourceVersion}
+              result={item.result}
+              status={item.status}
+              commitBuildHref={item._links.web.href}
+            />
+          ))}
       </div>
     );
   }
 }
-  
+
 export default CypressCi;
 
