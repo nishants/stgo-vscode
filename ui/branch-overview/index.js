@@ -20,40 +20,53 @@ class Index extends React.Component {
     // TODO breakdown : two components : one when pr is created, one when no PR is created
 
     const existing = Boolean(branchPullRequest);
-    var sourceRefName = existing && branchPullRequest.sourceRefName.split('/')[2];
-    var targetRefName = existing && branchPullRequest.targetRefName.split('/')[2];
+    const sourceRefName = existing && branchPullRequest.sourceRefName.split('/')[2];
+    const targetRefName = existing && branchPullRequest.targetRefName.split('/')[2];
+    const createdByImage = branchPullRequest?.createdBy._links.avatar.href;
+    const formattedDate = String(branchPullRequest?.creationDate).substring(0, 10);
 
     return (
       <div className="branch-details">
         <div className='row'>
-            <span className="label">Selected Branch :</span> 
-            <span className="value">{selectedBranch}</span>
+          <span className="label">Selected Branch :</span>
+          <span className="value">{selectedBranch}</span>
         </div>
         {existing &&
-          (<React.Fragment>
-              <div className='row'>
-                <span className="label">Pull Request :</span>
-                <span className="value">
+        (<React.Fragment>
+          <div className='row'>
+            <span className="label">Pull Request :</span>
+            <span className="value">
                     <span>#{branchPullRequest.pullRequestId}</span>
                 </span>
-              </div>
-              <div className='row'>
-                <span className="label">Title :</span>
-                <span className="value">{branchPullRequest.title}</span>
-              </div>
-              <div className='row'>
-                <span className="label">Description :</span>
-                <span className="value">{branchPullRequest.description}</span>
-              </div>
-              <div className='row'>
-                <span className="label">Source :</span>
-                <span className="value">{sourceRefName}</span>
-              </div>
-              <div className='row'> 
-                <span className="label"> Target :</span>
-                <span className="value">{targetRefName}</span>
-              </div>
-          </React.Fragment>)
+          </div>
+          <div className='row'>
+            <span className="label">Title :</span>
+            <span className="value">{branchPullRequest.title}</span>
+          </div>
+          <div className='row'>
+            <span className="label">Description :</span>
+            <span className="value">{branchPullRequest.description}</span>
+          </div>
+          <div className='row'>
+            <span className="label">Source :</span>
+            <span className="value">{sourceRefName}</span>
+          </div>
+          <div className='row'>
+            <span className="label"> Target :</span>
+            <span className="value">{targetRefName}</span>
+          </div>
+          <div className='row'>
+            <span className="label">Created By :</span>
+            <img className="icon" src={createdByImage} /> <span className="value">
+                {branchPullRequest.createdBy.displayName} on {formattedDate}</span>
+          </div>
+          <div className='row'>
+            <span className="label">Reviewers :</span>
+            <img className="icon" src={branchPullRequest.reviewers[0].imageUrl} /> <span className="value">
+                {branchPullRequest.reviewers[0].displayName}</span>
+          </div>
+
+        </React.Fragment>)
         }
         <div className='row no-label'>
           <div><a href={`https://stestr1-nl2.tst2.dom/${selectedBranch}`}>Open branch on DTE</a></div>
