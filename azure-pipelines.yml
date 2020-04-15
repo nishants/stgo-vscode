@@ -29,9 +29,9 @@ steps:
     artifact: dist
   displayName: 'Publish output'
 
-- task: PublishPipelineArtifact@1
+- task: PublishBuildArtifacts@1
   inputs:
-    path: $(Agent.BuildDirectory)/s/test-resources/screenshots
+    path: $(Agent.BuildDirectory)/s/test-resources/screenshots/*
     artifact: screenshots
-  condition: failed()
-  displayName: 'Publish e2e results'
+  condition: succeededOrFailed()
+  displayName: 'Publish e2e screenshots'
