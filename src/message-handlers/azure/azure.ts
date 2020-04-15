@@ -5,7 +5,7 @@ import {
   AZURE_URL,
   AZURE_PROJECT,
   AZURE_INTEGRATION_BUILDID
-} from "../constant";
+} from "../../constant";
 
 export default class AZURE {
   azureConnectObj: BuildApi.IBuildApi | undefined;

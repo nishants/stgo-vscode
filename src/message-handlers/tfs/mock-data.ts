@@ -1,4 +1,4 @@
-import * as config from "../config";
+import * as config from "../../config";
 
 const PR_MOCK_FILE = "pull-request-mock.json";
 
