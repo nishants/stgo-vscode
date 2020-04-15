@@ -2,7 +2,7 @@ import * as vscode from 'vscode';
 import * as fs from 'fs';
 import * as path from 'path';
 
-import messageHandler from './message-handler';
+import messageHandler from './message-handlers';
 
 const REACT_APP_NAME = 'stgoci';
 const REACT_APP_TITLE = 'stgoci';

@@ -35,7 +35,3 @@ steps:
     artifact: screenshots
   condition: failed()
   displayName: 'Publish e2e results'
-
-# TODO need to enable auto releaes of extension
-#- script: yarn publish
-#  displayName: 'Build exention'
