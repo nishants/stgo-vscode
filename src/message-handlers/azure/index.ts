@@ -1,6 +1,6 @@
 // @ts-nocheck
 import * as vscode from "vscode";
-import * as config from "../config";
+import * as config from "../../config";
 import AZURE from "./azure";
 const CPYRESS_BUILDS_MOCK_DATA = "cypress-mock-data.json";
 
