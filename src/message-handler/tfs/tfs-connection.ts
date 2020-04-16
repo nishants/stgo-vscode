@@ -1,4 +1,4 @@
-import {TFS_PROJECT, TFS_REPO, TFS_URL} from "../constant";
+import {TFS_PROJECT, TFS_REPO, TFS_URL} from "../../constant";
 const tfs = require('azure-devops-node-api');
 
 let tfsConnection: any;

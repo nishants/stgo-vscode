@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 
 import {getPullRequest} from "./tfs-connection";
 import {getMockPullRequest} from "./mock-data";
-import {getCreatePullRequestUrl, getPullRequestUrl} from "../constant";
+import {getCreatePullRequestUrl, getPullRequestUrl} from "../../constant";
 
 type WorkspaceConfig = { enableMocks: boolean, tfsToken: string };
 

@@ -2,8 +2,8 @@ jest.mock('vscode');
 
 import * as vscode from "vscode";
 
-import panel from "../__mocks__/fakePanel";
-import {setJsonOverHttp, setMockFile, resetMocks} from "../__mocks__/helper";
+import panel from "../../__mocks__/fakePanel";
+import {setJsonOverHttp, setMockFile, resetMocks} from "../../__mocks__/helper";
 
 import handler from "./index";
 

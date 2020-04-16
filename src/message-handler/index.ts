@@ -1,7 +1,7 @@
 import * as vscode from "vscode";
 import * as axios from 'axios';
 
-import * as config from "./config";
+import * as config from "../config";
 import tfsHandler from "./tfs";
 import gitHandler from "./git";
 import azureHandler from "./azure";

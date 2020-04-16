@@ -1,5 +1,5 @@
 // @ts-nocheck
-import * as config from "../config";
+import * as config from "../../config";
 import * as vscode from "vscode";
 
 const SCREENSHOT_DIFFS_MOCK_FILE = 'screenshot-diffs-mock.json';
@@ -8,7 +8,7 @@ const SCREENSHOT_API_URL = 'http://st-integration.sys.dom/publicApi/differences/
 const BRANCH_LIST__MOCK_FILE = 'branch-list-mock.json';
 const BRANCH_LIST_API_URL = 'http://st-integration.sys.dom/publicApi/branches';
 
-import {getJsonOverHttp} from "../utils";
+import {getJsonOverHttp} from "../../utils";
 
 // Groups screenshot diffs
 const groupByPath = (data) => {
